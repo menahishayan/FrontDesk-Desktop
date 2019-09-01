@@ -1,0 +1,26 @@
+{
+  "name": "frontdesk-desktop",
+  "version": "1.0.0",
+  "description": "A cross-platform event registration app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/menahishayan/FrontDesk-Desktop.git"
+  },
+  "keywords": [
+    "Electron"
+  ],
+  "author": "Menahi Shayan",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "electron": "^6.0.6"
+  },
+  "bugs": {
+    "url": "https://github.com/menahishayan/FrontDesk-Desktop/issues"
+  },
+  "homepage": "https://github.com/menahishayan/FrontDesk-Desktop#readme",
+  "dependencies": {}
+}
