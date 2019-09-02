@@ -215,7 +215,7 @@ iframe {
 
 .input100 {
   font-family: Corbel, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   color: #555555;
   line-height: 1;
   display: block;
@@ -320,11 +320,14 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 18px;
+  margin-bottom: -12px;
 }
 
 .login100-form-btn {
   font-family: Corbel, sans-serif;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: bold;
   color: #fff;
   line-height: 1.2;
   text-transform: uppercase;
@@ -336,7 +339,7 @@ iframe {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 10px;
   min-width: 160px;
   height: 42px;
   border-radius: 21px;
