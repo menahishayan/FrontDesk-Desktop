@@ -1,38 +1,51 @@
+const path = require('path')
+
 const {
 	app,
 	BrowserWindow,
-	dialog
+	dialog,
+	ipcMain
 } = require('electron')
 
-let win
-var mysql = require('mysql');
+require('electron-reload')(__dirname, {
+    electron: require(`${__dirname}/node_modules/electron`)
+});
 
-var con = mysql.createConnection({
+let loginWin
+var mysql = require('mysql');
+const Window = require('./Window')
+
+let sample_db = require('./sample_db.json')
+
+// create a new todo store name "Todos Main"
+const db = mysql.createConnection({
 	host: "http://databases.000webhost.com/db_structure.php?db=id10729791_frontdesk",
 	user: "id10729791_admin",
 	password: "nish..."
 });
-
-const options = {
-	type: 'question',
-	buttons: ['Cancel', 'Yes, please', 'No, thanks'],
-	defaultId: 2,
-	title: 'Question',
-	message: 'Do you want to do this?',
-	detail: 'Connected'
-};
+//
+// const options = {
+// 	type: 'question',
+// 	buttons: ['Cancel', 'Yes, please', 'No, thanks'],
+// 	defaultId: 2,
+// 	title: 'Question',
+// 	message: 'Do you want to do this?',
+// 	detail: 'Connected'
+// };
 
 createWindow = () => {
-	win = new BrowserWindow({
-		width: 900,
-		height: 600,
+	loginWin = new BrowserWindow({
+		width: 700,
+		height: 500,
 		webPreferences: {
 			nodeIntegration: true
 		},
 		titleBarStyle: 'hidden'
 	})
 
-	win.loadFile('index.html')
+	loginWin.loadFile('index.html')
+
+	let eventWin
 
 	// win.webContents.openDevTools()
 
@@ -44,8 +57,30 @@ createWindow = () => {
 	// 	});
 	// });
 
-	win.on('closed', () => {
-		win = null
+	ipcMain.on('event-window', () => {
+    if (!eventWin) {
+      eventWin = new Window({
+		  file: 'events.html',
+		  width: 1080,
+  		height: 720,
+		parent: loginWin
+      })
+
+	  // loginWin.close();
+
+	  eventWin.once('show', () => {
+	    eventWin.webContents.send('events', sample_db.events)
+	  })
+
+      // cleanup
+      eventWin.on('closed', () => {
+        eventWin = null
+      })
+    }
+  })
+
+	loginWin.on('closed', () => {
+		loginWin = null
 	})
 }
 

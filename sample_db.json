@@ -1,0 +1,91 @@
+{
+	"coordinators": [{
+		"USN": "1AM17CS101",
+		"Event": "",
+		"Role": "Core Team"
+	}],
+	"events": [{
+		"EID": "E000",
+		"Category": "Main Stage",
+		"Color": "Red",
+		"Coordinators": ["1AM17CS127"],
+		"Date": "2019-09-27",
+		"Description": ["fgsf", "deeee", "3434"],
+		"Duration": "5+2",
+		"Name": "Group Dance",
+		"Price": 600,
+		"Rules": ["6+6 in a team", "Time alloted 5+2 mins", "If anyone conveys any indecent gestures or costumes will lead to on spot disqualification ",
+			"Pendrive must be submitted to the Technical Team one hour in prior", "Obscenity of any kind will lead to disqualification"
+		],
+		"TeamCount": "2-4",
+		"Time": "11:15",
+		"Venue": "Main Stage"
+	}, {
+		"EID": "E001",
+		"Category": "Main Stage",
+		"Color": "Blue",
+		"Coordinators": ["1AM17CS145"],
+		"Date": "2019-09-27",
+		"Description": ["Dance maadi plz", "No singing", "Beatboxing without box"],
+		"Duration": "3+2",
+		"Name": "Solo Singing",
+		"Price": 150,
+		"Rules": ["Time alloted 3+2 mins.", "With or without karkoke. Music file should be submitted one hour in prior.",
+			"Participant should not see the lyrics while performing ", "Instruments can be played by the singer or with the help of any supporting mate."
+		],
+		"TeamCount": "1",
+		"Time": "12:00",
+		"Venue": "Main Stage"
+	}, {
+		"EID": "E002",
+		"Category": "Technical",
+		"Color": "Purple",
+		"Coordinators": ["1AM17CS005"],
+		"Date": "2019-09-27",
+		"Description": ["TYPE", "C++", "Beatboxing without box"],
+		"Duration": "1:00",
+		"Name": "Code It",
+		"Price": 150,
+		"Rules": ["", "", "", ""],
+		"TeamCount": "2",
+		"Time": "9:30",
+		"Venue": "201"
+	}],
+	"payment": {
+		"name": "Menahi Shayan",
+		"phone": 8971729383,
+		"vpa": "menahi.shayan@oksbi"
+	},
+	"students": [{
+		"USN": "1AM17CS005",
+		"Dept": "CSE",
+		"Events": ["E002"],
+		"Name": "Abhishek C",
+		"Phone": "9912345678",
+		"Section": "A",
+		"Sem": "5"
+	}, {
+		"USN": "1AM17CS101",
+		"Dept": "CSE",
+		"Name": "Shayan",
+		"Phone": "8971729383",
+		"Section": "B",
+		"Sem": "5"
+	}, {
+		"USN": "1AM17CS127",
+		"Dept": "CSE",
+		"Events": ["E000"],
+		"Name": "Vamshi",
+		"Phone": "8660718302",
+		"Section": "B",
+		"Sem": "5"
+	}, {
+		"USN": "1AM17CS145",
+		"Dept": "CSE",
+		"Events": ["E001"],
+		"Name": "Harshit",
+		"Phone": "9900112233",
+		"Section": "A",
+		"Sem": "5"
+	}]
+}
