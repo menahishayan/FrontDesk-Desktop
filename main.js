@@ -45,15 +45,19 @@ createWindow = () => {
 		db.connect(function(err) {
     		if (err) throw err;
 			else {
-				db.query("SELECT * FROM auth WHERE USN='1AM17CS127'", function (err, result, fields) {
-			    if (err) throw err;
+				db.query("SELECT * FROM auth", function (err, result, fields) {
+				if (err) throw err;
+				let strOut = ""
+				result.forEach(r => {
+					strOut += " \n" + r['USN']
+				});
 				dialog.showMessageBox(null, {
 					type: 'question',
-					buttons: ['Cancel', 'OK'],
+					buttons: ['Cancel', 'OK'], 
 					defaultId: 2,
 					title: 'Result',
-					message: 'Congrats',
-					detail: result[0]['PASSWORD']
+					message: 'Available Logins 🤣😂',
+					detail: strOut
 				}, (response) => {
 				   console.log(response);
 			   });
