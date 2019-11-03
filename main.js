@@ -29,7 +29,7 @@ const options = {
 	defaultId: 2,
 	title: 'Question',
 	message: 'Do you want to do this?',
-	detail: 'Connected'
+	detail: 'Connected, Laddie. You are a wizard now!'
 };
 
 createWindow = () => {
