@@ -43,11 +43,24 @@ createWindow = () => {
 	loginWin.once('show', () => {
 		db.connect(function(err) {
     		if (err) throw err;
-    		else dialog.showMessageBox(null, options, (response, checkboxChecked) => {
-    			console.log(response);
-    			console.log(checkboxChecked);
-    		});
+			else {
+				db.query("SELECT * FROM auth WHERE USN='1AM17CS127'", function (err, result, fields) {
+			    if (err) throw err;
+				dialog.showMessageBox(null, {
+					type: 'question',
+					buttons: ['Cancel', 'OK'],
+					defaultId: 2,
+					title: 'Result',
+					message: result,
+					detail: fields[0]
+				}, (response) => {
+				   console.log(response);
+			   });
+  			});
+			}
+
     	});
+
 	})
 	// win.webContents.openDevTools()
 
