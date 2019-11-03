@@ -33,7 +33,18 @@
 
 .header {
 	-webkit-app-region: drag;
-	width: "100%";
+	width: '100%';
+}
+
+.list-container {
+  width: '100%';
+  overflow: auto;
+}
+
+.event-item {
+	display:inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 .no-select {
@@ -43,6 +54,7 @@
 
 #eventList {
 	margin-left: -20px;
+	width: '100%';
 }
 
 .gradient-Red {
