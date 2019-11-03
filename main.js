@@ -20,7 +20,8 @@ let sample_db = require('./sample_db.json')
 const db = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: ""
+	password: "",
+	database: "frontdesk"
 });
 
 const options = {
@@ -51,8 +52,8 @@ createWindow = () => {
 					buttons: ['Cancel', 'OK'],
 					defaultId: 2,
 					title: 'Result',
-					message: result,
-					detail: fields[0]
+					message: 'Congrats',
+					detail: result[0]['PASSWORD']
 				}, (response) => {
 				   console.log(response);
 			   });
