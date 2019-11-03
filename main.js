@@ -18,32 +18,37 @@ const Window = require('./Window')
 let sample_db = require('./sample_db.json')
 
 const db = mysql.createConnection({
-	host: "http://databases.000webhost.com/db_structure.php?db=id10729791_frontdesk",
-	user: "id10729791_admin",
-	password: "nish..."
+	host: "localhost",
+	user: "root",
+	password: ""
 });
-//
-// const options = {
-// 	type: 'question',
-// 	buttons: ['Cancel', 'Yes, please', 'No, thanks'],
-// 	defaultId: 2,
-// 	title: 'Question',
-// 	message: 'Do you want to do this?',
-// 	detail: 'Connected'
-// };
+
+const options = {
+	type: 'question',
+	buttons: ['Cancel', 'Yes, please', 'No, thanks'],
+	defaultId: 2,
+	title: 'Question',
+	message: 'Do you want to do this?',
+	detail: 'Connected'
+};
 
 createWindow = () => {
-	loginWin = new BrowserWindow({
+	loginWin = new Window({
+		file: 'index.html',
 		width: 700,
-		height: 500,
-		webPreferences: {
-			nodeIntegration: true
-		},
-		titleBarStyle: 'hidden'
+		height: 500
 	})
 
-	loginWin.loadFile('index.html')
 
+	loginWin.once('show', () => {
+		db.connect(function(err) {
+    		if (err) throw err;
+    		else dialog.showMessageBox(null, options, (response, checkboxChecked) => {
+    			console.log(response);
+    			console.log(checkboxChecked);
+    		});
+    	});
+	})
 	// win.webContents.openDevTools()
 
 	// con.connect(function(err) {
