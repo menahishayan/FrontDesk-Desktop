@@ -11,13 +11,12 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let loginWin
+let loginWin, eventWin, viewEventWin
 var mysql = require('mysql');
 const Window = require('./Window')
 
 let sample_db = require('./sample_db.json')
 
-// create a new todo store name "Todos Main"
 const db = mysql.createConnection({
 	host: "http://databases.000webhost.com/db_structure.php?db=id10729791_frontdesk",
 	user: "id10729791_admin",
@@ -45,8 +44,6 @@ createWindow = () => {
 
 	loginWin.loadFile('index.html')
 
-	let eventWin
-
 	// win.webContents.openDevTools()
 
 	// con.connect(function(err) {
@@ -66,6 +63,7 @@ createWindow = () => {
 		parent: loginWin
       })
 
+	  // commented out during testing
 	  // loginWin.close();
 
 	  eventWin.once('show', () => {
@@ -78,6 +76,28 @@ createWindow = () => {
       })
     }
   })
+
+  ipcMain.on('view-event-window', () => {
+  if (!viewEventWin) {
+	viewEventWin = new Window({
+		file: 'view_event.html',
+		width: 1080,
+	  height: 720,
+	  parent: eventWin
+	})
+
+	// loginWin.close();
+
+	viewEventWin.once('show', () => {
+	  viewEventWin.webContents.send('viewEvent', sample_db.events)
+	})
+
+	// cleanup
+	viewEventWin.on('closed', () => {
+	  viewEventWin = null
+	})
+  }
+})
 
 	loginWin.on('closed', () => {
 		loginWin = null

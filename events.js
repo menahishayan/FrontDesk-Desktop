@@ -3,8 +3,8 @@
 const { ipcRenderer } = require('electron')
 
 // delete event by its text value ( used below in event listener)
-const deleteEvent = (e) => {
-  ipcRenderer.send('delete-event', e.target.textContent)
+const viewEvent = (e) => {
+  ipcRenderer.send('view-event', e.target.textContent)
 }
 
 // create add event window button
@@ -34,6 +34,6 @@ ipcRenderer.on('events', (event, events) => {
 
   // add click handlers to delete the clicked event
   eventList.querySelectorAll('.event-item').forEach(item => {
-    item.addEventListener('click', deleteEvent)
+    item.addEventListener('click', viewEvent)
   })
 })
