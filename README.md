@@ -10,3 +10,11 @@ FrontDesk - Cross-platform desktop app for event registrations, ticketing and tr
 
  ## Running
  - `npm start`
+
+## Screenshots
+<br>
+### Login Page
+ <image src ="Screenshots/../Screenshots/Capture.PNG">
+ <br>
+### Events page
+ <image src ="Screenshots/../Screenshots/Capture0.PNG">
