@@ -57,100 +57,114 @@
 	width: '100%';
 }
 
- /* Red */
-.gradient-Red {
+ /* RED */
+.gradient-RED {
 	background: #D90000;
 	background: -webkit-linear-gradient(top, #D90000 0%, #690000 100%);
 }
 
-.gradient-Red:hover {
+.gradient-RED:hover {
 	background: #D90000;
 }
 
-.gradient-Red:active {
+.gradient-RED:active {
 	background: #690000;
 }
 
-/* Blue */
-.gradient-Blue {
+/* BLUE */
+.gradient-BLUE {
 	background: #003BD9;
 	background: -webkit-linear-gradient(top, #003BD9 0%, #001469 100%);
 }
 
-.gradient-Blue:hover {
+.gradient-BLUE:hover {
 	background: #003BD9;
 }
 
-.gradient-Blue:active {
+.gradient-BLUE:active {
 	background: #001469;
 }
 
-/* Purple */
-.gradient-Purple {
+/* PURPLE */
+.gradient-PURPLE {
 	background: #5D00D9;
 	background: -webkit-linear-gradient(top, #5D00D9 0%, #2E0069 100%);
 }
 
-.gradient-Purple:hover {
+.gradient-PURPLE:hover {
 	background: #5D00D9;
 }
 
-.gradient-Purple:active {
+.gradient-PURPLE:active {
 	background: #2E0069;
 }
 
-/* Yellow */
-.gradient-Yellow {
+/* YELLOW */
+.gradient-YELLOW {
 	background: #FFDC00;
 	background: -webkit-linear-gradient(top, #FFDC00 0%, #806C00 100%);
 }
 
-.gradient-Yellow:hover {
+.gradient-YELLOW:hover {
 	background: #FFDC00;
 }
 
-.gradient-Yellow:active {
+.gradient-YELLOW:active {
 	background: #806C00;
 }
 
-/* Orange */
-.gradient-Orange {
+/* ORANGE */
+.gradient-ORANGE {
 	background: #FF6E00;
 	background: -webkit-linear-gradient(top, #FF6E00 0%, #804900 100%);
 }
 
-.gradient-Orange:hover {
+.gradient-ORANGE:hover {
 	background: #FF6E00;
 }
 
-.gradient-Orange:active {
+.gradient-ORANGE:active {
 	background: #804900;
 }
 
-/* Pink */
-.gradient-Pink {
+/* PINK */
+.gradient-PINK {
 	background: #D900A0;
 	background: -webkit-linear-gradient(top, #D900A0 0%, #69005A 100%);
 }
 
-.gradient-Pink:hover {
+.gradient-PINK:hover {
 	background: #D900A0;
 }
 
-.gradient-Pink:active {
+.gradient-PINK:active {
 	background: #69005A;
 }
 
-/* Teal */
-.gradient-Teal {
+/* TEAL */
+.gradient-TEAL {
 	background: #00D9CA;
 	background: -webkit-linear-gradient(top, #00D9CA 0%, #00695F 100%);
 }
 
-.gradient-Teal:hover {
+.gradient-TEAL:hover {
 	background: #00D9CA;
 }
 
-.gradient-Teal:active {
+.gradient-TEAL:active {
 	background: #00695F;
+}
+
+/* GREEN */
+.gradient-GREEN {
+	background: #08D900;
+	background: -webkit-linear-gradient(top, #08D900 0%, #116900 100%);
+}
+
+.gradient-GREEN:hover {
+	background: #08D900;
+}
+
+.gradient-GREEN:active {
+	background: #116900;
 }
