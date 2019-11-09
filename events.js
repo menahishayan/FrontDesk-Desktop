@@ -3,8 +3,10 @@
 const { ipcRenderer } = require('electron')
 
 // delete event by its text value ( used below in event listener)
-const viewEvent = (e) => {
-  ipcRenderer.send('view-event', e.target.textContent)
+const viewEvent = (e, item) => {
+  console.log(item);
+  
+  ipcRenderer.send('view-event-window', item)
 }
 
 // create add event window button
@@ -19,9 +21,7 @@ ipcRenderer.on('events', (event, events) => {
 
   // create html string
   const eventItems = events.reduce((html, e) => {
-    console.log(e);
-    
-    html += `<li class="event-item">
+    html += `<li id="${e['E_ID']}" class="event-item">
     <div class="item-container gradient-${e['COLOR']}">
         <div class="item-name">${e['NAME']}</div>
         <div class="item-sub">${e['CATEGORY']}</div>
@@ -36,6 +36,7 @@ ipcRenderer.on('events', (event, events) => {
 
   // add click handlers to delete the clicked event
   eventList.querySelectorAll('.event-item').forEach(item => {
-    item.addEventListener('click', viewEvent)
+    console.log(item)
+    item.addEventListener('click', viewEvent(this))
   })
 })

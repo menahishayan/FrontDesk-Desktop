@@ -101,9 +101,6 @@ createWindow = () => {
 
 	// loginWin.close();
 
-	viewEventWin.once('show', () => {
-	  viewEventWin.webContents.send('viewEvent', sample_db.events)
-	})
 
 	// cleanup
 	viewEventWin.on('closed', () => {
