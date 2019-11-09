@@ -57,6 +57,7 @@
 	width: '100%';
 }
 
+ /* Red */
 .gradient-Red {
 	background: #D90000;
 	background: -webkit-linear-gradient(top, #D90000 0%, #690000 100%);
@@ -70,6 +71,7 @@
 	background: #690000;
 }
 
+/* Blue */
 .gradient-Blue {
 	background: #003BD9;
 	background: -webkit-linear-gradient(top, #003BD9 0%, #001469 100%);
@@ -83,6 +85,7 @@
 	background: #001469;
 }
 
+/* Purple */
 .gradient-Purple {
 	background: #5D00D9;
 	background: -webkit-linear-gradient(top, #5D00D9 0%, #2E0069 100%);
@@ -94,4 +97,60 @@
 
 .gradient-Purple:active {
 	background: #2E0069;
+}
+
+/* Yellow */
+.gradient-Yellow {
+	background: #FFDC00;
+	background: -webkit-linear-gradient(top, #FFDC00 0%, #806C00 100%);
+}
+
+.gradient-Yellow:hover {
+	background: #FFDC00;
+}
+
+.gradient-Yellow:active {
+	background: #806C00;
+}
+
+/* Orange */
+.gradient-Orange {
+	background: #FF6E00;
+	background: -webkit-linear-gradient(top, #FF6E00 0%, #804900 100%);
+}
+
+.gradient-Orange:hover {
+	background: #FF6E00;
+}
+
+.gradient-Orange:active {
+	background: #804900;
+}
+
+/* Pink */
+.gradient-Pink {
+	background: #D900A0;
+	background: -webkit-linear-gradient(top, #D900A0 0%, #69005A 100%);
+}
+
+.gradient-Pink:hover {
+	background: #D900A0;
+}
+
+.gradient-Pink:active {
+	background: #69005A;
+}
+
+/* Teal */
+.gradient-Teal {
+	background: #00D9CA;
+	background: -webkit-linear-gradient(top, #00D9CA 0%, #00695F 100%);
+}
+
+.gradient-Teal:hover {
+	background: #00D9CA;
+}
+
+.gradient-Teal:active {
+	background: #00695F;
 }
