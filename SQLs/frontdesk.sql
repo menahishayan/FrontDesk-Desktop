@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2019 at 05:52 PM
+-- Generation Time: Nov 09, 2019 at 06:06 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -115,15 +115,18 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRICE`, `COORDINATORS`, `RULES`, `CATEGORY`, `TEAM_COUNT`, `COLOR`) VALUES
-('E000', 'Group Dance', '2019-09-27', '11:15:00', '07:00:00', 'Main Stage', 600, '1AM17CS127', '6+6 in a team', 'Main Stage', 4, 'Red'),
-('E001', 'Solo Singing', '2019-09-27', '12:00:00', '05:00:00', 'Main Stage', 150, '1AM17CS145', 'Time alloted 3+2 min', 'Main Stage', 1, 'Blue'),
-('E002', 'Code It', '2019-09-27', '09:30:00', '01:00:00', '201', 150, '1AM17CS005', '', 'Technical', 2, 'Purple'),
-('E003', 'Group singing', '2019-09-27', '11:15:00', '05:00:00', 'Main Stage', 600, '1AM17CS102', '6+6 in a team', 'Main Stage', 4, 'Green'),
-('E004', 'mad ads', '2019-09-27', '01:00:00', '04:00:00', 'Main Stage', 200, '1AM17CS103', 'Time alloted 3+2 min', 'Main Stage', 4, 'Orange'),
-('E005', 'hackaton', '2019-09-27', '09:30:00', '01:00:00', '201', 150, '1AM17CS006', '', 'Technical', 2, 'Purple'),
-('E006', 'solo dance', '2019-09-27', '11:15:00', '07:00:00', 'Main Stage', 200, '1AM17CS128', '6+6 in a team', 'Main Stage', 1, 'Red'),
-('E007', 'fashion show', '2019-09-27', '05:00:00', '05:30:00', 'Main Stage', 800, '1AM17CS146', 'Time alloted 3+2 min', 'Main Stage', 8, 'Blue'),
-('E008', 'quiz', '2019-09-27', '10:30:00', '01:00:00', '201', 150, '1AM17CS123', '', 'Technical', 2, 'Purple');
+('E1001', 'codeit', '2019-11-15', '10:00:00', '00:00:01', '201', 80, '1AM17CS102', '', 'TECHNICAL', 2, 'RED'),
+('E1002', 'fasion show', '2019-11-15', '05:00:00', '00:00:01', 'MAIN STAGE', 800, '1AM17CS103', '', 'MAIN STAGE', 8, 'GREEN'),
+('E1003', 'group singing', '2019-11-15', '10:00:00', '00:00:01', 'MAIN STAGE', 400, '1AM17CS104', '', 'MAIN STAGE', 5, 'BLUE'),
+('E1004', 'group dance', '2019-11-15', '11:00:00', '00:00:01', 'MAIN STAGE', 500, '1AM17CS105', '', 'MAIN STAGE', 6, 'YELLOW'),
+('E1005', 'solo singing', '2019-11-15', '12:00:00', '00:00:01', 'MAIN STAGE', 100, '1AM17CS106', '', 'MAIN STAGE', 1, 'ORANGE'),
+('E1006', 'solo dance', '2019-11-15', '01:00:00', '00:00:01', 'MAIN STAGE', 100, '1AM17CS107', '', 'MAIN STAGE', 1, 'PURPLE'),
+('E1007', 'hackaton', '2019-11-15', '11:00:00', '00:00:01', '202', 100, '1AM17CS108', '', 'TECHNICAL', 2, 'BLACK'),
+('E1008', 'treasure hunt', '2019-11-15', '12:00:00', '00:00:01', '203', 100, '1AM17CS109', '', 'OFF STAGE', 2, 'INDIGO'),
+('E1009', 'beg borrow steel', '2019-11-15', '01:00:00', '00:00:01', '204', 100, '1AM17CS110', '', 'OFF STAGE', 4, 'BROWN'),
+('E1010', 'sports', '2019-11-15', '10:00:00', '00:00:01', 'MAIN GROUND', 200, '1AM17CS111', '', 'SPORTS', 11, 'PINK'),
+('E1011', 'sketching', '2019-11-15', '02:00:00', '00:00:01', '205', 100, '1AM17CS112', '', 'OFF STAGE', 1, 'GREY'),
+('E1012', 'mad ads', '2019-11-15', '03:00:00', '00:00:01', 'MAIN STAGE', 200, '1AM17CS113', '', 'MAIN STAGE', 5, 'DARK BLUE');
 
 -- --------------------------------------------------------
 
