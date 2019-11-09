@@ -19,10 +19,12 @@ ipcRenderer.on('events', (event, events) => {
 
   // create html string
   const eventItems = events.reduce((html, e) => {
+    console.log(e);
+    
     html += `<li class="event-item">
-    <div class="item-container gradient-${e.Color}">
-        <div class="item-name">${e.Name}</div>
-        <div class="item-sub">${e.Category}</div>
+    <div class="item-container gradient-${e['COLOR']}">
+        <div class="item-name">${e['NAME']}</div>
+        <div class="item-sub">${e['CATEGORY']}</div>
     </div>
     </li>`
 

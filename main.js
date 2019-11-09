@@ -45,26 +45,11 @@ createWindow = () => {
 		db.connect(function(err) {
     		if (err) throw err;
 			else {
-				db.query("SELECT * FROM auth", function (err, result, fields) {
-				if (err) throw err;
-				let strOut = ""
-				result.forEach(r => {
-					strOut += " \n" + r['USN']
-				});
-				dialog.showMessageBox(null, {
-					type: 'question',
-					buttons: ['Cancel', 'OK'], 
-					defaultId: 2,
-					title: 'Result',
-					message: 'Available Logins 🤣😂',
-					detail: strOut
-				}, (response) => {
-				   console.log(response);
-			   });
-  			});
+				
 			}
 
-    	});
+		});
+		
 
 	})
 	// win.webContents.openDevTools()
@@ -90,7 +75,12 @@ createWindow = () => {
 	  // loginWin.close();
 
 	  eventWin.once('show', () => {
-	    eventWin.webContents.send('events', sample_db.events)
+		db.query("SELECT * FROM events", function (err, result, fields) {
+			if (err) throw err;
+			
+			eventWin.webContents.send('events', result)
+		  });
+	    
 	  })
 
       // cleanup
