@@ -75,7 +75,7 @@ createWindow = () => {
 	  // loginWin.close();
 
 	  eventWin.once('show', () => {
-		db.query("SELECT * FROM events", function (err, result, fields) {
+		db.query("SELECT * FROM events ORDER BY CATEGORY", function (err, result, fields) {
 			if (err) throw err;
 			
 			eventWin.webContents.send('events', result)
