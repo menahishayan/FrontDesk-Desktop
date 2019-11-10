@@ -2,28 +2,25 @@
 
 const { ipcRenderer } = require('electron')
 
-// delete event by its text value ( used below in event listener)
-const viewEvent = (e, item) => {
-  console.log(item);
-  
-  ipcRenderer.send('view-event-window', item)
-}
+String.prototype.capitalizeEachWord = function() {
+    this.toLowerCase();
+    let str = this.split(" ");
 
-// create add event window button
-// document.getElementById('createEventBtn').addEventListener('click', () => {
-//   ipcRenderer.send('add-event-window')
-// })
+    for (var i = 0, x = str.length; i < x; i++)
+        str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+
+    return str.join(" ");
+}
 
 // on receive events
 ipcRenderer.on('events', (event, events) => {
   // get the eventList ul
   const eventList = document.getElementById('eventList')
-
   // create html string
   const eventItems = events.reduce((html, e) => {
     html += `<li id="${e['E_ID']}" class="event-item">
-    <div class="item-container gradient-${e['COLOR']}">
-        <div class="item-name">${e['NAME']}</div>
+    <div class="item-container gradient-${e['COLOR'].toUpperCase()}">
+        <div class="item-name">${e['NAME'].capitalizeEachWord()}</div>
         <div class="item-sub">${e['CATEGORY']}</div>
     </div>
     </li>`
@@ -36,7 +33,6 @@ ipcRenderer.on('events', (event, events) => {
 
   // add click handlers to delete the clicked event
   eventList.querySelectorAll('.event-item').forEach(item => {
-    console.log(item)
-    item.addEventListener('click', viewEvent(this))
+    item.addEventListener('click', () => {ipcRenderer.send('view-event-window', item.id)})
   })
 })

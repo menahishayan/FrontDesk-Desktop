@@ -15,23 +15,12 @@ let loginWin, eventWin, viewEventWin
 var mysql = require('mysql');
 const Window = require('./Window')
 
-let sample_db = require('./sample_db.json')
-
 const db = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	password: "",
 	database: "frontdesk"
 });
-
-const options = {
-	type: 'question',
-	buttons: ['Cancel', 'Yes, please', 'No, thanks'],
-	defaultId: 2,
-	title: 'Question',
-	message: 'Do you want to do this?',
-	detail: 'Connected, Laddie. You are a wizard now!'
-};
 
 createWindow = () => {
 	loginWin = new Window({
@@ -45,28 +34,16 @@ createWindow = () => {
 		db.connect(function(err) {
     		if (err) throw err;
 			else {
-				
+
 			}
-
 		});
-		
-
 	})
-	// win.webContents.openDevTools()
-
-	// con.connect(function(err) {
-	// 	if (err) throw err;
-	// 	else dialog.showMessageBox(null, options, (response, checkboxChecked) => {
-	// 		console.log(response);
-	// 		console.log(checkboxChecked);
-	// 	});
-	// });
 
 	ipcMain.on('event-window', () => {
     if (!eventWin) {
       eventWin = new Window({
 		  file: 'events.html',
-		  width: 1080,
+		  width: 1090,
   		height: 720,
 		parent: loginWin
       })
@@ -75,14 +52,20 @@ createWindow = () => {
 	  // loginWin.close();
 
 	  eventWin.once('show', () => {
-		db.query("SELECT * FROM events ORDER BY CATEGORY", function (err, result, fields) {
-			if (err) throw err;
-			
-			eventWin.webContents.send('events', result)
-		  });
-	    
-	  })
-
+		db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY", function(err, result, fields) {
+			if (err)
+				dialog.showMessageBox(null, {
+					type: 'error',
+					buttons: ['OK'],
+					defaultId: 2,
+					title: 'Error',
+					message: 'Query Error',
+					detail: err
+				}, (res) => {console.log(res);})
+			else
+				eventWin.webContents.send('events', result)
+		});
+	})
       // cleanup
       eventWin.on('closed', () => {
         eventWin = null
@@ -90,16 +73,20 @@ createWindow = () => {
     }
   })
 
-  ipcMain.on('view-event-window', () => {
+  ipcMain.on('view-event-window', (id) => {
   if (!viewEventWin) {
 	viewEventWin = new Window({
 		file: 'view_event.html',
-		width: 1080,
-	  height: 720,
+		width: 800,
+	  height: 680,
 	  parent: eventWin
 	})
 
-	// loginWin.close();
+	viewEventWin.once('show', (e) => {
+		viewEventWin.webContents.send('testArg', "t90")
+	})
+
+
 
 
 	// cleanup
