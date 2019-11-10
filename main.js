@@ -13,7 +13,7 @@ require('electron-reload')(__dirname, {
 
 let loginWin, eventWin, viewEventWin
 var mysql = require('mysql');
-const Window = require('./Window')
+const Window = require('./js/Window')
 
 const db = mysql.createConnection({
 	host: "localhost",

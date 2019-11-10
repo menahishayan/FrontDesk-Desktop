@@ -18,6 +18,8 @@
 
 	<link rel="stylesheet" href="./css/main.css" />
 	<link rel="stylesheet" href="./css/events.css" />
+	<link rel="stylesheet" href="./css/view_event.css" />
+	<link rel="stylesheet" href="./css/color.css" />
 
 	<script>
 		let $ = require('jquery');
@@ -31,14 +33,18 @@
 </head>
 
 <body>
-	<div class="limiter overflow-hidden" style="padding:40px;">
+	<div class="limiter overflow-hidden container-left">
 		<div class="d-flex header no-select">
 			<h1 id="eventHeader" style="color: black;"></h1>
+			<div id="categoryContainer" style="position: absolute; right: 50px; margin-top:8px;"></div>
 		</div>
 		<hr />
-
+		<p id="body" style="font-size: 20px;">
+		</p>
 	</div>
-	<script src="./view_event.js"></script>
+	<div class="ticket-container">
+	</div>
+	<script src="./js/view_event.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,15 @@
+.body-items {
+	font-size: 28px;
+	margin: 10px;
+	margin-bottom: 50px;
+}
+
+.container-left {
+	padding:40px;
+	width: 720px;
+	height: 690px;
+	position: absolute;
+	left: 0;
+	-webkit-box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.17);
+box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.17);
+}

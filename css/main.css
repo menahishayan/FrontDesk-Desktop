@@ -448,6 +448,12 @@ iframe {
   opacity: 1;
 }
 
+.fa-icon::after {
+	font-family: FontAwesome;
+    content: attr(data-placeholder);
+    width: 100%;
+	margin: 10px;
+}
 
 @media (max-width: 992px) {
   .alert-validate::before {
