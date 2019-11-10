@@ -1,0 +1,73 @@
+.item-container {
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background: #B0B0B0;
+	background: -webkit-linear-gradient(top, #B0B0B0 0%, #454545 100%);
+	height: 140px;
+	width: 230px;
+	padding: 15px;
+	cursor: pointer;
+}
+
+.item-container:hover {
+	-webkit-box-shadow: 3px 5px 12px 0px rgba(0,0,0,0.37);
+}
+
+.item-container:active {
+	-webkit-box-shadow: 3px 5px 12px 0px rgba(0,0,0,0.67);
+}
+
+.item-container-min {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	background: #B0B0B0;
+	background: -webkit-linear-gradient(top, #B0B0B0 0%, #454545 100%);
+	height: 28px;
+	padding: 5px;
+	padding-left: 12px;
+	padding-right: 12px;
+	color: white;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+	pointer-events: none;
+}
+
+.item-name {
+	color: white;
+	font-weight: 700;
+	font-size: 18px;
+	margin-top: 70px;
+}
+
+.item-sub {
+	color: white;
+	font-size: 12px;
+	margin-top: -6px;
+}
+
+.header {
+	-webkit-app-region: drag;
+	width: '100%';
+}
+
+.list-container {
+  width: '100%';
+  overflow: auto;
+}
+
+.event-item {
+	display:inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.no-select {
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+#eventList {
+	margin-left: -20px;
+	width: '100%';
+}
