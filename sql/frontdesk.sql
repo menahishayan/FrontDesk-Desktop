@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2019 at 06:06 PM
+-- Generation Time: Nov 10, 2019 at 07:18 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -100,7 +100,7 @@ CREATE TABLE `events` (
   `NAME` varchar(20) NOT NULL,
   `DATE` date NOT NULL,
   `TIME` time NOT NULL,
-  `DURATION` time NOT NULL,
+  `DURATION` int(11) NOT NULL,
   `VENUE` varchar(20) NOT NULL,
   `PRICE` int(11) NOT NULL,
   `COORDINATORS` varchar(20) NOT NULL,
@@ -115,18 +115,21 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRICE`, `COORDINATORS`, `RULES`, `CATEGORY`, `TEAM_COUNT`, `COLOR`) VALUES
-('E1001', 'codeit', '2019-11-15', '10:00:00', '00:00:01', '201', 80, '1AM17CS102', '', 'TECHNICAL', 2, 'RED'),
-('E1002', 'fasion show', '2019-11-15', '05:00:00', '00:00:01', 'MAIN STAGE', 800, '1AM17CS103', '', 'MAIN STAGE', 8, 'GREEN'),
-('E1003', 'group singing', '2019-11-15', '10:00:00', '00:00:01', 'MAIN STAGE', 400, '1AM17CS104', '', 'MAIN STAGE', 5, 'BLUE'),
-('E1004', 'group dance', '2019-11-15', '11:00:00', '00:00:01', 'MAIN STAGE', 500, '1AM17CS105', '', 'MAIN STAGE', 6, 'YELLOW'),
-('E1005', 'solo singing', '2019-11-15', '12:00:00', '00:00:01', 'MAIN STAGE', 100, '1AM17CS106', '', 'MAIN STAGE', 1, 'ORANGE'),
-('E1006', 'solo dance', '2019-11-15', '01:00:00', '00:00:01', 'MAIN STAGE', 100, '1AM17CS107', '', 'MAIN STAGE', 1, 'PURPLE'),
-('E1007', 'hackaton', '2019-11-15', '11:00:00', '00:00:01', '202', 100, '1AM17CS108', '', 'TECHNICAL', 2, 'BLACK'),
-('E1008', 'treasure hunt', '2019-11-15', '12:00:00', '00:00:01', '203', 100, '1AM17CS109', '', 'OFF STAGE', 2, 'INDIGO'),
-('E1009', 'beg borrow steel', '2019-11-15', '01:00:00', '00:00:01', '204', 100, '1AM17CS110', '', 'OFF STAGE', 4, 'BROWN'),
-('E1010', 'sports', '2019-11-15', '10:00:00', '00:00:01', 'MAIN GROUND', 200, '1AM17CS111', '', 'SPORTS', 11, 'PINK'),
-('E1011', 'sketching', '2019-11-15', '02:00:00', '00:00:01', '205', 100, '1AM17CS112', '', 'OFF STAGE', 1, 'GREY'),
-('E1012', 'mad ads', '2019-11-15', '03:00:00', '00:00:01', 'MAIN STAGE', 200, '1AM17CS113', '', 'MAIN STAGE', 5, 'DARK BLUE');
+('E1001', 'Codeit', '2019-11-15', '10:00:00', 60, ' LH-201', 80, '1AM17CS102', '', 'TECHNICAL', 2, 'YELLOW'),
+('E1002', 'Fasion show', '2019-11-15', '05:00:00', 15, 'MAIN STAGE', 800, '1AM17CS103', '', 'MAIN STAGE', 8, 'RED'),
+('E1003', 'Group singing', '2019-11-15', '10:00:00', 7, 'MAIN STAGE', 400, '1AM17CS104', '', 'MAIN STAGE', 5, 'RED'),
+('E1004', 'Group dance', '2019-11-15', '11:00:00', 7, 'MAIN STAGE', 500, '1AM17CS105', '', 'MAIN STAGE', 6, 'RED'),
+('E1005', 'Solo singing', '2019-11-15', '12:00:00', 5, 'MAIN STAGE', 100, '1AM17CS106', '', 'MAIN STAGE', 1, 'RED'),
+('E1006', 'Solo dance', '2019-11-15', '01:00:00', 6, 'MAIN STAGE', 100, '1AM17CS107', '', 'MAIN STAGE', 1, 'RED'),
+('E1007', 'Hackaton', '2019-11-15', '11:00:00', 60, 'LH-202', 100, '1AM17CS108', '', 'TECHNICAL', 2, 'YELLOW'),
+('E1008', 'Treasure hunt', '2019-11-15', '12:00:00', 120, 'LH-203', 100, '1AM17CS109', '', 'OFF STAGE', 2, 'BLUE'),
+('E1009', 'Beg Borrow Steal', '2019-11-15', '01:00:00', 120, 'LH-204', 100, '1AM17CS110', '', 'OFF STAGE', 4, 'BLUE'),
+('E1010', 'Sports', '2019-11-15', '10:00:00', 60, 'MAIN GROUND', 200, '1AM17CS111', '', 'SPORTS', 11, 'GREEN'),
+('E1011', 'Sketching', '2019-11-15', '02:00:00', 60, 'LH-205', 100, '1AM17CS112', '', 'OFF STAGE', 1, 'BLUE'),
+('E1012', 'Mad ads', '2019-11-15', '03:00:00', 15, 'MAIN STAGE', 200, '1AM17CS113', '', 'MAIN STAGE', 5, 'RED'),
+('E1013', 'Quiz', '2019-11-15', '01:00:00', 60, 'LH-206', 100, '1AM17CS114', '', 'OFF STAGE', 1, 'BLUE'),
+('E1014', 'Debate', '2019-11-15', '11:00:00', 5, 'LH-207', 100, '1AM17CS115', '', 'OFF STAGE', 1, 'BLUE'),
+('E1015', 'Gaming', '2019-11-15', '12:00:00', 60, 'LH-208', 200, '1AM17CS116', '', 'OFF STAGE', 4, 'BLUE');
 
 -- --------------------------------------------------------
 
