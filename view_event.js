@@ -2,20 +2,17 @@
 
 const { ipcRenderer } = require('electron')
 
-ipcRenderer.on('view-event', (event, e_id) => {
-  // get the eventList ul
-  console.log(e_id);
-})
+String.prototype.capitalizeEachWord = function() {
+    this.toLowerCase();
+    let str = this.split(" ");
 
-ipcRenderer.on('view-event-window', (event, e_id) => {
-  // get the eventList ul
-  console.log(e_id);
-})
+    for (var i = 0, x = str.length; i < x; i++)
+        str[i] = str[i][0].toUpperCase() + str[i].substr(1);
 
-ipcRenderer.on('testArg', (event, e_id) => {
-  // get the eventList ul
-  console.log(e_id);
+    return str.join(" ");
+}
 
+ipcRenderer.on('view-event', (e, obj) => {
   const eventHeader = document.getElementById('eventHeader')
-  eventHeader.innerHTML = events['NAME']
+  eventHeader.innerHTML = obj[0]['NAME'].capitalizeEachWord()
 })

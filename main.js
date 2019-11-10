@@ -73,28 +73,37 @@ createWindow = () => {
     }
   })
 
-  ipcMain.on('view-event-window', (id) => {
-  if (!viewEventWin) {
-	viewEventWin = new Window({
-		file: 'view_event.html',
-		width: 800,
-	  height: 680,
-	  parent: eventWin
+  ipcMain.on('view-event-window', (e, id) => {
+		if (!viewEventWin) {
+			viewEventWin = new Window({
+				file: 'view_event.html',
+				width: 800,
+				height: 680,
+				parent: eventWin
+			})
+
+			viewEventWin.once('show', () => {
+				db.query(`SELECT * FROM events WHERE E_ID=\'${id}\'`, function(err, result, fields) {
+					if (err)
+						dialog.showMessageBox(null, {
+							type: 'error',
+							buttons: ['OK'],
+							defaultId: 2,
+							title: 'Error',
+							message: 'Query Error',
+							detail: err.toString()
+						}, (res) => {console.log(res);})
+					else
+						viewEventWin.webContents.send('view-event', result)
+				});
+			})
+
+			// cleanup
+			viewEventWin.on('closed', () => {
+				viewEventWin = null
+			})
+		}
 	})
-
-	viewEventWin.once('show', (e) => {
-		viewEventWin.webContents.send('testArg', "t90")
-	})
-
-
-
-
-	// cleanup
-	viewEventWin.on('closed', () => {
-	  viewEventWin = null
-	})
-  }
-})
 
 	loginWin.on('closed', () => {
 		loginWin = null
