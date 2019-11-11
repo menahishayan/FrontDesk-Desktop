@@ -16,9 +16,15 @@ String.prototype.capitalizeEachWord = function() {
 ipcRenderer.on('view-event', (e, obj) => {
   const eventHeader = document.getElementById('eventHeader')
   eventHeader.innerHTML = obj[0]['NAME'].capitalizeEachWord()
+<<<<<<< HEAD
 
   const categoryContainer = document.getElementById('categoryContainer')
 
+=======
+
+  const categoryContainer = document.getElementById('categoryContainer')
+
+>>>>>>> parent of 2380c91... View Event UI
   categoryContainer.innerHTML =
     `<div class="item-container-min gradient-${obj[0]['COLOR'].toUpperCase()}">
     ${obj[0]['CATEGORY'].toUpperCase()}
@@ -34,7 +40,11 @@ ipcRenderer.on('view-event', (e, obj) => {
                 <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
                   ${obj[0]['TEAM_COUNT']} in a team<br><br>
                   <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
+<<<<<<< HEAD
                     ${obj[0]['a']} , Ph: ${obj[0]['b']}<br><br>`
+=======
+                    ${obj[0]['COORDINATORS']}'s Name<br><br>`
+>>>>>>> parent of 2380c91... View Event UI
   // keys.forEach(k => {
   //     data+= k + ": " + obj[0][k] + "<br>"
   // })

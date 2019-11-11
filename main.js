@@ -26,8 +26,7 @@ createWindow = () => {
 	loginWin = new Window({
 		file: 'index.html',
 		width: 700,
-		height: 500,
-		frame: false
+		height: 500
 	})
 
 
