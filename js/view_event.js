@@ -15,16 +15,26 @@ String.prototype.capitalizeEachWord = function() {
 	return str.join(" ");
 }
 
+let detailsContent, registerContent;
+
 const collapseLeft = function() {
 	document.querySelector('.container-left').style.width = '450px';
 	document.getElementById('categoryContainer').className = 'hidden35';
-	document.getElementById('body').className = 'hidden15';
+	document.getElementById('body').className = 'hidden35';
+
+    document.getElementById('body').innerHTML = registerContent;
+
+    document.getElementById('body').className = 'visible35';
 }
 
 const expandLeft = function() {
 	document.querySelector('.container-left').style.width = '720px';
 	document.getElementById('categoryContainer').className = 'visible15';
-	document.getElementById('body').className = 'visible35';
+	document.getElementById('body').className = 'hidden35';
+
+    document.getElementById('body').innerHTML = detailsContent;
+
+    document.getElementById('body').className = 'visible35';
 }
 
 ipcRenderer.on('view-event', (e, obj) => {
@@ -37,16 +47,42 @@ ipcRenderer.on('view-event', (e, obj) => {
     ${obj[0]['CATEGORY'].toUpperCase()}
     </div>`
 	//Event desription
-	document.getElementById('body').innerHTML += `<span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf073;"></span>
-                ${moment(obj[0]['DATE']).format("MMM DD, YYYY")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf017;"></span>
-             ${moment(obj[0]['TIME'], "HH:mm:ss", true).format("hh:mm A")} - ${moment(obj[0]['TIME'], "HH:mm:ss", true).add(obj[0]['DURATION'], 'minutes').format("hh:mm A")}<br><br>
-              <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf02d;"></span>
-                ${obj[0]['RULES']}<br><br>
-                <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
-                  ${obj[0]['TEAM_COUNT']} in a team<br><br>
+    detailsContent = `<span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf073;"></span>
+                    ${moment(obj[0]['DATE']).format("MMM DD, YYYY")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf017;"></span>
+                     ${moment(obj[0]['TIME'], "HH:mm:ss", true).format("hh:mm A")} - ${moment(obj[0]['TIME'], "HH:mm:ss", true).add(obj[0]['DURATION'], 'minutes').format("hh:mm A")}<br><br>
+                      <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf02d;"></span>
+                    ${obj[0]['RULES']}<br><br>
+                    <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
+                      ${obj[0]['TEAM_COUNT']} in a team<br><br>
                   <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
                     ${obj[0]['a']} , Ph: ${obj[0]['b']}<br><br>`
+
+    registerContent = `<form class="login100-form validate-form p-b-33 p-t-5">
+
+        <div class="wrap-input100 validate-input" data-validate="name">
+            <input class="input100" type="text" name="pName" placeholder="Name">
+            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter USN">
+            <input class="input100" type="password" name="USN" placeholder="USN">
+            <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter Phone">
+            <input class="input100" type="password" name="phone" placeholder="Phone">
+            <span class="focus-input100" data-placeholder="&#xe80f;""></span>
+        </div>
+
+        <div class="container-login100-form-btn m-t-32">
+            <button id="login" class="login100-form-btn gradient-${obj[0]['COLOR'].toUpperCase()}-left">
+                REGISTER
+            </button>
+        </div>
+
+    </form>`
+	document.getElementById('body').innerHTML = detailsContent;
                     // Ticket
   let gradient = getComputedStyle(document.querySelector('.gradient-' + obj[0]['COLOR'].toUpperCase())).background.split('-webkit-linear-gradient(top, ')[1].split(' 100%)')[0].split(' 0%, ');
   document.getElementById('grad1').innerHTML += `<stop offset="0%" style="stop-color: ${gradient[0]}" />

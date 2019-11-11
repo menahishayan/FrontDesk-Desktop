@@ -9,6 +9,11 @@
 	background: -webkit-linear-gradient(top, #D90000 0%, #690000 100%);
 }
 
+.gradient-RED-left {
+	background: #D90000;
+	background: -webkit-linear-gradient(left, #D90000 0%, #690000 100%);
+}
+
 .gradient-RED:hover {
 	background: #D90000;
 }
@@ -25,6 +30,11 @@
 .gradient-BLUE {
 	background: #003BD9;
 	background: -webkit-linear-gradient(top, #003BD9 0%, #001469 100%);
+}
+
+.gradient-BLUE-left {
+	background: #003BD9;
+	background: -webkit-linear-gradient(left, #003BD9 0%, #001469 100%);
 }
 
 .gradient-BLUE:hover {
@@ -79,6 +89,11 @@
 .gradient-ORANGE {
 	background: #FF6E00;
 	background: -webkit-linear-gradient(top, #FF6E00 0%, #804900 100%);
+}
+
+.gradient-ORANGE-left {
+	background: #FF6E00;
+	background: -webkit-linear-gradient(left, #FF6E00 0%, #804900 100%);
 }
 
 .gradient-ORANGE:hover {
