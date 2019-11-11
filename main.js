@@ -52,7 +52,8 @@ createWindow = () => {
 	  // loginWin.close();
 
 	  eventWin.once('show', () => {
-		db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY", function(err, result, fields) {
+		//db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY OFFSET 1 ROW  ", function(err, result, fields) {
+			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
 			if (err)
 				dialog.showMessageBox(null, {
 					type: 'error',
