@@ -84,7 +84,7 @@ createWindow = () => {
 			})
 
 			viewEventWin.once('show', () => {
-				db.query(`SELECT * FROM events WHERE E_ID=\'${id}\'`, function(err, result, fields) {
+				db.query(`SELECT e.* , c.name  as fuck, s.phone as suck FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
 					if (err)
 						dialog.showMessageBox(null, {
 							type: 'error',
