@@ -12,7 +12,7 @@
 	left: 0;
 	-webkit-box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.19);
 	box-shadow: 8px 0px 12px -3px rgba(0,0,0,0.19);
-	z-index: 1;
+	z-index: 2;
 	background: white;
 	transition: 0.5s;
 }
@@ -26,6 +26,28 @@
 	left: 450px;
 	margin: 25px;
 	z-index: -1;
+}
+
+.ticket-content {
+	position: relative;
+	top:-550px;
+	left: 222px;
+	color: white;
+	z-index: 1;
+	text-align: center;
+}
+
+.ticket-content-head {
+	color: white;
+
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.ticket-content-sub {
+	color: white;
+	font-size: 16px;
+	font-weight: normal;
 }
 
 .visible35 {
