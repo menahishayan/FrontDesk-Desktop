@@ -34,7 +34,7 @@ ipcRenderer.on('view-event', (e, obj) => {
                 <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
                   ${obj[0]['TEAM_COUNT']} in a team<br><br>
                   <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
-                    ${obj[0]['fuck']} , Ph: ${obj[0]['suck']}<br><br>`
+                    ${obj[0]['a']} , Ph: ${obj[0]['b']}<br><br>`
   // keys.forEach(k => {
   //     data+= k + ": " + obj[0][k] + "<br>"
   // })
