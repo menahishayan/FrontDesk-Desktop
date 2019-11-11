@@ -17,9 +17,15 @@ ipcRenderer.on('view-event', (e, obj) => {
   const eventHeader = document.getElementById('eventHeader')
   eventHeader.innerHTML = obj[0]['NAME'].capitalizeEachWord()
 <<<<<<< HEAD
+<<<<<<< HEAD
 
   const categoryContainer = document.getElementById('categoryContainer')
 
+=======
+
+  const categoryContainer = document.getElementById('categoryContainer')
+
+>>>>>>> parent of 2380c91... View Event UI
 =======
 
   const categoryContainer = document.getElementById('categoryContainer')
@@ -44,6 +50,9 @@ ipcRenderer.on('view-event', (e, obj) => {
                     ${obj[0]['a']} , Ph: ${obj[0]['b']}<br><br>`
 =======
                     ${obj[0]['COORDINATORS']}'s Name<br><br>`
+<<<<<<< HEAD
+>>>>>>> parent of 2380c91... View Event UI
+=======
 >>>>>>> parent of 2380c91... View Event UI
   // keys.forEach(k => {
   //     data+= k + ": " + obj[0][k] + "<br>"
