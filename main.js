@@ -26,8 +26,7 @@ createWindow = () => {
 	loginWin = new Window({
 		file: 'index.html',
 		width: 700,
-		height: 500,
-		frame: false
+		height: 500
 	})
 
 
@@ -53,7 +52,9 @@ createWindow = () => {
 	  // loginWin.close();
 
 	  eventWin.once('show', () => {
-		db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY", function(err, result, fields) {
+		//db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY", function(err, result, fields) {
+		//db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY OFFSET 1 ROW  ", function(err, result, fields) {
+			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
 			if (err)
 				dialog.showMessageBox(null, {
 					type: 'error',
@@ -84,7 +85,8 @@ createWindow = () => {
 			})
 
 			viewEventWin.once('show', () => {
-				db.query(`SELECT * FROM events WHERE E_ID=\'${id}\'`, function(err, result, fields) {
+				//db.query(`SELECT * FROM events WHERE E_ID=\'${id}\'`, function(err, result, fields) {
+				db.query(`SELECT e.* , c.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
 					if (err)
 						dialog.showMessageBox(null, {
 							type: 'error',
