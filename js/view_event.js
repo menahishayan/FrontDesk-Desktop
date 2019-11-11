@@ -46,10 +46,10 @@ ipcRenderer.on('view-event', (e, obj) => {
                 <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
                   ${obj[0]['TEAM_COUNT']} in a team<br><br>
                   <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
-                    ${obj[0]['fuck']} , Ph: ${obj[0]['suck']}<br><br>`
-	// Ticket
-	let gradient = getComputedStyle(document.querySelector('.gradient-' + obj[0]['COLOR'].toUpperCase())).background.split('-webkit-linear-gradient(top, ')[1].split(' 100%)')[0].split(' 0%, ');
-	document.getElementById('grad1').innerHTML += `<stop offset="0%" style="stop-color: ${gradient[0]}" />
+                    ${obj[0]['a']} , Ph: ${obj[0]['b']}<br><br>`
+                    // Ticket
+  let gradient = getComputedStyle(document.querySelector('.gradient-' + obj[0]['COLOR'].toUpperCase())).background.split('-webkit-linear-gradient(top, ')[1].split(' 100%)')[0].split(' 0%, ');
+  document.getElementById('grad1').innerHTML += `<stop offset="0%" style="stop-color: ${gradient[0]}" />
   <stop offset="100%" style="stop-color: ${gradient[1]}" />`
 
   document.getElementById('ticketContent').innerHTML += `<p class="ticket-content-head">${obj[0]['NAME'].capitalizeEachWord()}</p>
