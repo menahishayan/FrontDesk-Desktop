@@ -54,6 +54,9 @@
 .list-container {
   width: '100%';
   overflow: auto;
+  max-height:100%;
+  margin-top: -15px;
+  padding-top: 15px;
 }
 
 .event-item {
