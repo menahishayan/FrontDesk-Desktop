@@ -67,23 +67,8 @@ createWindow = () => {
 			else
 				eventWin.webContents.send('events', result)
 		});
+});
 
-		/* eventWin.once('show', () => {
-			//db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events ORDER BY CATEGORY OFFSET 1 ROW  ", function(err, result, fields) {
-				db.query("insert into registration(E_ID,USN,TIMESTAMP,DESK_ID,DESK_USN,DESKLOCATION) values(\'${id}\', \'${USN}\', Date.now(), \'${DeskID}\', \'${DeskUSN}\', \'${DeskLoc}\')", function(err, result, fields) {
-				if (err)
-					dialog.showMessageBox(null, {
-						type: 'error',
-						buttons: ['OK'],
-						defaultId: 2,
-						title: 'Error',
-						message: 'Query Error',
-						detail: err
-					}, (res) => {console.log(res);})
-				else
-					eventWin.webContents.send('events', result)
-			}); */
-	})
       // cleanup
       eventWin.on('closed', () => {
         eventWin = null
@@ -115,6 +100,8 @@ createWindow = () => {
 						viewEventWin.webContents.send('view-event', result)
 				});
 			})
+
+
 
 			// cleanup
 			viewEventWin.on('closed', () => {
