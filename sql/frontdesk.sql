@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2019 at 03:05 PM
+-- Generation Time: Nov 11, 2019 at 02:46 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -143,7 +143,7 @@ CREATE TABLE `events` (
   `VENUE` varchar(20) NOT NULL,
   `PRICE` int(11) NOT NULL,
   `COORDINATORS` varchar(20) NOT NULL,
-  `RULES` varchar(2000) NOT NULL,
+  `RULES` varchar(20) NOT NULL,
   `CATEGORY` varchar(20) NOT NULL,
   `TEAM_COUNT` int(11) NOT NULL,
   `COLOR` varchar(20) NOT NULL
@@ -154,35 +154,35 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRICE`, `COORDINATORS`, `RULES`, `CATEGORY`, `TEAM_COUNT`, `COLOR`) VALUES
-('E1001', 'Codeit', '2019-11-15', '10:00:00', 60, ' LH-201', 80, '1AM17CS102', 'The team should complete the task in given time', 'TECHNICAL', 2, 'YELLOW'),
-('E1002', 'Fasion show', '2019-11-15', '17:00:00', 15, 'MAIN STAGE', 800, '1AM17CS103', 'The team must not use any vulgar clothes', 'MAIN STAGE', 8, 'RED'),
-('E1003', 'Group singing', '2019-11-15', '10:00:00', 7, 'MAIN STAGE', 400, '1AM17CS104', 'To be completed in given time', 'MAIN STAGE', 5, 'RED'),
-('E1004', 'Group dance', '2019-11-15', '11:00:00', 7, 'MAIN STAGE', 500, '1AM17CS105', 'To be completed in given time', 'MAIN STAGE', 6, 'RED'),
-('E1005', 'Solo singing', '2019-11-15', '12:00:00', 5, 'MAIN STAGE', 100, '1AM17CS106', 'To be completed in given time', 'MAIN STAGE', 1, 'RED'),
-('E1006', 'Solo dance', '2019-11-15', '13:00:00', 6, 'MAIN STAGE', 100, '1AM17CS107', 'To be completed in given time', 'MAIN STAGE', 1, 'RED'),
-('E1007', 'Hackaton', '2019-11-15', '11:00:00', 60, 'LH-202', 100, '1AM17CS108', 'who ever clears the most no of levels they are the winners', 'TECHNICAL', 2, 'YELLOW'),
-('E1008', 'Treasure hunt', '2019-11-15', '12:00:00', 120, 'LH-203', 100, '1AM17CS109', 'To be completed in given time', 'OFF STAGE', 2, 'BLUE'),
-('E1009', 'Beg Borrow Steal', '2019-11-15', '13:00:00', 120, 'LH-204', 100, '1AM17CS110', 'Most number of items collected is the winner', 'OFF STAGE', 4, 'BLUE'),
+('E1001', 'Codeit', '2019-11-15', '10:00:00', 60, ' LH-201', 80, '1AM17CS102', 'The team should comp', 'TECHNICAL', 2, 'YELLOW'),
+('E1002', 'Fasion show', '2019-11-15', '17:00:00', 15, 'MAIN STAGE', 800, '1AM17CS103', 'The team must not us', 'MAIN STAGE', 8, 'RED'),
+('E1003', 'Group singing', '2019-11-15', '10:00:00', 7, 'MAIN STAGE', 400, '1AM17CS104', 'To be completed in g', 'MAIN STAGE', 5, 'RED'),
+('E1004', 'Group dance', '2019-11-15', '11:00:00', 7, 'MAIN STAGE', 500, '1AM17CS105', 'To be completed in g', 'MAIN STAGE', 6, 'RED'),
+('E1005', 'Solo singing', '2019-11-15', '12:00:00', 5, 'MAIN STAGE', 100, '1AM17CS106', 'To be completed in g', 'MAIN STAGE', 1, 'RED'),
+('E1006', 'Solo dance', '2019-11-15', '13:00:00', 6, 'MAIN STAGE', 100, '1AM17CS107', 'To be completed in g', 'MAIN STAGE', 1, 'RED'),
+('E1007', 'Hackaton', '2019-11-15', '11:00:00', 60, 'LH-202', 100, '1AM17CS108', 'who ever clears the ', 'TECHNICAL', 2, 'YELLOW'),
+('E1008', 'Treasure hunt', '2019-11-15', '12:00:00', 120, 'LH-203', 100, '1AM17CS109', 'To be completed in g', 'OFF STAGE', 2, 'BLUE'),
+('E1009', 'Beg Borrow Steal', '2019-11-15', '13:00:00', 120, 'LH-204', 100, '1AM17CS110', 'Most number of items', 'OFF STAGE', 4, 'BLUE'),
 ('E1010', 'Sketching', '2019-11-15', '14:00:00', 60, 'LH-205', 100, '1AM17CS112', 'Pencil sketch only', 'OFF STAGE', 1, 'BLUE'),
-('E1011', 'Mad ads', '2019-11-15', '15:00:00', 15, 'MAIN STAGE', 200, '1AM17CS113', 'No insulting( No NFSW)', 'MAIN STAGE', 5, 'RED'),
+('E1011', 'Mad ads', '2019-11-15', '15:00:00', 15, 'MAIN STAGE', 200, '1AM17CS113', 'No insulting( No NFS', 'MAIN STAGE', 5, 'RED'),
 ('E1012', 'Quiz', '2019-11-15', '13:00:00', 60, 'LH-206', 100, '1AM17CS114', 'No usage of phone', 'OFF STAGE', 1, 'BLUE'),
-('E1013', 'Debate', '2019-11-15', '11:00:00', 5, 'LH-207', 100, '1AM17CS115', 'To be completed in given time', 'TECHNICAL', 1, 'YELLOW'),
-('E1014', 'Gaming', '2019-11-15', '12:00:00', 60, 'LH-208', 200, '1AM17CS116', 'Follow the given game policy', 'OFF STAGE', 4, 'BLUE'),
-('E1015', 'Musically King/Queen', '2019-11-15', '15:00:00', 5, 'LH-209', 100, '1AM17CS117', 'To be completed within time', 'OFF STAGE', 1, 'BLUE'),
+('E1013', 'Debate', '2019-11-15', '11:00:00', 5, 'LH-207', 100, '1AM17CS115', 'To be completed in g', 'TECHNICAL', 1, 'YELLOW'),
+('E1014', 'Gaming', '2019-11-15', '12:00:00', 60, 'LH-208', 200, '1AM17CS116', 'Follow the given gam', 'OFF STAGE', 4, 'BLUE'),
+('E1015', 'Musically King/Queen', '2019-11-15', '15:00:00', 5, 'LH-209', 100, '1AM17CS117', 'To be completed with', 'OFF STAGE', 1, 'BLUE'),
 ('E1016', 'Cooking W/o Fire', '2019-11-15', '15:00:00', 30, 'LH-210', 150, '1AM17CS118', 'No usage of fire', 'OFF STAGE', 2, 'BLUE'),
-('E1017', 'Rangoli', '2019-11-15', '15:00:00', 45, 'LH-211', 100, '1AM17CS119', 'To be completed in given time', 'OFF STAGE', 4, 'BLUE'),
-('E1018', 'Poetry', '2019-11-15', '16:00:00', 30, 'LH-212', 80, '1AM17CS120', 'To be completed in given time', 'OFF STAGE', 1, 'BLUE'),
-('E1019', 'Photography', '2019-11-15', '17:00:00', 30, 'LH-213', 100, '1AM17CS121', 'Phone photography w/o filter', 'OFF STAGE', 1, 'BLUE'),
-('E1020', 'Dumb Charades', '2019-11-15', '16:00:00', 10, 'LH-214', 80, '1AM17CS122', 'To maintain standards', 'OFF STAGE', 1, 'BLUE'),
-('E1021', 'Mr & Ms. Fresher', '2019-11-15', '13:00:00', 120, 'LH-215', 0, '1AM17CS123', 'To maintain standards', 'MAIN STAGE', 1, 'RED'),
-('E1022', 'Stand Up Comedy', '2019-11-15', '12:00:00', 8, 'LH-216', 100, '1AM17CS124', 'No insulting(No NFSW)', 'MAIN STAGE', 1, 'RED'),
-('E1023', 'PUBG Mobile', '2019-11-15', '13:00:00', 60, 'LH-217', 400, '1AM17CS125', 'Follow the given game policy', 'GAMING', 4, 'ORANGE'),
-('E1024', 'NFS Most Wanted', '2019-11-15', '11:00:00', 60, 'LH-218', 200, '1AM17CS126', 'Follow the given game policy', 'GAMING', 2, 'ORANGE'),
-('E1025', 'Counter Strike 1.6', '2019-11-15', '14:00:00', 60, 'LH-219', 200, '1AM17CS127', 'Follow the given game policy', 'GAMING', 2, 'ORANGE'),
-('E1026', 'Mini Militia', '2019-11-15', '12:00:00', 20, 'LH-220', 100, '1AM17CS128', 'Follow the given game policy', 'GAMING', 1, 'ORANGE'),
-('E1027', 'Football', '2019-11-15', '14:00:00', 30, 'LH-221', 200, '1AM17CS129', 'Rough Play prohibited', 'SPORTS', 8, 'GREEN'),
-('E1028', 'Cricket', '2019-11-15', '13:00:00', 40, 'LH-222', 400, '1AM17CS130', 'Rough Play prohibited', 'SPORTS', 11, 'GREEN'),
-('E1029', 'Chess', '2019-11-15', '17:00:00', 20, 'LH-223', 100, '1AM17CS131', 'Finish the game in given time', 'SPORTS', 1, 'GREEN'),
+('E1017', 'Rangoli', '2019-11-15', '15:00:00', 45, 'LH-211', 100, '1AM17CS119', 'To be completed in g', 'OFF STAGE', 4, 'BLUE'),
+('E1018', 'Poetry', '2019-11-15', '16:00:00', 30, 'LH-212', 80, '1AM17CS120', 'To be completed in g', 'OFF STAGE', 1, 'BLUE'),
+('E1019', 'Photography', '2019-11-15', '17:00:00', 30, 'LH-213', 100, '1AM17CS121', 'Phone photography w/', 'OFF STAGE', 1, 'BLUE'),
+('E1020', 'Dumb Charades', '2019-11-15', '16:00:00', 10, 'LH-214', 80, '1AM17CS122', 'To maintain standard', 'OFF STAGE', 1, 'BLUE'),
+('E1021', 'Mr & Ms. Fresher', '2019-11-15', '13:00:00', 120, 'LH-215', 0, '1AM17CS123', 'To maintain standard', 'MAIN STAGE', 1, 'RED'),
+('E1022', 'Stand Up Comedy', '2019-11-15', '12:00:00', 8, 'LH-216', 100, '1AM17CS124', 'No insulting(No NFSW', 'MAIN STAGE', 1, 'RED'),
+('E1023', 'PUBG Mobile', '2019-11-15', '13:00:00', 60, 'LH-217', 400, '1AM17CS125', 'Follow the given gam', 'GAMING', 4, 'ORANGE'),
+('E1024', 'NFS Most Wanted', '2019-11-15', '11:00:00', 60, 'LH-218', 200, '1AM17CS126', 'Follow the given gam', 'GAMING', 2, 'ORANGE'),
+('E1025', 'Counter Strike 1.6', '2019-11-15', '14:00:00', 60, 'LH-219', 200, '1AM17CS127', 'Follow the given gam', 'GAMING', 2, 'ORANGE'),
+('E1026', 'Mini Militia', '2019-11-15', '12:00:00', 20, 'LH-220', 100, '1AM17CS128', 'Follow the given gam', 'GAMING', 1, 'ORANGE'),
+('E1027', 'Football', '2019-11-15', '14:00:00', 30, 'LH-221', 200, '1AM17CS129', 'Rough Play prohibite', 'SPORTS', 8, 'GREEN'),
+('E1028', 'Cricket', '2019-11-15', '13:00:00', 40, 'LH-222', 400, '1AM17CS130', 'Rough Play prohibite', 'SPORTS', 11, 'GREEN'),
+('E1029', 'Chess', '2019-11-15', '17:00:00', 20, 'LH-223', 100, '1AM17CS131', 'Finish the game in g', 'SPORTS', 1, 'GREEN'),
 ('E1030', 'Table Tennis', '2019-11-15', '16:00:00', 30, 'LH-224', 100, '1AM17CS132', 'No Foul Play', 'SPORTS', 2, 'GREEN');
 
 -- --------------------------------------------------------
