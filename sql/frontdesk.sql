@@ -297,8 +297,6 @@ ALTER TABLE `events`
 -- Indexes for table `registration`
 --
 ALTER TABLE `registration`
-  ADD PRIMARY KEY (`R_ID`),
-  ADD KEY `T_ID` (`T_ID`),
   ADD KEY `E_ID` (`E_ID`),
   ADD KEY `USN` (`USN`);
 
@@ -312,7 +310,6 @@ ALTER TABLE `students`
 -- Indexes for table `transactions`
 --
 ALTER TABLE `transactions`
-  ADD PRIMARY KEY (`T_ID`),
   ADD KEY `R_ID` (`R_ID`);
 
 --
@@ -330,16 +327,9 @@ ALTER TABLE `coordinators`
 -- Constraints for table `registration`
 --
 ALTER TABLE `registration`
-  ADD CONSTRAINT `registration_ibfk_1` FOREIGN KEY (`T_ID`) REFERENCES `transactions` (`T_ID`),
   ADD CONSTRAINT `registration_ibfk_2` FOREIGN KEY (`E_ID`) REFERENCES `events` (`E_ID`),
   ADD CONSTRAINT `registration_ibfk_3` FOREIGN KEY (`USN`) REFERENCES `students` (`USN`);
 
---
--- Constraints for table `transactions`
---
-ALTER TABLE `transactions`
-  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`R_ID`) REFERENCES `registration` (`R_ID`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

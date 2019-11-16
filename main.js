@@ -35,6 +35,7 @@ createWindow = () => {
 		db.connect(function(err) {
     		if (err) throw err;
 			else {
+				
 
 			}
 		});
@@ -44,7 +45,7 @@ createWindow = () => {
     if (!eventWin) {
       eventWin = new Window({
 		  file: 'events.html',
-		  width: 1090,
+		  width: 1099,
   		height: 720,
 		parent: loginWin
       })
