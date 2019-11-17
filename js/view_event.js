@@ -3,8 +3,11 @@
 const {
 	ipcRenderer
 } = require('electron')
+
 const moment = require('moment');
 var mysql = require('mysql');
+
+const dialog = require('electron').remote.dialog
 
 String.prototype.capitalizeEachWord = function() {
 	this.toLowerCase();
@@ -16,7 +19,7 @@ String.prototype.capitalizeEachWord = function() {
 	return str.join(" ");
 }
 
-let detailsContent, registerContent;
+let detailsContent, registerContent, eventData;
 
 const collapseLeft = function() {
 	document.querySelector('.container-left').style.width = '450px';
@@ -27,9 +30,9 @@ const collapseLeft = function() {
 
 	document.getElementById('body').className = 'visible35';
 
-	document.getElementById('login').addEventListener('click', () => {
-		console.log("button clicked");
-		register(obj[0]['E_ID'], document.getElementById('USN').innerHTML, "1AM17CS121")
+	document.getElementById('register').addEventListener('click', (e) => {
+		e.preventDefault();
+		register(eventData['E_ID'], document.getElementById('USN').innerHTML, "1AM17CS121")
 	});
 }
 
@@ -58,50 +61,43 @@ const setup = () => {
 }
 
 const register = (e_id, USN, DeskUSN) => {
-    db.connect(function(err) {
-        if (err) throw err;
-        else {
+	db.connect(function(err) {
+		if (err) throw err;
+		else {
 			console.log("connected");
-        }
-    });
-    db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, function(err, result, fields) {
-    if (err)
-        // dialog.showMessageBox(null, {
-        //     type: 'error',
-        //     buttons: ['OK'],
-        //     defaultId: 2,
-        //     title: 'Error',
-        //     message: 'Query Error',
-        //     detail: err
-        // }, (res) => {console.log(res);})
-        console.log(err);
-    else {
-		console.log(result);
-    }
-});
+		}
+	});
+
+	db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, function(err, result, fields) {
+		if (err)
+			dialog.showMessageBox(null, {
+			    type: 'error',
+			    buttons: ['OK'],
+			    defaultId: 2,
+			    title: 'Error',
+			    message: 'Query Error',
+			    detail: err.toString()
+			}, (res) => {console.log(res);})
+			// console.log(err);
+		else {
+			console.log(result);
+		}
+	});
 }
 
 ipcRenderer.on('view-event', (e, obj) => {
+
+	eventData = obj[0];
+
 	// Heading
-	document.getElementById('eventHeader').innerHTML = obj[0]['NAME'].capitalizeEachWord()
+	document.getElementById('eventHeader').innerHTML = eventData['NAME'].capitalizeEachWord()
 
 	//Category Label
 	document.getElementById('categoryContainer').innerHTML =
-		`<div class="item-container-min gradient-${obj[0]['COLOR'].toUpperCase()}">
-    ${obj[0]['CATEGORY'].toUpperCase()}
+		`<div class="item-container-min gradient-${eventData['COLOR'].toUpperCase()}">
+    ${eventData['CATEGORY'].toUpperCase()}
     </div>`
 	//Event desription
-	detailsContent = `<span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf073;"></span>
-                    ${moment(obj[0]['DATE']).format("MMM DD, YYYY")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf017;"></span>
-                     ${moment(obj[0]['TIME'], "HH:mm:ss", true).format("hh:mm A")} - ${moment(obj[0]['TIME'], "HH:mm:ss", true).add(obj[0]['DURATION'], 'minutes').format("hh:mm A")}<br><br>
-                      <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf02d;"></span>
-                    ${obj[0]['RULES']}<br><br>
-                    <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
-                      ${obj[0]['TEAM_COUNT']} in a team<br><br>
-                  <span class="fa-icon body-items ${obj[0]['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
-                    ${obj[0]['a']} , Ph: ${obj[0]['b']}<br><br>`
-
 	registerContent = `<form class="login100-form validate-form p-b-33 p-t-5">
         <div class="wrap-input100 validate-input" data-validate="Enter USN">
             <input class="input100" type="text" id="USN" placeholder="USN">
@@ -144,15 +140,30 @@ ipcRenderer.on('view-event', (e, obj) => {
         </div>
 
     </form>`
+	detailsContent = `<span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf073;"></span>
+                    ${moment(eventData['DATE']).format("MMM DD, YYYY")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf017;"></span>
+                     ${moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A")} - ${moment(eventData['TIME'], "HH:mm:ss", true).add(eventData['DURATION'], 'minutes').format("hh:mm A")}<br><br>
+                      <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf02d;"></span>
+                    ${eventData['RULES']}<br><br>
+                    <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
+                      ${eventData['TEAM_COUNT']} in a team<br><br>
+                  <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
+                    ${eventData['a']} , Ph: ${eventData['b']}<br><br>`
+
+	registerContent = document.getElementById('registerContent')
+
+	document.getElementById('registerContent').className = `gradient-${eventData['COLOR'].toUpperCase()}-left`
+
 	document.getElementById('body').innerHTML = detailsContent;
 	// Ticket
-	let gradient = getComputedStyle(document.querySelector('.gradient-' + obj[0]['COLOR'].toUpperCase())).background.split('-webkit-linear-gradient(top, ')[1].split(' 100%)')[0].split(' 0%, ');
+	let gradient = getComputedStyle(document.querySelector('.gradient-' + eventData['COLOR'].toUpperCase())).background.split('-webkit-linear-gradient(top, ')[1].split(' 100%)')[0].split(' 0%, ');
 	document.getElementById('grad1').innerHTML += `<stop offset="0%" style="stop-color: ${gradient[0]}" />
   <stop offset="100%" style="stop-color: ${gradient[1]}" />`
 
-	document.getElementById('ticketContent').innerHTML += `<p class="ticket-content-head">${obj[0]['NAME'].capitalizeEachWord()}</p>
-                                                      <p class="ticket-content-sub">${moment(obj[0]['DATE']).format("MMM DD, YYYY")},&nbsp;
-                                                      ${moment(obj[0]['TIME'], "HH:mm:ss", true).format("hh:mm A")}</p>`;
+	document.getElementById('ticketContent').innerHTML += `<p class="ticket-content-head">${eventData['NAME'].capitalizeEachWord()}</p>
+                                                      <p class="ticket-content-sub">${moment(eventData['DATE']).format("MMM DD, YYYY")},&nbsp;
+                                                      ${moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A")}</p>`;
 
 	document.getElementById('ticketContainer').addEventListener('click', () => {
 		if (document.querySelector('.container-left').style.width != '450px')
