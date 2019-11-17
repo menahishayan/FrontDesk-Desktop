@@ -223,7 +223,7 @@ CREATE TABLE `rules` (
   `E_ID` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `RULE_NO` int(11) NOT NULL,
   `RULES` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rules`

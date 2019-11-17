@@ -59,7 +59,7 @@ const register = (e_id, USN, DeskID, DeskUSN, DeskLoc) => {
 
         }
     });
-    db.query(`insert into registration(E_ID,USN,TIMESTAMP,DESK_ID,DESK_USN,DESKLOCATION) values(\'${e_id}\', \'${USN}\', ${new Date()}, \'${DeskID}\', \'${DeskUSN}\', \'${DeskLoc}\')`, function(err, result, fields) {
+    db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, function(err, result, fields) {
     if (err)
         // dialog.showMessageBox(null, {
         //     type: 'error',
