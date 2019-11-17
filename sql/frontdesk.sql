@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2019 at 08:40 AM
+-- Generation Time: Nov 17, 2019 at 09:27 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -197,6 +197,22 @@ CREATE TABLE `registration` (
   `DESK_USN` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `registration`
+--
+
+INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
+('R1003', 'E1021', '1AM17CS119', '1AM17CS132'),
+('R1004', 'E1012', '1AM17CS131', '1AM17CS119');
+
+--
+-- Triggers `registration`
+--
+DELIMITER $$
+CREATE TRIGGER `TRANSACT` AFTER INSERT ON `registration` FOR EACH ROW INSERT INTO transactions(R_ID) VALUES(NEW.R_ID)
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -207,7 +223,7 @@ CREATE TABLE `rules` (
   `E_ID` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `RULE_NO` int(11) NOT NULL,
   `RULES` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `rules`
@@ -287,6 +303,14 @@ CREATE TABLE `transactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
+('R1003', 0, NULL, 'PENDING'),
+('R1004', 0, NULL, 'PENDING');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -360,7 +384,7 @@ ALTER TABLE `registration`
 --
 ALTER TABLE `rules`
   ADD CONSTRAINT `rules_fk1` FOREIGN KEY (`E_ID`) REFERENCES `events` (`E_ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
