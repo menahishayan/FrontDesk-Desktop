@@ -59,7 +59,7 @@ const register = (e_id, USN, DeskID, DeskUSN, DeskLoc) => {
 
         }
     });
-    db.query(`insert into registration(E_ID,USN,TIMESTAMP,DESK_ID,DESK_USN,DESKLOCATION) values(${e_id}, ${USN}, ${new Date()}, ${DeskID}, ${DeskUSN}, ${DeskLoc})`, function(err, result, fields) {
+    db.query(`insert into registration(E_ID,USN,TIMESTAMP,DESK_ID,DESK_USN,DESKLOCATION) values(\'${e_id}\', \'${USN}\', ${new Date()}, \'${DeskID}\', \'${DeskUSN}\', \'${DeskLoc}\')`, function(err, result, fields) {
     if (err)
         // dialog.showMessageBox(null, {
         //     type: 'error',
@@ -104,7 +104,7 @@ ipcRenderer.on('view-event', (e, obj) => {
         </div>
 
         <div class="wrap-input100 validate-input" data-validate="name">
-            <input class="input100" type="text" id="pName" placeholder="Name">
+            <input class="input100" type="text" id="Name" placeholder="Name">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
         </div>
 
