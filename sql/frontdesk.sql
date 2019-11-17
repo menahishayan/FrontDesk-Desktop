@@ -92,37 +92,37 @@ CREATE TABLE `coordinators` (
 
 INSERT INTO `coordinators` (`USN`, `ROLE`, `EVENT`) VALUES
 ('1AM17CS101', 'Core Team', 'Core'),
-('1AM17CS102', 'Coordinator', 'E1001'),
-('1AM17CS103', 'Coordinator', 'E1002'),
-('1AM17CS104', 'Coordinator', 'E1003'),
-('1AM17CS105', 'Coordinator', 'E1004'),
-('1AM17CS106', 'Coordinator', 'E1005'),
-('1AM17CS107', 'Coordinator', 'E1006'),
-('1AM17CS108', 'Coordinator', 'E1007'),
-('1AM17CS109', 'Coordinator', 'E1008'),
-('1AM17CS110', 'Coordinator', 'E1009'),
-('1AM17CS111', 'Coordinator', 'E1010'),
-('1AM17CS112', 'Coordinator', 'E1011'),
-('1AM17CS113', 'Coordinator', 'E1012'),
-('1AM17CS114', 'Coordinator', 'E1013'),
-('1AM17CS115', 'Coordinator', 'E1014'),
-('1AM17CS116', 'Coordinator', 'E1015'),
-('1AM17CS117', 'Coordinator', 'E1016'),
-('1AM17CS118', 'Coordinator', 'E1017'),
-('1AM17CS119', 'Coordinator', 'E1018'),
-('1AM17CS120', 'Coordinator', 'E1019'),
-('1AM17CS121', 'Coordinator', 'E1020'),
-('1AM17CS122', 'Coordinator', 'E1021'),
-('1AM17CS123', 'Coordinator', 'E1022'),
-('1AM17CS124', 'Coordinator', 'E1023'),
-('1AM17CS125', 'Coordinator', 'E1024'),
-('1AM17CS126', 'Coordinator', 'E1025'),
-('1AM17CS127', 'Coordinator', 'E1026'),
-('1AM17CS128', 'Coordinator', 'E1027'),
-('1AM17CS129', 'Coordinator', 'E1028'),
-('1AM17CS130', 'Coordinator', 'E1029'),
-('1AM17CS131', 'Coordinator', 'E1030'),
-('1AM17CS132', 'Coordinator', 'E1031'),
+('1AM17CS102', 'Coordinator', '1'),
+('1AM17CS103', 'Coordinator', '2'),
+('1AM17CS104', 'Coordinator', '3'),
+('1AM17CS105', 'Coordinator', '4'),
+('1AM17CS106', 'Coordinator', '5'),
+('1AM17CS107', 'Coordinator', '6'),
+('1AM17CS108', 'Coordinator', '7'),
+('1AM17CS109', 'Coordinator', '8'),
+('1AM17CS110', 'Coordinator', '9'),
+('1AM17CS111', 'Coordinator', '10'),
+('1AM17CS112', 'Coordinator', '11'),
+('1AM17CS113', 'Coordinator', '12'),
+('1AM17CS114', 'Coordinator', '13'),
+('1AM17CS115', 'Coordinator', '14'),
+('1AM17CS116', 'Coordinator', '15'),
+('1AM17CS117', 'Coordinator', '16'),
+('1AM17CS118', 'Coordinator', '17'),
+('1AM17CS119', 'Coordinator', '18'),
+('1AM17CS120', 'Coordinator', '19'),
+('1AM17CS121', 'Coordinator', '20'),
+('1AM17CS122', 'Coordinator', '21'),
+('1AM17CS123', 'Coordinator', '22'),
+('1AM17CS124', 'Coordinator', '23'),
+('1AM17CS125', 'Coordinator', '24'),
+('1AM17CS126', 'Coordinator', '25'),
+('1AM17CS127', 'Coordinator', '26'),
+('1AM17CS128', 'Coordinator', '27'),
+('1AM17CS129', 'Coordinator', '28'),
+('1AM17CS130', 'Coordinator', '29'),
+('1AM17CS131', 'Coordinator', '30'),
+('1AM17CS132', 'Coordinator', '31'),
 ('1AM17CS133', 'Core team', 'Core'),
 ('1AM17CS134', 'Core team', 'Core'),
 ('1AM17CS135', 'Core team', 'Core');
@@ -134,7 +134,7 @@ INSERT INTO `coordinators` (`USN`, `ROLE`, `EVENT`) VALUES
 --
 
 CREATE TABLE `events` (
-  `E_ID` varchar(20) NOT NULL,
+  `E_ID` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `NAME` varchar(20) NOT NULL,
   `DATE` date NOT NULL,
   `TIME` time NOT NULL,
@@ -152,36 +152,36 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRICE`, `COORDINATORS`, `CATEGORY`, `TEAM_COUNT`, `COLOR`) VALUES
-('E1001', 'Codeit', '2019-11-15', '10:00:00', 60, ' LH-201', 80, '1AM17CS102', 'TECHNICAL', 2, 'YELLOW'),
-('E1002', 'Fasion show', '2019-11-15', '17:00:00', 15, 'MAIN STAGE', 800, '1AM17CS103', 'MAIN STAGE', 8, 'RED'),
-('E1003', 'Group singing', '2019-11-15', '10:00:00', 7, 'MAIN STAGE', 400, '1AM17CS104', 'MAIN STAGE', 5, 'RED'),
-('E1004', 'Group dance', '2019-11-15', '11:00:00', 7, 'MAIN STAGE', 500, '1AM17CS105', 'MAIN STAGE', 6, 'RED'),
-('E1005', 'Solo singing', '2019-11-15', '12:00:00', 5, 'MAIN STAGE', 100, '1AM17CS106', 'MAIN STAGE', 1, 'RED'),
-('E1006', 'Solo dance', '2019-11-15', '13:00:00', 6, 'MAIN STAGE', 100, '1AM17CS107', 'MAIN STAGE', 1, 'RED'),
-('E1007', 'Hackaton', '2019-11-15', '11:00:00', 60, 'LH-202', 100, '1AM17CS108', 'TECHNICAL', 2, 'YELLOW'),
-('E1008', 'Treasure hunt', '2019-11-15', '12:00:00', 120, 'LH-203', 100, '1AM17CS109', 'OFF STAGE', 2, 'BLUE'),
-('E1009', 'Beg Borrow Steal', '2019-11-15', '13:00:00', 120, 'LH-204', 100, '1AM17CS110', 'OFF STAGE', 4, 'BLUE'),
-('E1010', 'Sketching', '2019-11-15', '14:00:00', 60, 'LH-205', 100, '1AM17CS112', 'OFF STAGE', 1, 'BLUE'),
-('E1011', 'Mad ads', '2019-11-15', '15:00:00', 15, 'MAIN STAGE', 200, '1AM17CS113', 'MAIN STAGE', 5, 'RED'),
-('E1012', 'Quiz', '2019-11-15', '13:00:00', 60, 'LH-206', 100, '1AM17CS114', 'OFF STAGE', 1, 'BLUE'),
-('E1013', 'Debate', '2019-11-15', '11:00:00', 5, 'LH-207', 100, '1AM17CS115', 'TECHNICAL', 1, 'YELLOW'),
-('E1014', 'Gaming', '2019-11-15', '12:00:00', 60, 'LH-208', 200, '1AM17CS116', 'OFF STAGE', 4, 'BLUE'),
-('E1015', 'Musically King/Queen', '2019-11-15', '15:00:00', 5, 'LH-209', 100, '1AM17CS117', 'OFF STAGE', 1, 'BLUE'),
-('E1016', 'Cooking W/o Fire', '2019-11-15', '15:00:00', 30, 'LH-210', 150, '1AM17CS118', 'OFF STAGE', 2, 'BLUE'),
-('E1017', 'Rangoli', '2019-11-15', '15:00:00', 45, 'LH-211', 100, '1AM17CS119', 'OFF STAGE', 4, 'BLUE'),
-('E1018', 'Poetry', '2019-11-15', '16:00:00', 30, 'LH-212', 80, '1AM17CS120', 'OFF STAGE', 1, 'BLUE'),
-('E1019', 'Photography', '2019-11-15', '17:00:00', 30, 'LH-213', 100, '1AM17CS121', 'OFF STAGE', 1, 'BLUE'),
-('E1020', 'Dumb Charades', '2019-11-15', '16:00:00', 10, 'LH-214', 80, '1AM17CS122', 'OFF STAGE', 1, 'BLUE'),
-('E1021', 'Mr & Ms. Fresher', '2019-11-15', '13:00:00', 120, 'LH-215', 0, '1AM17CS123', 'MAIN STAGE', 1, 'RED'),
-('E1022', 'Stand Up Comedy', '2019-11-15', '12:00:00', 8, 'LH-216', 100, '1AM17CS124', 'MAIN STAGE', 1, 'RED'),
-('E1023', 'PUBG Mobile', '2019-11-15', '13:00:00', 60, 'LH-217', 400, '1AM17CS125', 'GAMING', 4, 'ORANGE'),
-('E1024', 'NFS Most Wanted', '2019-11-15', '11:00:00', 60, 'LH-218', 200, '1AM17CS126', 'GAMING', 2, 'ORANGE'),
-('E1025', 'Counter Strike 1.6', '2019-11-15', '14:00:00', 60, 'LH-219', 200, '1AM17CS127', 'GAMING', 2, 'ORANGE'),
-('E1026', 'Mini Militia', '2019-11-15', '12:00:00', 20, 'LH-220', 100, '1AM17CS128', 'GAMING', 1, 'ORANGE'),
-('E1027', 'Football', '2019-11-15', '14:00:00', 30, 'LH-221', 200, '1AM17CS129', 'SPORTS', 8, 'GREEN'),
-('E1028', 'Cricket', '2019-11-15', '13:00:00', 40, 'LH-222', 400, '1AM17CS130', 'SPORTS', 11, 'GREEN'),
-('E1029', 'Chess', '2019-11-15', '17:00:00', 20, 'LH-223', 100, '1AM17CS131', 'SPORTS', 1, 'GREEN'),
-('E1030', 'Table Tennis', '2019-11-15', '16:00:00', 30, 'LH-224', 100, '1AM17CS132', 'SPORTS', 2, 'GREEN');
+('1', 'Codeit', '2019-11-15', '10:00:00', 60, ' LH-201', 80, '1AM17CS102', 'TECHNICAL', 2, 'YELLOW'),
+('2', 'Fasion show', '2019-11-15', '17:00:00', 15, 'MAIN STAGE', 800, '1AM17CS103', 'MAIN STAGE', 8, 'RED'),
+('3', 'Group singing', '2019-11-15', '10:00:00', 7, 'MAIN STAGE', 400, '1AM17CS104', 'MAIN STAGE', 5, 'RED'),
+('4', 'Group dance', '2019-11-15', '11:00:00', 7, 'MAIN STAGE', 500, '1AM17CS105', 'MAIN STAGE', 6, 'RED'),
+('5', 'Solo singing', '2019-11-15', '12:00:00', 5, 'MAIN STAGE', 100, '1AM17CS106', 'MAIN STAGE', 1, 'RED'),
+('6', 'Solo dance', '2019-11-15', '13:00:00', 6, 'MAIN STAGE', 100, '1AM17CS107', 'MAIN STAGE', 1, 'RED'),
+('7', 'Hackaton', '2019-11-15', '11:00:00', 60, 'LH-202', 100, '1AM17CS108', 'TECHNICAL', 2, 'YELLOW'),
+('8', 'Treasure hunt', '2019-11-15', '12:00:00', 120, 'LH-203', 100, '1AM17CS109', 'OFF STAGE', 2, 'BLUE'),
+('9', 'Beg Borrow Steal', '2019-11-15', '13:00:00', 120, 'LH-204', 100, '1AM17CS110', 'OFF STAGE', 4, 'BLUE'),
+('10', 'Sketching', '2019-11-15', '14:00:00', 60, 'LH-205', 100, '1AM17CS112', 'OFF STAGE', 1, 'BLUE'),
+('11', 'Mad ads', '2019-11-15', '15:00:00', 15, 'MAIN STAGE', 200, '1AM17CS113', 'MAIN STAGE', 5, 'RED'),
+('12', 'Quiz', '2019-11-15', '13:00:00', 60, 'LH-206', 100, '1AM17CS114', 'OFF STAGE', 1, 'BLUE'),
+('13', 'Debate', '2019-11-15', '11:00:00', 5, 'LH-207', 100, '1AM17CS115', 'TECHNICAL', 1, 'YELLOW'),
+('14', 'Gaming', '2019-11-15', '12:00:00', 60, 'LH-208', 200, '1AM17CS116', 'OFF STAGE', 4, 'BLUE'),
+('15', 'Musically King/Queen', '2019-11-15', '15:00:00', 5, 'LH-209', 100, '1AM17CS117', 'OFF STAGE', 1, 'BLUE'),
+('16', 'Cooking W/o Fire', '2019-11-15', '15:00:00', 30, 'LH-210', 150, '1AM17CS118', 'OFF STAGE', 2, 'BLUE'),
+('17', 'Rangoli', '2019-11-15', '15:00:00', 45, 'LH-211', 100, '1AM17CS119', 'OFF STAGE', 4, 'BLUE'),
+('18', 'Poetry', '2019-11-15', '16:00:00', 30, 'LH-212', 80, '1AM17CS120', 'OFF STAGE', 1, 'BLUE'),
+('19', 'Photography', '2019-11-15', '17:00:00', 30, 'LH-213', 100, '1AM17CS121', 'OFF STAGE', 1, 'BLUE'),
+('20', 'Dumb Charades', '2019-11-15', '16:00:00', 10, 'LH-214', 80, '1AM17CS122', 'OFF STAGE', 1, 'BLUE'),
+('21', 'Mr & Ms. Fresher', '2019-11-15', '13:00:00', 120, 'LH-215', 0, '1AM17CS123', 'MAIN STAGE', 1, 'RED'),
+('22', 'Stand Up Comedy', '2019-11-15', '12:00:00', 8, 'LH-216', 100, '1AM17CS124', 'MAIN STAGE', 1, 'RED'),
+('23', 'PUBG Mobile', '2019-11-15', '13:00:00', 60, 'LH-217', 400, '1AM17CS125', 'GAMING', 4, 'ORANGE'),
+('24', 'NFS Most Wanted', '2019-11-15', '11:00:00', 60, 'LH-218', 200, '1AM17CS126', 'GAMING', 2, 'ORANGE'),
+('25', 'Counter Strike 1.6', '2019-11-15', '14:00:00', 60, 'LH-219', 200, '1AM17CS127', 'GAMING', 2, 'ORANGE'),
+('26', 'Mini Militia', '2019-11-15', '12:00:00', 20, 'LH-220', 100, '1AM17CS128', 'GAMING', 1, 'ORANGE'),
+('27', 'Football', '2019-11-15', '14:00:00', 30, 'LH-221', 200, '1AM17CS129', 'SPORTS', 8, 'GREEN'),
+('28', 'Cricket', '2019-11-15', '13:00:00', 40, 'LH-222', 400, '1AM17CS130', 'SPORTS', 11, 'GREEN'),
+('29', 'Chess', '2019-11-15', '17:00:00', 20, 'LH-223', 100, '1AM17CS131', 'SPORTS', 1, 'GREEN'),
+('30', 'Table Tennis', '2019-11-15', '16:00:00', 30, 'LH-224', 100, '1AM17CS132', 'SPORTS', 2, 'GREEN');
 
 -- --------------------------------------------------------
 
@@ -190,8 +190,8 @@ INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRIC
 --
 
 CREATE TABLE `registration` (
-  `R_ID` varchar(20) NOT NULL,
-  `E_ID` varchar(20) NOT NULL,
+  `R_ID` int(11) NOT NULL,
+  `E_ID` int(11) NOT NULL,
   `USN` varchar(20) NOT NULL,
   `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESK_USN` varchar(20) NOT NULL
@@ -202,8 +202,8 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
-('R1003', 'E1021', '1AM17CS119', '1AM17CS132'),
-('R1004', 'E1012', '1AM17CS131', '1AM17CS119');
+('3', '21', '1AM17CS119', '1AM17CS132'),
+('4', '12', '1AM17CS131', '1AM17CS119');
 
 --
 -- Triggers `registration`
@@ -220,7 +220,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `rules` (
-  `E_ID` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `E_ID` int(11) NOT NULL,
   `RULE_NO` int(11) NOT NULL,
   `RULES` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -230,8 +230,8 @@ CREATE TABLE `rules` (
 --
 
 INSERT INTO `rules` (`E_ID`, `RULE_NO`, `RULES`) VALUES
-('E1002', 1, 'Test rule 1'),
-('E1002', 2, 'Test rule 2');
+('2', 1, 'Test rule 1'),
+('2', 2, 'Test rule 2');
 
 -- --------------------------------------------------------
 
@@ -296,7 +296,7 @@ INSERT INTO `students` (`USN`, `DEPT`, `SEM`, `SECTION`, `PHONE`, `NAME`) VALUES
 --
 
 CREATE TABLE `transactions` (
-  `R_ID` varchar(20) NOT NULL,
+  `R_ID` int(11) NOT NULL,
   `AMOUNT` int(11) NOT NULL DEFAULT '0',
   `MODE` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `STATUS` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'PENDING'
@@ -307,8 +307,8 @@ CREATE TABLE `transactions` (
 --
 
 INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
-('R1003', 0, NULL, 'PENDING'),
-('R1004', 0, NULL, 'PENDING');
+('3', 0, NULL, 'PENDING'),
+('4', 0, NULL, 'PENDING');
 
 --
 -- Indexes for dumped tables
@@ -325,12 +325,6 @@ ALTER TABLE `auth`
 --
 ALTER TABLE `coordinators`
   ADD PRIMARY KEY (`USN`);
-
---
--- Indexes for table `events`
---
-ALTER TABLE `events`
-  ADD PRIMARY KEY (`E_ID`);
 
 --
 -- Indexes for table `registration`

@@ -26,6 +26,11 @@ const collapseLeft = function() {
 	document.getElementById('body').innerHTML = registerContent;
 
 	document.getElementById('body').className = 'visible35';
+
+	document.getElementById('login').addEventListener('click', () => {
+		console.log("button clicked");
+		register(obj[0]['E_ID'], document.getElementById('USN').innerHTML, "1AM17CS121")
+	});
 }
 
 const expandLeft = function() {
@@ -52,11 +57,11 @@ const setup = () => {
     console.log("setup");
 }
 
-const register = (e_id, USN, DeskID, DeskUSN, DeskLoc) => {
+const register = (e_id, USN, DeskUSN) => {
     db.connect(function(err) {
         if (err) throw err;
         else {
-
+			console.log("connected");
         }
     });
     db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, function(err, result, fields) {
@@ -71,7 +76,7 @@ const register = (e_id, USN, DeskID, DeskUSN, DeskLoc) => {
         // }, (res) => {console.log(res);})
         console.log(err);
     else {
-
+		console.log(result);
     }
 });
 }
@@ -155,8 +160,6 @@ ipcRenderer.on('view-event', (e, obj) => {
 		else expandLeft();
 	});
 
-    document.getElementById('login').addEventListener('click', () => {
-		register(obj[0]['E_ID'], document.getElementById('USN').innerHTML, "D01", "1AM18CS033", "MAIN STAIRS")
-	});
+
 
 })
