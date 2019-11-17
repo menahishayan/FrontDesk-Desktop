@@ -32,7 +32,7 @@ const collapseLeft = function() {
 
 	document.getElementById('register').addEventListener('click', (e) => {
 		e.preventDefault();
-		register(eventData['E_ID'], document.getElementById('USN').innerHTML, "1AM17CS121")
+		register(eventData['E_ID'], document.getElementById('USN').value, "1AM17CS132")
 	});
 }
 
@@ -55,11 +55,6 @@ const db = mysql.createConnection({
 	database: "frontdesk"
 });
 
-
-const setup = () => {
-    console.log("setup");
-}
-
 const register = (e_id, USN, DeskUSN) => {
 	db.connect(function(err) {
 		if (err) throw err;
@@ -81,6 +76,8 @@ const register = (e_id, USN, DeskUSN) => {
 			// console.log(err);
 		else {
 			console.log(result);
+			let R_ID = result.insertId;
+			let QRData = `{"R_ID": "${R_ID}", "E_ID": "${e_id}"}`
 		}
 	});
 }
@@ -134,12 +131,13 @@ ipcRenderer.on('view-event', (e, obj) => {
         </div>
 
         <div class="container-login100-form-btn m-t-32">
-            <button id="login" class="login100-form-btn gradient-${obj[0]['COLOR'].toUpperCase()}-left">
+            <button id="register" class="login100-form-btn gradient-${obj[0]['COLOR'].toUpperCase()}-left">
                 REGISTER
             </button>
         </div>
 
     </form>`
+
 	detailsContent = `<span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf073;"></span>
                     ${moment(eventData['DATE']).format("MMM DD, YYYY")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf017;"></span>
@@ -150,10 +148,6 @@ ipcRenderer.on('view-event', (e, obj) => {
                       ${eventData['TEAM_COUNT']} in a team<br><br>
                   <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
                     ${eventData['a']} , Ph: ${eventData['b']}<br><br>`
-
-	registerContent = document.getElementById('registerContent')
-
-	document.getElementById('registerContent').className = `gradient-${eventData['COLOR'].toUpperCase()}-left`
 
 	document.getElementById('body').innerHTML = detailsContent;
 	// Ticket
