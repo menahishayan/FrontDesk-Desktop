@@ -12,15 +12,9 @@ require('electron-reload')(__dirname, {
 });
 
 let loginWin, eventWin, viewEventWin
-var mysql = require('mysql');
 const Window = require('./js/Window')
 
-const db = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "frontdesk"
-});
+const db = require('./js/db')
 
 createWindow = () => {
 	loginWin = new Window({
@@ -45,7 +39,7 @@ createWindow = () => {
     if (!eventWin) {
       eventWin = new Window({
 		  file: 'events.html',
-		  width: 1099,
+		  width: 1079,
   		height: 720,
 		parent: loginWin
       })

@@ -73,3 +73,18 @@
 	opacity: 0;
 	transition: visibility 0s 0.35s, opacity 0.35s linear;
 }
+
+.fetchable {
+	display: none;
+}
+
+.qr-container {
+	background-color: white;
+	border-radius: 8px;
+	padding: 10px;
+	height: 110px;
+	width: 110px;
+	position: relative;
+	top:295px;
+	left: 345px;
+}

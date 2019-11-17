@@ -1,13 +1,9 @@
 'use strict'
 
-const {
-	ipcRenderer
-} = require('electron')
-
+const { ipcRenderer } = require('electron')
 const moment = require('moment');
-var mysql = require('mysql');
-
 const dialog = require('electron').remote.dialog
+const db = require('./js/db')
 
 String.prototype.capitalizeEachWord = function() {
 	this.toLowerCase();
@@ -34,6 +30,10 @@ const collapseLeft = function() {
 		e.preventDefault();
 		register(eventData['E_ID'], document.getElementById('USN').value, "1AM17CS132")
 	});
+
+	document.getElementById('USN').addEventListener('input', () => {
+		checkUSN(document.getElementById('USN').value)
+	});
 }
 
 const expandLeft = function() {
@@ -46,24 +46,25 @@ const expandLeft = function() {
 	document.getElementById('body').className = 'visible35';
 }
 
-var mysql = require('mysql');
-
-const db = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "",
-	database: "frontdesk"
-});
+const checkUSN = (usn) => {
+	if(usn.length == 10) {
+		document.getElementById('body').querySelectorAll('.fetchable').forEach(f => {
+			f.style.display = 'flex'
+		})
+		db.query(`SELECT * FROM students WHERE USN=\'${usn}\'`, (err, result, fields) => {
+			if (!err) {
+				document.getElementById('Name').value = result[0]['NAME'];
+				document.getElementById('phone').value = result[0]['PHONE'];
+				document.getElementById('sem').value = result[0]['SEM'];
+				document.getElementById('section').value = result[0]['SECTION'];
+				document.getElementById('dept').value = result[0]['DEPT'];
+			}
+		})
+	}
+}
 
 const register = (e_id, USN, DeskUSN) => {
-	db.connect(function(err) {
-		if (err) throw err;
-		else {
-			console.log("connected");
-		}
-	});
-
-	db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, function(err, result, fields) {
+	db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, (err, result, fields) => {
 		if (err)
 			dialog.showMessageBox(null, {
 			    type: 'error',
@@ -73,11 +74,10 @@ const register = (e_id, USN, DeskUSN) => {
 			    message: 'Query Error',
 			    detail: err.toString()
 			}, (res) => {console.log(res);})
-			// console.log(err);
 		else {
-			console.log(result);
 			let R_ID = result.insertId;
 			let QRData = `{"R_ID": "${R_ID}", "E_ID": "${e_id}"}`
+			console.log(QRData);
 		}
 	});
 }
@@ -98,36 +98,36 @@ ipcRenderer.on('view-event', (e, obj) => {
 	registerContent = `<form class="login100-form validate-form p-b-33 p-t-5">
         <div class="wrap-input100 validate-input" data-validate="Enter USN">
             <input class="input100" type="text" id="USN" placeholder="USN">
-            <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+            <span class="focus-input100" data-placeholder="&#xe803;"></span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="name">
+        <div class="wrap-input100 validate-input fetchable" data-validate="name">
             <input class="input100" type="text" id="Name" placeholder="Name">
             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Enter Phone">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Phone">
             <input class="input100" type="text" id="phone" placeholder="Phone">
-            <span class="focus-input100" data-placeholder="&#xe80f;""></span>
+            <span class="focus-input100" data-placeholder="&#xe830;""></span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Enter Sem" width="45%">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Sem" width="45%">
             <input class="input100" type="number" id="sem" placeholder="Sem">
-            <span class="focus-input100" data-placeholder="&#xe80f;""></span>
+            <span class="focus-input100" data-placeholder="&#xe852;""></span>
         </div>
-        <div class="wrap-input100 validate-input" data-validate="Enter Section" width="45%">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Section" width="45%">
             <input class="input100" type="text" id="section" placeholder="Section">
-            <span class="focus-input100" data-placeholder="&#xe80f;""></span>
+            <span class="focus-input100" data-placeholder="&#xe852;""></span>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Enter Dept" width="45%">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Dept" width="45%">
             <input class="input100" type="text" id="dept" placeholder="Dept">
-            <span class="focus-input100" data-placeholder="&#xe80f;""></span>
+            <span class="focus-input100" data-placeholder="&#xe852;""></span>
         </div>
 
         <div class="wrap-input100 validate-input" data-validate="Enter Payment Mode" width="45%">
             <input class="input100" type="text" id="payment" placeholder="Payment Mode">
-            <span class="focus-input100" data-placeholder="&#xe80f;""></span>
+            <span class="focus-input100" data-placeholder="&#xe82f;""></span>
         </div>
 
         <div class="container-login100-form-btn m-t-32">
@@ -157,7 +157,8 @@ ipcRenderer.on('view-event', (e, obj) => {
 
 	document.getElementById('ticketContent').innerHTML += `<p class="ticket-content-head">${eventData['NAME'].capitalizeEachWord()}</p>
                                                       <p class="ticket-content-sub">${moment(eventData['DATE']).format("MMM DD, YYYY")},&nbsp;
-                                                      ${moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A")}</p>`;
+                                                      ${moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A")}</p>
+													  <div class="qr-container"></div>`;
 
 	document.getElementById('ticketContainer').addEventListener('click', () => {
 		if (document.querySelector('.container-left').style.width != '450px')
