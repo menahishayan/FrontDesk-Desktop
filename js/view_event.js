@@ -2,8 +2,9 @@
 
 const { ipcRenderer } = require('electron')
 const moment = require('moment');
-const dialog = require('electron').remote.dialog
+// const dialog = require('electron').remote.dialog
 const db = require('./js/db')
+const showError = require('./js/showError')
 
 String.prototype.capitalizeEachWord = function() {
 	this.toLowerCase();
@@ -64,23 +65,34 @@ const checkUSN = (usn) => {
 }
 
 const register = (e_id, USN, DeskUSN) => {
+	// IF USN NOT EXISTS IN STUDENTS
+	db.query(`SELECT * FROM students WHERE USN=\'${USN}\'`, (err, result, fields) => {
+		if (err) {
+			// ADD TO STUDENT USN, NAME,PHONE,SEM,SECTION,DEPT
+			db.query(`insert into student(USN,NAME,PHONE,SEM,SECTION,DEPT) values(\'${USN}\', \'${name}\', \'${phone}\'\'${sem}\',\'${section}\',\'${dept}\')'` ,(err, result, fields) => {
+				if (error) showError(error);
+			});
+		}
+	})
+
+	// ADD TO REGISTRATION E_ID, USN, DESK_USN
 	db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, (err, result, fields) => {
-		if (err)
-			dialog.showMessageBox(null, {
-			    type: 'error',
-			    buttons: ['OK'],
-			    defaultId: 2,
-			    title: 'Error',
-			    message: 'Query Error',
-			    detail: err.toString()
-			}, (res) => {console.log(res);})
+		if (err) showError(err);
 		else {
 			let R_ID = result.insertId;
 			let QRData = `{"R_ID": "${R_ID}", "E_ID": "${e_id}"}`
 			console.log(QRData);
 		}
 	});
+
+	// UPDATE TRANSACTIONS SET AMOUNT=AMOUNT, MODE=PAYMENTMODE STATUS=PAID WHERE RID=RID
+	db.query(` update table transactions set AMOUNT=${amount},MODE='${paymentmode}',STATUS='PAID' where R_ID=${R_ID}` ,(err, result, fields) => {
+		if (error) showError(error);
+	});
+
 }
+
+
 
 ipcRenderer.on('view-event', (e, obj) => {
 

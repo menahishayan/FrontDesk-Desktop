@@ -15,6 +15,7 @@ let loginWin, eventWin, viewEventWin
 const Window = require('./js/Window')
 
 const db = require('./js/db')
+const showError = require('./js/showError')
 
 createWindow = () => {
 	loginWin = new Window({
@@ -23,15 +24,8 @@ createWindow = () => {
 		height: 500
 	})
 
-
 	loginWin.once('show', () => {
-		db.connect(function(err) {
-    		if (err) throw err;
-			else {
-
-
-			}
-		});
+		db.connect((err) => {if (err) showError(err)});
 	})
 
 	ipcMain.on('event-window', () => {
@@ -48,17 +42,8 @@ createWindow = () => {
 
 	  eventWin.once('show', () => {
 			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
-			if (err)
-				dialog.showMessageBox(null, {
-					type: 'error',
-					buttons: ['OK'],
-					defaultId: 2,
-					title: 'Error',
-					message: 'Query Error',
-					detail: err.toString()
-				}, (res) => {console.log(res);})
-			else
-				eventWin.webContents.send('events', result)
+			if (err) showError(err)
+			else eventWin.webContents.send('events', result)
 		});
 });
 
@@ -80,17 +65,8 @@ createWindow = () => {
 
 			viewEventWin.once('show', () => {
 				db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
-					if (err)
-						dialog.showMessageBox(null, {
-							type: 'error',
-							buttons: ['OK'],
-							defaultId: 2,
-							title: 'Error',
-							message: 'Query Error',
-							detail: err.toString()
-						}, (res) => {console.log(res);})
-					else
-						viewEventWin.webContents.send('view-event', result)
+					if (err) showError(err)
+					else viewEventWin.webContents.send('view-event', result)
 				});
 			})
 
