@@ -20,8 +20,7 @@ createWindow = () => {
 	loginWin = new Window({
 		file: 'index.html',
 		width: 700,
-		height: 500,
-		frame: false
+		height: 500
 	})
 
 
@@ -56,7 +55,7 @@ createWindow = () => {
 					defaultId: 2,
 					title: 'Error',
 					message: 'Query Error',
-					detail: err
+					detail: err.toString()
 				}, (res) => {console.log(res);})
 			else
 				eventWin.webContents.send('events', result)
