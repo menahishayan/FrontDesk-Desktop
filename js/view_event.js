@@ -75,7 +75,7 @@ const checkUSN = (usn) => {
 }
 
 const register = (e_id, user, DeskUSN) => {
-
+	// SQL Procedure required
 	let studentExists = false;
 
 	// IF USN NOT EXISTS IN STUDENTS

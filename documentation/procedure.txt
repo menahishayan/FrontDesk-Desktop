@@ -1,0 +1,48 @@
+CREATE PROCEDURE register @E_ID INT, @USN VARCHAR, @NAME VARCHAR, @PHONE VARCHAR, @DEPT VARCHAR, @SEM INT, @SECTION VARCHAR, @PAY VARCHAR, @DESKUSN VARCHAR, @R_ID INT
+AS 
+DECLARE @COUNT INT;
+SET
+    @COUNT =(
+    SELECT
+        COUNT(*)
+    FROM
+        students
+    WHERE
+        USN = @USN
+); IF @COUNT = 0
+BEGIN
+    INSERT INTO students(
+        USN,
+        NAME,
+        PHONE,
+        SEM,
+        SECTION,
+        DEPT
+    )
+VALUES(
+    @USN,
+    @NAME,
+    @PHONE,
+    @SEM,
+    @SECTION,
+    @DEPT
+);
+END
+INSERT INTO registration(E_ID, USN, DESK_USN)
+VALUES(@E_ID, @USN, @DESKUSN);
+SET
+    @R_ID =(
+    SELECT
+        R_ID
+    FROM
+        registration
+    WHERE
+        E_ID = @E_ID
+);
+UPDATE
+    transactions
+SET
+    `MODE` = @PAY,
+    `STATUS` = 'PAID'
+WHERE
+    R_ID = @R_ID; RETURN @R_ID; GO
