@@ -103,6 +103,18 @@ const register = (e_id, user, DeskUSN) => {
 					// UPDATE TRANSACTIONS SET AMOUNT=AMOUNT, MODE=PAYMENTMODE STATUS=PAID WHERE RID=RID
 					db.query(`update transactions set MODE='${document.getElementById('payment').value}',STATUS='PAID' where R_ID=\'${R_ID}\'` ,(err, result, fields) => {
 						if (err) showError(err);
+						else {
+							// document.getElementById('body').querySelectorAll('.wrap-input100').forEach(f => {
+							// 	f.style.display = 'none';
+							// })
+							// document.getElementById('register').innerHTML = "DONE";
+							document.getElementById('body').style.display = "none";
+							document.getElementById('eventHeader').style.display = "none";
+							document.getElementById('categoryContainer').style.display = "none";
+							document.querySelector('.container-left').style.width = '0px';
+
+							// document.getElementById('ticketContainer').removeEventListener('click');
+						}
 					});
 				}
 			});

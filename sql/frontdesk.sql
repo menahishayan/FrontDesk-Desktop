@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2019 at 03:27 PM
+-- Generation Time: Nov 19, 2019 at 05:53 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -204,13 +204,26 @@ CREATE TABLE `registration` (
 INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (3, 21, '1AM17CS119', '1AM17CS132'),
 (4, 12, '1AM17CS131', '1AM17CS119'),
-(10, 11, '1AM17CS101', '1AM17CS132');
+(10, 11, '1AM17CS101', '1AM17CS132'),
+(11, 24, '1AM17CS121', '1AM17CS132'),
+(12, 11, '1AM17CS110', '1AM17CS132'),
+(13, 26, '1AM17CS102', '1AM17CS132'),
+(19, 24, '1AM17CS101', '1AM17CS132'),
+(26, 11, '1AM18CS102', '1AM17CS132'),
+(27, 10, '1AM17CS121', '1AM17CS132'),
+(28, 11, '1AM17CS101', '1AM17CS132'),
+(29, 11, '1AM17CS121', '1AM17CS132'),
+(30, 3, '1am17cs127', '1AM17CS132'),
+(31, 21, '1AM17CS132', '1AM17CS132'),
+(32, 11, '1AM17CS119', '1AM17CS132'),
+(33, 4, '1AM17CS118', '1AM17CS132'),
+(34, 15, '1AM17CS112', '1AM17CS132');
 
 --
 -- Triggers `registration`
 --
 DELIMITER $$
-CREATE TRIGGER `TRANSACT` AFTER INSERT ON `registration` FOR EACH ROW INSERT INTO transactions(R_ID) VALUES(NEW.R_ID)
+CREATE TRIGGER `TRANSACT` AFTER INSERT ON `registration` FOR EACH ROW INSERT INTO transactions(R_ID, AMOUNT) VALUES(NEW.R_ID, (SELECT PRICE FROM events WHERE events.E_ID=NEW.E_ID))
 $$
 DELIMITER ;
 
@@ -288,7 +301,10 @@ INSERT INTO `students` (`USN`, `DEPT`, `SEM`, `SECTION`, `PHONE`, `NAME`) VALUES
 ('1AM17CS132', 'cse', 5, 'b', '8939387837', 'Podaralla Candy'),
 ('1AM17CS133', 'cse', 5, 'a', '9986634653', 'Marleah'),
 ('1AM17CS134', 'cse', 5, 'b', '8660718302', 'Humphrey'),
-('1AM17CS135', 'cse', 5, 'b', '8639094896', 'Alvin');
+('1AM17CS135', 'cse', 5, 'b', '8639094896', 'Alvin'),
+('1AM18CS100', 'CSE', 3, 'B', '723423489', 'BOB'),
+('1AM18CS101', 'CSE', 3, 'B', '293842983', 'TOM'),
+('1AM18CS102', 'CSE', 3, 'B', '453435342', 'JOB');
 
 -- --------------------------------------------------------
 
@@ -310,7 +326,20 @@ CREATE TABLE `transactions` (
 INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (3, 0, NULL, 'PENDING'),
 (4, 0, NULL, 'PENDING'),
-(10, 0, NULL, 'PENDING');
+(10, 0, NULL, 'PENDING'),
+(11, 0, NULL, 'PENDING'),
+(12, 0, NULL, 'PENDING'),
+(13, 0, NULL, 'PENDING'),
+(19, 200, NULL, 'PENDING'),
+(26, 200, 'CASH', 'PAID'),
+(27, 100, 'UPI', 'PAID'),
+(28, 200, 'CASH', 'PAID'),
+(29, 200, 'CASH', 'PAID'),
+(30, 400, 'CASH', 'PAID'),
+(31, 0, 'UPI', 'PAID'),
+(32, 200, 'UPI', 'PAID'),
+(33, 500, 'UPI', 'PAID'),
+(34, 100, 'UPI', 'PAID');
 
 --
 -- Indexes for dumped tables
@@ -376,7 +405,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
