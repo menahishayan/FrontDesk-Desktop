@@ -16,7 +16,7 @@ String.prototype.capitalizeEachWord = function() {
 	return str.join(" ");
 }
 
-let detailsContent, registerContent, eventData;
+let detailsContent, registerContent, eventData, userData;
 
 const collapseLeft = function() {
 	document.querySelector('.container-left').style.width = '450px';
@@ -29,7 +29,17 @@ const collapseLeft = function() {
 
 	document.getElementById('register').addEventListener('click', (e) => {
 		e.preventDefault();
-		register(eventData['E_ID'], document.getElementById('USN').value, "1AM17CS132")
+
+		userData = {
+			USN: document.getElementById('USN').value,
+			name: document.getElementById('Name').value,
+			phone: document.getElementById('phone').value,
+			sem: document.getElementById('sem').value,
+			sec: document.getElementById('section').value,
+			dept: document.getElementById('dept').value,
+		}
+
+		register(eventData['E_ID'], userData, "1AM17CS132")
 	});
 
 	document.getElementById('USN').addEventListener('input', () => {
@@ -50,10 +60,10 @@ const expandLeft = function() {
 const checkUSN = (usn) => {
 	if(usn.length == 10) {
 		document.getElementById('body').querySelectorAll('.fetchable').forEach(f => {
-			f.style.display = 'flex'
+			f.style.display = 'flex';
 		})
 		db.query(`SELECT * FROM students WHERE USN=\'${usn}\'`, (err, result, fields) => {
-			if (!err) {
+			if (result.length>0) {
 				document.getElementById('Name').value = result[0]['NAME'];
 				document.getElementById('phone').value = result[0]['PHONE'];
 				document.getElementById('sem').value = result[0]['SEM'];
@@ -64,32 +74,40 @@ const checkUSN = (usn) => {
 	}
 }
 
-const register = (e_id, USN, DeskUSN) => {
+const register = (e_id, user, DeskUSN) => {
+
+	let studentExists = false;
+
 	// IF USN NOT EXISTS IN STUDENTS
-	db.query(`SELECT * FROM students WHERE USN=\'${USN}\'`, (err, result, fields) => {
-		if (err) {
+	db.query(`SELECT COUNT(*) AS COUNT FROM students WHERE USN=\'${user.USN}\'`, (err, result, fields) => {
+		if (result[0]['COUNT']==0) {
 			// ADD TO STUDENT USN, NAME,PHONE,SEM,SECTION,DEPT
-			db.query(`insert into student(USN,NAME,PHONE,SEM,SECTION,DEPT) values(\'${USN}\', \'${name}\', \'${phone}\'\'${sem}\',\'${section}\',\'${dept}\')'` ,(err, result, fields) => {
-				if (error) showError(error);
+			db.query(`insert into students(USN,NAME,PHONE,SEM,SECTION,DEPT) values(\'${user.USN}\', \'${user.name}\', \'${user.phone}\',\'${user.sem}\',\'${user.sec}\',\'${user.dept}\')` ,(err, result, fields) => {
+				if (err) showError(err);
+				else studentExists = true;
 			});
 		}
+		else studentExists = true;
 	})
 
 	// ADD TO REGISTRATION E_ID, USN, DESK_USN
-	db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${USN}\', \'${DeskUSN}\')`, (err, result, fields) => {
-		if (err) showError(err);
-		else {
-			let R_ID = result.insertId;
-			let QRData = `{"R_ID": "${R_ID}", "E_ID": "${e_id}"}`
-			console.log(QRData);
-		}
-	});
+	setTimeout(() => {
+		if(studentExists)
+			db.query(`insert into registration(E_ID,USN,DESK_USN) values(\'${e_id}\', \'${user.USN}\', \'${DeskUSN}\')`, (err, result, fields) => {
+				if (err) showError(err);
+				else {
+					let R_ID = result.insertId;
+					let QRData = `{"R_ID": "${R_ID}", "E_ID": "${e_id}"}`
+					console.log(QRData);
 
-	// UPDATE TRANSACTIONS SET AMOUNT=AMOUNT, MODE=PAYMENTMODE STATUS=PAID WHERE RID=RID
-	db.query(` update table transactions set AMOUNT=${amount},MODE='${paymentmode}',STATUS='PAID' where R_ID=${R_ID}` ,(err, result, fields) => {
-		if (error) showError(error);
-	});
-
+					// UPDATE TRANSACTIONS SET AMOUNT=AMOUNT, MODE=PAYMENTMODE STATUS=PAID WHERE RID=RID
+					db.query(`update transactions set MODE='${document.getElementById('payment').value}',STATUS='PAID' where R_ID=\'${R_ID}\'` ,(err, result, fields) => {
+						if (err) showError(err);
+					});
+				}
+			});
+		else console.log("No Student");
+	}, studentExists?5:300)
 }
 
 

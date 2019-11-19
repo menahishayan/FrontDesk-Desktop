@@ -1,6 +1,7 @@
-const dialog = require('electron').remote.dialog
 
 const showError = (msg) => {
+	const dialog = require('electron').remote.dialog
+	
 	dialog.showMessageBox(null, {
 		type: 'error',
 		buttons: ['OK'],
