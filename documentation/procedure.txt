@@ -1,16 +1,18 @@
-CREATE PROCEDURE register @E_ID INT, @USN VARCHAR, @NAME VARCHAR, @PHONE VARCHAR, @DEPT VARCHAR, @SEM INT, @SECTION VARCHAR, @PAY VARCHAR, @DESKUSN VARCHAR, @R_ID INT
-AS 
-DECLARE @COUNT INT;
-SET
-    @COUNT =(
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTER`(IN `_E_ID` INT(11), IN `_USN` VARCHAR(20), IN `_NAME` VARCHAR(20), IN `_PHONE` VARCHAR(20), IN `_SEM` INT(11), IN `_SECTION` VARCHAR(20), IN `_PAY` VARCHAR(20), IN `_DESKUSN` VARCHAR(20), IN `_DEPT` VARCHAR(20))
+    MODIFIES SQL DATA
+BEGIN
+DECLARE _COUNT INT(11);
+DECLARE _R_ID INT(11);
     SELECT
         COUNT(*)
+        	INTO _COUNT
     FROM
         students
     WHERE
-        USN = @USN
-); IF @COUNT = 0
-BEGIN
+        USN = _USN;
+
+IF (_COUNT = 0) THEN
     INSERT INTO students(
         USN,
         NAME,
@@ -20,29 +22,33 @@ BEGIN
         DEPT
     )
 VALUES(
-    @USN,
-    @NAME,
-    @PHONE,
-    @SEM,
-    @SECTION,
-    @DEPT
+    _USN,
+    _NAME,
+    _PHONE,
+    _SEM,
+    _SECTION,
+    _DEPT
 );
-END
+END IF;
 INSERT INTO registration(E_ID, USN, DESK_USN)
-VALUES(@E_ID, @USN, @DESKUSN);
-SET
-    @R_ID =(
+VALUES(_E_ID, _USN, _DESKUSN);
+
     SELECT
         R_ID
+    INTO _R_ID
     FROM
         registration
     WHERE
-        E_ID = @E_ID
-);
+        E_ID = _E_ID AND USN = _USN 
+        ORDER BY `TIMESTAMP` LIMIT 1 ;
+
 UPDATE
     transactions
 SET
-    `MODE` = @PAY,
+    `MODE` = _PAY,
     `STATUS` = 'PAID'
 WHERE
-    R_ID = @R_ID; RETURN @R_ID; GO
+    R_ID = _R_ID;
+    SELECT _R_ID LIMIT 1;
+END$$
+DELIMITER ;

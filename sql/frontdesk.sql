@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2019 at 05:53 AM
+-- Generation Time: Nov 20, 2019 at 06:04 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -21,6 +21,64 @@ SET time_zone = "+00:00";
 --
 -- Database: `frontdesk`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTER` (IN `_E_ID` INT(11), IN `_USN` VARCHAR(20), IN `_NAME` VARCHAR(20), IN `_PHONE` VARCHAR(20), IN `_SEM` INT(11), IN `_SECTION` VARCHAR(20), IN `_PAY` VARCHAR(20), IN `_DESKUSN` VARCHAR(20), IN `_DEPT` VARCHAR(20))  MODIFIES SQL DATA
+BEGIN
+DECLARE _COUNT INT(11);
+DECLARE _R_ID INT(11);
+    SELECT
+        COUNT(*)
+        	INTO _COUNT
+    FROM
+        students
+    WHERE
+        USN = _USN;
+
+IF (_COUNT = 0) THEN
+    INSERT INTO students(
+        USN,
+        NAME,
+        PHONE,
+        SEM,
+        SECTION,
+        DEPT
+    )
+VALUES(
+    _USN,
+    _NAME,
+    _PHONE,
+    _SEM,
+    _SECTION,
+    _DEPT
+);
+END IF;
+INSERT INTO registration(E_ID, USN, DESK_USN)
+VALUES(_E_ID, _USN, _DESKUSN);
+
+    SELECT
+        R_ID
+    INTO _R_ID
+    FROM
+        registration
+    WHERE
+        E_ID = _E_ID AND USN = _USN 
+        ORDER BY `TIMESTAMP` LIMIT 1 ;
+
+UPDATE
+    transactions
+SET
+    `MODE` = _PAY,
+    `STATUS` = 'PAID'
+WHERE
+    R_ID = _R_ID;
+    SELECT _R_ID LIMIT 1;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -217,7 +275,35 @@ INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (31, 21, '1AM17CS132', '1AM17CS132'),
 (32, 11, '1AM17CS119', '1AM17CS132'),
 (33, 4, '1AM17CS118', '1AM17CS132'),
-(34, 15, '1AM17CS112', '1AM17CS132');
+(34, 15, '1AM17CS112', '1AM17CS132'),
+(35, 11, '1AM18CS113', '1AM17CS132'),
+(36, 11, '1AM17CS101', '1AM17CS132'),
+(37, 9, '1AM17CS132', '1AM17CS132'),
+(38, 2, '1AM17CS119', '1AM17CS132'),
+(39, 2, '1AM17CS118', '1AM17CS132'),
+(40, 3, '1AM17CS105', '1AM17CS132'),
+(41, 4, '1AM17CS119', '1AM17CS132'),
+(42, 4, '1AM17CS119', '1AM17CS132'),
+(43, 4, '1AM17CS120', '1AM17CS132'),
+(44, 4, '1AM17CS120', '1AM17CS132'),
+(45, 24, '1AM17CS120', '1AM17CS132'),
+(46, 3, '1AM17CS120', '1AM17CS132'),
+(47, 11, '1AM18CS114', '1AM17CS132'),
+(48, 25, '1AM17CS113', '1AM17CS132'),
+(49, 23, '1AM17CS113', '1AM17CS132'),
+(50, 21, '1AM17CS110', '1AM17CS132'),
+(51, 25, '1AM18CS101', '1AM17CS132'),
+(52, 24, '1AM18CS100', '1AM17CS132'),
+(53, 24, '1AM18CS102', '1AM17CS132'),
+(54, 8, '1AM18CS101', '1AM17CS132'),
+(55, 12, '1AM18CS102', '1AM17CS132'),
+(56, 9, '1AM18CS119', '1AM17CS132'),
+(57, 11, '1AM18CS100', '1AM17CS132'),
+(58, 10, '1AM17CS119', '1AM17CS132'),
+(59, 11, '1AM17CS119', '1AM17CS132'),
+(60, 20, '1AM18CS101', '1AM17CS132'),
+(61, 24, '1AM18CS101', '1AM17CS132'),
+(62, 24, '1AM17CS120', '1AM17CS132');
 
 --
 -- Triggers `registration`
@@ -304,7 +390,10 @@ INSERT INTO `students` (`USN`, `DEPT`, `SEM`, `SECTION`, `PHONE`, `NAME`) VALUES
 ('1AM17CS135', 'cse', 5, 'b', '8639094896', 'Alvin'),
 ('1AM18CS100', 'CSE', 3, 'B', '723423489', 'BOB'),
 ('1AM18CS101', 'CSE', 3, 'B', '293842983', 'TOM'),
-('1AM18CS102', 'CSE', 3, 'B', '453435342', 'JOB');
+('1AM18CS102', 'CSE', 3, 'B', '453435342', 'JOB'),
+('1AM18CS113', 'cse', 5, 'b', '9890998098', 'Nishank Swamy'),
+('1AM18CS114', 'CSE', 3, 'A', '342342342', 'CAP'),
+('1AM18CS119', 'CSE', 3, 'B', '934583945', 'ROB');
 
 -- --------------------------------------------------------
 
@@ -337,9 +426,37 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (29, 200, 'CASH', 'PAID'),
 (30, 400, 'CASH', 'PAID'),
 (31, 0, 'UPI', 'PAID'),
-(32, 200, 'UPI', 'PAID'),
+(32, 200, 'CASH', 'PAID'),
 (33, 500, 'UPI', 'PAID'),
-(34, 100, 'UPI', 'PAID');
+(34, 100, 'UPI', 'PAID'),
+(35, 200, '', 'PAID'),
+(36, 200, 'CASH', 'PAID'),
+(37, 100, 'CASH', 'PAID'),
+(38, 800, 'UPI', 'PAID'),
+(39, 800, NULL, 'PENDING'),
+(40, 400, NULL, 'PENDING'),
+(41, 500, NULL, 'PENDING'),
+(42, 500, NULL, 'PENDING'),
+(43, 500, NULL, 'PENDING'),
+(44, 500, NULL, 'PENDING'),
+(45, 200, 'CASH', 'PAID'),
+(46, 400, NULL, 'PENDING'),
+(47, 200, 'CASH', 'PAID'),
+(48, 200, 'UPI', 'PAID'),
+(49, 400, 'CASH', 'PAID'),
+(50, 0, 'CASH', 'PAID'),
+(51, 200, 'UPI', 'PAID'),
+(52, 200, 'CASH', 'PAID'),
+(53, 200, 'UPI', 'PAID'),
+(54, 100, 'CASH', 'PAID'),
+(55, 100, 'UPI', 'PAID'),
+(56, 100, 'CASH', 'PAID'),
+(57, 200, 'CASH', 'PAID'),
+(58, 100, 'CASH', 'PAID'),
+(59, 200, NULL, 'PENDING'),
+(60, 80, 'UPI', 'PAID'),
+(61, 200, 'CASH', 'PAID'),
+(62, 200, NULL, 'PENDING');
 
 --
 -- Indexes for dumped tables
@@ -405,7 +522,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Constraints for dumped tables
