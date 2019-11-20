@@ -100,3 +100,13 @@
 .tick {
 	margin-top: 150px;
 }
+
+#backText {
+	color: #CCC;
+	font-size: 14px;
+	text-align: center;
+	font-weight: 100;
+	position: absolute;
+	left: 160px;
+	top: 290px;
+}

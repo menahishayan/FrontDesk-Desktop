@@ -104,6 +104,8 @@ const register = (e_id, user, DeskUSN) => {
 				}, 1)
 				document.getElementById('body').className = 'hidden35';
 				document.getElementById('containerLeft').style.width = '0px';
+
+				document.getElementById('backText').innerHTML = "<span class=\"fa-icon body-items\" data-placeholder=\"&#xf030;\" style=\"color: #CCC;\"></span><br>Screenshot this M-Ticket<br>and share it with the participants"
 			}, 1800)
 
 			let qrData = Buffer.from(`{"R_ID": ${result[0][0]['_R_ID']}}`).toString('base64');
