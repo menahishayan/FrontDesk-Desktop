@@ -12,12 +12,12 @@ const debug = false
 document.getElementById('login').addEventListener('click', !debug ? (e) => {
     e.preventDefault();
     let usn = document.getElementById('username').value;
-    db.query(`SELECT PASSWORD FROM auth WHERE USN=\'${usn}\'`, (err, result, fields) => {
+    db.query(`SELECT AES_DECRYPT(PASSWORD,'nish') AS PASSWORD FROM auth WHERE USN=\'${usn}\'`, (err, result, fields) => {
         if(result.length>0) {
             if (result[0]['PASSWORD'] == document.getElementById('pass').value)
-                ipcRenderer.send('event-window')
+                ipcRenderer.send('event-window', usn)
             else showError("Invalid Username or Password")
         }
         else showError("Invalid Username or Password")
     })
-} : () => ipcRenderer.send('event-window'))
+} : () => ipcRenderer.send('event-window'), "1AM17CS101")

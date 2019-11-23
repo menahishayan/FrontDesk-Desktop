@@ -16,7 +16,7 @@ String.prototype.capitalizeEachWord = function() {
 	return str.join(" ");
 }
 
-let detailsContent, registerContent, eventData, userData, registerStatus = false;
+let detailsContent, registerContent, eventData, userData, registerStatus = false, rulesList = '', DeskUSN;
 
 const collapseLeft = function() {
 	document.querySelector('.container-left').style.width = '450px';
@@ -39,7 +39,7 @@ const collapseLeft = function() {
 			dept: document.getElementById('dept').value,
 		}
 
-		register(eventData['E_ID'], userData, "1AM17CS132")
+		register(eventData['E_ID'], userData, DeskUSN)
 	});
 
 	document.getElementById('USN').addEventListener('input', () => {
@@ -52,6 +52,8 @@ const expandLeft = function() {
 	document.getElementById('categoryContainer').className = 'visible15';
 	document.getElementById('body').className = 'hidden35';
 
+	rulesList = ''
+	getRules(eventData['E_ID'])
 	document.getElementById('body').innerHTML = detailsContent;
 
 	document.getElementById('body').className = 'visible35';
@@ -84,7 +86,7 @@ const checkUSN = (usn) => {
 	}
 }
 
-const register = (e_id, user, DeskUSN) => {
+const register = (e_id, user) => {
 	db.query(`CALL REGISTER(${e_id}, \'${user.USN}\', \'${user.name}\', \'${user.phone}\', ${user.sem}, \'${user.sec}\', \'${document.getElementById('payment').value}\', \'${DeskUSN}\', \'${user.dept}\')`, (err, result, fields) => {
 		if(err) showError(err)
 		else {
@@ -121,8 +123,6 @@ const register = (e_id, user, DeskUSN) => {
 }
 
 const getRules = (e_id) => {
-	let rulesList = ''
-
 	db.query(`SELECT * FROM rules WHERE E_ID=\'${e_id}\' ORDER BY RULE_NO`, (err, result, fields) => {
 		if(!err) {
 			let r;
@@ -130,7 +130,6 @@ const getRules = (e_id) => {
 				rulesList += r['RULE_NO'] + '. ' + r['RULES'] + '<br>'
 			})
 			document.getElementById('rlist').innerHTML = rulesList.length>0 ? rulesList : "No rules available";
-			return rulesList
 		} else console.log(err);
 	})
 
@@ -138,9 +137,10 @@ const getRules = (e_id) => {
 
 
 
-ipcRenderer.on('view-event', (e, obj) => {
-
+ipcRenderer.on('view-event', (e, obj, loginUSN) => {
 	eventData = obj[0];
+
+	DeskUSN = loginUSN
 
 	// Heading
 	document.getElementById('eventHeader').innerHTML = eventData['NAME'].capitalizeEachWord()
@@ -191,19 +191,20 @@ ipcRenderer.on('view-event', (e, obj) => {
                 REGISTER
             </button>
         </div>
-
     </form>`
 
-
+	getRules(eventData['E_ID']);
 
 	detailsContent = `<span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf073;"></span>
                     ${moment(eventData['DATE']).format("MMM DD, YYYY")}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf017;"></span>
                      ${moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A")} - ${moment(eventData['TIME'], "HH:mm:ss", true).add(eventData['DURATION'], 'minutes').format("hh:mm A")}<br><br>
                       <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf02d;"></span>
-                    <div id="rlist" style="position: relative; top: -40px; left: 70px; margin-bottom: -70px;">${getRules(eventData['E_ID'])}</div><br><br>
+                    <div id="rlist" style="position: relative; top: -40px; left: 70px; margin-bottom: -70px;">${rulesList}</div><br><br>
                     <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
-                      ${eventData['TEAM_COUNT']} in a team<br><br>
+                      ${eventData['TEAM_COUNT']} in a team&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf0d6;"></span>
+					  ${eventData['PRICE'] ? "Rs. " + eventData['PRICE'] : "Free"}<br><br>
                   <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
                     ${eventData['a']}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					+91 ${eventData['b']}<br><br>`

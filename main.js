@@ -11,7 +11,7 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let loginWin, eventWin, viewEventWin
+let loginWin, eventWin, viewEventWin, loginUSN
 const Window = require('./js/Window')
 
 const db = require('./js/db')
@@ -28,9 +28,9 @@ createWindow = () => {
 		db.connect((err) => {if (err) showError(err)});
 	})
 
-	ipcMain.on('event-window', () => {
+	ipcMain.on('event-window', (e, usn) => {
     if (!eventWin) {
-      eventWin = new Window({
+      eventWin= new Window({
 		  file: 'events.html',
 		  width: 1079,
   		height: 720,
@@ -39,13 +39,14 @@ createWindow = () => {
 
 	  // commented out during testing
 	  // loginWin.close();
+	  loginUSN = usn
 
 	  eventWin.once('show', () => {
 			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
-			if (err) showError(err)
-			else eventWin.webContents.send('events', result)
-		});
-});
+				if (err) showError(err)
+				else eventWin.webContents.send('events', result)
+			});
+	});
 
       // cleanup
       eventWin.on('closed', () => {
@@ -66,7 +67,7 @@ createWindow = () => {
 			viewEventWin.once('show', () => {
 				db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
 					if (err) showError(err)
-					else viewEventWin.webContents.send('view-event', result)
+					else viewEventWin.webContents.send('view-event', result, loginUSN)
 				});
 			})
 

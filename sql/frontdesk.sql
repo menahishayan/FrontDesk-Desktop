@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 23, 2019 at 09:37 AM
+-- Generation Time: Nov 23, 2019 at 07:24 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -96,41 +96,41 @@ CREATE TABLE `auth` (
 --
 
 INSERT INTO `auth` (`USN`, `PASSWORD`) VALUES
-('1AM17CS101', '12345678'),
-('1AM17CS102', '12345678'),
-('1AM17CS103', '12345678'),
-('1AM17CS104', '12345678'),
-('1AM17CS105', '12345678'),
-('1AM17CS106', '12345678'),
-('1AM17CS107', '12345678'),
-('1AM17CS108', '12345678'),
-('1AM17CS109', '12345678'),
-('1AM17CS110', '12345678'),
-('1AM17CS111', '12345678'),
-('1AM17CS112', '12345678'),
-('1AM17CS113', '12345678'),
-('1AM17CS114', '12345678'),
-('1AM17CS115', '12345678'),
-('1AM17CS116', '12345678'),
-('1AM17CS117', '12345678'),
-('1AM17CS118', '12345678'),
-('1AM17CS119', '12345678'),
-('1AM17CS120', '12345678'),
-('1AM17CS121', '12345678'),
-('1AM17CS122', '12345678'),
-('1AM17CS123', '12345678'),
-('1AM17CS124', '12345678'),
-('1AM17CS125', '12345678'),
-('1AM17CS126', '12345678'),
-('1AM17CS127', '12345678'),
-('1AM17CS128', '12345678'),
-('1AM17CS129', '12345678'),
-('1AM17CS130', '12345678'),
-('1AM17CS131', '12345678'),
-('1AM17CS132', '12345678'),
-('1AM17CS133', '12345678'),
-('1AM17CS134', '12345678'),
-('1AM17CS135', '12345678');
+('1AM17CS101', 'ŠOƒ—0žrpØÑ?õh¾“'),
+('1AM17CS102', 'l‚®\0Bõ–÷SO\\ÌW?'),
+('1AM17CS103', 'J·_n4?}o›jg6§\r}'),
+('1AM17CS104', '1…*¢&Ì‘3zu¨MÉß'),
+('1AM17CS105', 'ýià¾H)¾…ÞgÛ±'),
+('1AM17CS106', 'ñ%iŸ°é)ÎYµòSƒ„À4'),
+('1AM17CS107', 'J·_n4?}o›jg6§\r}'),
+('1AM17CS108', '8Ïw¢Bžf5Mò—™'),
+('1AM17CS109', 'sÃþ„ÜüWbÝ•«‰2C2'),
+('1AM17CS110', 'œ6zq‘÷¼öˆby2'),
+('1AM17CS111', 'ÞÂÓ”•ÂÁë*.æÃâxè'),
+('1AM17CS112', 'š^³¸½ó&¶—šºu`'),
+('1AM17CS113', 'ñ%iŸ°é)ÎYµòSƒ„À4'),
+('1AM17CS114', 'ýià¾H)¾…ÞgÛ±'),
+('1AM17CS115', 'À;ï£““­^b^Øcu¼0'),
+('1AM17CS116', '©p‹D…LÈá	ùf9»]'),
+('1AM17CS117', '{œM¢¤Ùß–3VR¾Ýÿ4'),
+('1AM17CS118', 'ký—¨p¹ 3Û=§ÊwsN'),
+('1AM17CS119', '¬Œ¶ ,±¿ÏÛBáf·Ñ_'),
+('1AM17CS120', '`„˜“ë‰#Ý!g\Z5LÈy!'),
+('1AM17CS121', 'YkàMeOÍ`”w\"–©'),
+('1AM17CS122', '´Qcd×pÀcâÎ,ÿ–'),
+('1AM17CS123', 'ãšy0×#‹¿&ÇÔq\n'),
+('1AM17CS124', 'ë„Y\nŸ(âñ+{í`[•¤'),
+('1AM17CS125', 'zÙgHŒrŒ0“¿¥I'),
+('1AM17CS126', 'l>dØá\rì¤Ð:›k\"¼ '),
+('1AM17CS127', 'Ê•Ç,”÷Ö®,%‘áCË'),
+('1AM17CS128', '&¸—^4\ngdóåîûâÐ'),
+('1AM17CS129', 'ùþLü²K^o ”èuƒñø'),
+('1AM17CS130', 'æ¯©¦øZBœÙìÅòX£K'),
+('1AM17CS131', 'ˆý4k >”O	\'*)„'),
+('1AM17CS132', '„š#Ô´EÔ´}å88ýÑ@'),
+('1AM17CS133', 'â¼Òc-ö™0cý –j'),
+('1AM17CS134', 'eGÞVXÒ>Ël€N=	àÂö'),
+('1AM17CS135', 'R\ZÊ²—e=?Ï|íý-oN');
 
 -- --------------------------------------------------------
 
@@ -223,7 +223,6 @@ INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRIC
 (11, 'Mad ads', '2019-11-15', '15:00:00', 15, 'MAIN STAGE', 200, '1AM17CS113', 'MAIN STAGE', 5, 'RED'),
 (12, 'Quiz', '2019-11-15', '13:00:00', 60, 'LH-206', 100, '1AM17CS114', 'OFF STAGE', 1, 'BLUE'),
 (13, 'Debate', '2019-11-15', '11:00:00', 5, 'LH-207', 100, '1AM17CS115', 'TECHNICAL', 1, 'YELLOW'),
-(14, 'Gaming', '2019-11-15', '12:00:00', 60, 'LH-208', 200, '1AM17CS116', 'OFF STAGE', 4, 'BLUE'),
 (15, 'Musically King/Queen', '2019-11-15', '15:00:00', 5, 'LH-209', 100, '1AM17CS117', 'OFF STAGE', 1, 'BLUE'),
 (16, 'Cooking W/o Fire', '2019-11-15', '15:00:00', 30, 'LH-210', 150, '1AM17CS118', 'OFF STAGE', 2, 'BLUE'),
 (17, 'Rangoli', '2019-11-15', '15:00:00', 45, 'LH-211', 100, '1AM17CS119', 'OFF STAGE', 4, 'BLUE'),
@@ -310,7 +309,10 @@ INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (66, 30, '1AM18CS102', '1AM17CS132'),
 (67, 12, '1AM17CS101', '1AM17CS132'),
 (68, 19, '1AM17CS132', '1AM17CS132'),
-(69, 19, '1AM18CS100', '1AM17CS132');
+(69, 19, '1AM18CS100', '1AM17CS132'),
+(70, 21, '1AM17CS101', '1AM17CS132'),
+(71, 24, '1am17cs121', '1AM17CS132'),
+(73, 24, '1AM17CS105', '1AM17CS121');
 
 --
 -- Triggers `registration`
@@ -337,8 +339,73 @@ CREATE TABLE `rules` (
 --
 
 INSERT INTO `rules` (`E_ID`, `RULE_NO`, `RULES`) VALUES
-(2, 1, 'Test rule 1'),
-(2, 2, 'Test rule 2');
+(1, 1, 'The team should complete the task in given time'),
+(1, 2, 'No useage of internet'),
+(2, 1, 'The team must not use any vulgar clothes'),
+(2, 2, 'Should be based on some theme'),
+(2, 3, 'Maximum of 8 persons in a team'),
+(3, 1, 'To be completed in given time'),
+(3, 2, 'Maximum of 6 persons in a team'),
+(3, 3, 'To get there own bgms'),
+(4, 1, 'To be completed in given time'),
+(4, 2, 'Maximum of 6 persons in a team'),
+(4, 3, 'To get there own songs and give it to the technical team'),
+(5, 1, 'To be completed in given time'),
+(5, 2, 'Maximum of 1 person in a team'),
+(5, 3, 'To get there own bgms'),
+(6, 1, 'To be completed in given time'),
+(6, 2, 'Maximum of 1 person in a team'),
+(6, 3, 'To get there own songs and give it to the technical team'),
+(7, 1, 'Who ever clears the most no of levels they are the winners'),
+(7, 2, 'best idea suitable for the society wins'),
+(7, 3, 'complete within 24hours'),
+(8, 1, 'To be completed in given time'),
+(8, 2, 'Who ever clears the most no of levels they are the winners'),
+(8, 3, 'If the team is broke into two different parts and found then the team is dissqualified'),
+(9, 1, 'To be completed in given time'),
+(9, 2, 'Who ever clears the most no of levels they are the winners'),
+(9, 3, 'First team to get the more number of items mentioned in the list is the winner'),
+(10, 1, 'Pencil sketch only'),
+(10, 2, 'To get there own items only paper is provided'),
+(10, 3, 'To be completed in the given time'),
+(11, 1, 'No insulting( No NFSW)'),
+(11, 2, 'No immitating any person related to the college'),
+(11, 3, 'To be completed in the given time'),
+(12, 1, 'No usage of phone'),
+(12, 2, 'to be present at the venue at the specified time'),
+(13, 1, 'To be completed in given time'),
+(13, 2, 'To be done in english only'),
+(13, 3, 'no harsh language and tone ,if found then the team is disqualified'),
+(15, 1, 'To be completed within time'),
+(15, 2, 'decent dress is appritiated'),
+(15, 3, 'Most number of expressions win the vidieo is the winner'),
+(16, 1, 'No usage of fire'),
+(16, 2, 'To be completed in the given time '),
+(16, 3, 'Items to be bought by themselves'),
+(17, 1, 'To be completed in given time'),
+(17, 2, 'Items to be bought by themselves'),
+(18, 1, 'To be completed in given time'),
+(18, 2, 'English language only'),
+(19, 1, 'Phone photography w/o filter'),
+(19, 2, 'Photos to be taken at the given time only '),
+(20, 1, 'No speaking at the time of acting'),
+(20, 2, ' No lipsing at the time of acting'),
+(21, 1, 'To maintain standards'),
+(21, 2, 'Dressing should be based on a theme'),
+(22, 1, 'No insulting(No NFSW)'),
+(22, 2, 'To complete in the given time'),
+(23, 1, 'Follow the given game policy'),
+(24, 1, 'Follow the given game policy'),
+(25, 1, 'Follow the given game policy'),
+(26, 1, 'Follow the given game policy'),
+(27, 1, 'Rough Play prohibited'),
+(27, 2, 'Maximum of 11 players in a team'),
+(28, 1, 'Rough Play prohibited'),
+(28, 2, 'Maximum of 11 players in a team'),
+(29, 1, 'Finish the game in given time'),
+(29, 2, 'Follow the given game policy'),
+(30, 1, 'No Foul Play'),
+(30, 2, 'Follow the given game policy');
 
 -- --------------------------------------------------------
 
@@ -423,7 +490,7 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (3, 0, NULL, 'PENDING'),
 (4, 0, NULL, 'PENDING'),
 (10, 0, NULL, 'PENDING'),
-(11, 0, NULL, 'PENDING'),
+(11, 0, 'cash', 'PAID'),
 (12, 0, NULL, 'PENDING'),
 (13, 0, NULL, 'PENDING'),
 (19, 200, NULL, 'PENDING'),
@@ -470,7 +537,10 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (66, 100, 'CASH', 'PAID'),
 (67, 100, 'CASH', 'PAID'),
 (68, 100, 'CASH', 'PAID'),
-(69, 100, 'CASH', 'PAID');
+(69, 100, 'CASH', 'PAID'),
+(70, 0, 'CASH', 'PAID'),
+(71, 200, NULL, 'PENDING'),
+(73, 200, 'CASH', 'PAID');
 
 --
 -- Indexes for dumped tables
@@ -536,7 +606,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- Constraints for dumped tables
