@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 20, 2019 at 06:04 PM
+-- Generation Time: Nov 23, 2019 at 09:37 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -303,7 +303,14 @@ INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (59, 11, '1AM17CS119', '1AM17CS132'),
 (60, 20, '1AM18CS101', '1AM17CS132'),
 (61, 24, '1AM18CS101', '1AM17CS132'),
-(62, 24, '1AM17CS120', '1AM17CS132');
+(62, 24, '1AM17CS120', '1AM17CS132'),
+(63, 28, '1AM17CS113', '1AM17CS132'),
+(64, 20, '1AM17CS116', '1AM17CS132'),
+(65, 24, '1AM17CS109', '1AM17CS132'),
+(66, 30, '1AM18CS102', '1AM17CS132'),
+(67, 12, '1AM17CS101', '1AM17CS132'),
+(68, 19, '1AM17CS132', '1AM17CS132'),
+(69, 19, '1AM18CS100', '1AM17CS132');
 
 --
 -- Triggers `registration`
@@ -456,7 +463,14 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (59, 200, NULL, 'PENDING'),
 (60, 80, 'UPI', 'PAID'),
 (61, 200, 'CASH', 'PAID'),
-(62, 200, NULL, 'PENDING');
+(62, 200, NULL, 'PENDING'),
+(63, 400, 'CASH', 'PAID'),
+(64, 80, 'CASH', 'PAID'),
+(65, 200, 'CASH', 'PAID'),
+(66, 100, 'CASH', 'PAID'),
+(67, 100, 'CASH', 'PAID'),
+(68, 100, 'CASH', 'PAID'),
+(69, 100, 'CASH', 'PAID');
 
 --
 -- Indexes for dumped tables
@@ -522,7 +536,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- Constraints for dumped tables
