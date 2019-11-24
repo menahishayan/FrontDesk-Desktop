@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 23, 2019 at 07:24 PM
+-- Generation Time: Nov 24, 2019 at 09:09 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -30,6 +30,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTER` (IN `_E_ID` INT(11), IN `
 BEGIN
 DECLARE _COUNT INT(11);
 DECLARE _R_ID INT(11);
+DECLARE _EXISTCOUNT INT(11);
     SELECT
         COUNT(*)
         	INTO _COUNT
@@ -56,6 +57,8 @@ VALUES(
     _DEPT
 );
 END IF;
+SELECT COUNT(*) INTO _EXISTCOUNT FROM registration WHERE USN=_USN AND E_ID=_E_ID;
+IF (_EXISTCOUNT = 0) THEN
 INSERT INTO registration(E_ID, USN, DESK_USN)
 VALUES(_E_ID, _USN, _DESKUSN);
 
@@ -76,6 +79,10 @@ SET
 WHERE
     R_ID = _R_ID;
     SELECT _R_ID LIMIT 1;
+ELSE
+	SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Duplicate registration for USN, E_ID pair';
+END IF;
 END$$
 
 DELIMITER ;
@@ -131,6 +138,18 @@ INSERT INTO `auth` (`USN`, `PASSWORD`) VALUES
 ('1AM17CS133', 'â¼Òc-ö™0cý –j'),
 ('1AM17CS134', 'eGÞVXÒ>Ël€N=	àÂö'),
 ('1AM17CS135', 'R\ZÊ²—e=?Ï|íý-oN');
+
+--
+-- Triggers `auth`
+--
+DELIMITER $$
+CREATE TRIGGER `ENCRYPT_INSERT` BEFORE INSERT ON `auth` FOR EACH ROW SET new.PASSWORD = AES_ENCRYPT(new.PASSWORD, 'nish')
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `ENCRYPT_UPDATE` BEFORE UPDATE ON `auth` FOR EACH ROW SET new.PASSWORD = AES_ENCRYPT(new.PASSWORD, 'nish')
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -312,7 +331,8 @@ INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (69, 19, '1AM18CS100', '1AM17CS132'),
 (70, 21, '1AM17CS101', '1AM17CS132'),
 (71, 24, '1am17cs121', '1AM17CS132'),
-(73, 24, '1AM17CS105', '1AM17CS121');
+(73, 24, '1AM17CS105', '1AM17CS121'),
+(78, 3, '1am18cs100', '1AM17CS101');
 
 --
 -- Triggers `registration`
@@ -427,45 +447,45 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`USN`, `DEPT`, `SEM`, `SECTION`, `PHONE`, `NAME`) VALUES
-('1AM17CS101', 'cse', 5, 'b', '8971729383', 'Menahi Shayan'),
-('1AM17CS102', 'cse', 5, 'a', '5285746350', 'Kayne'),
-('1AM17CS103', 'cse', 5, 'b', '6325418596', 'Agnese'),
-('1AM17CS104', 'cse', 5, 'b', '5489235489', 'Kylen'),
-('1AM17CS105', 'cse', 5, 'b', '2041856329', 'Cordey'),
-('1AM17CS106', 'cse', 5, 'b', '6587459856', 'Cassius'),
-('1AM17CS107', 'cse', 5, 'b', '3254482635', 'Jodie'),
-('1AM17CS108', 'cse', 5, 'a', '9885456565', 'Elliot'),
-('1AM17CS109', 'cse', 5, 'b', '9875656755', 'Jazmin'),
-('1AM17CS110', 'cse', 5, 'b', '8752542585', 'Sigfrid'),
-('1AM17CS111', 'cse', 5, 'b', '7897986877', 'Desmund'),
-('1AM17CS112', 'cse', 5, 'b', '8698899879', 'Muire'),
-('1AM17CS113', 'cse', 5, 'b', '9787598800', 'Jesse'),
-('1AM17CS114', 'cse', 5, 'b', '8688908988', 'Ulrike'),
-('1AM17CS115', 'cse', 5, 'b', '9979886760', 'Tamma'),
-('1AM17CS116', 'cse', 5, 'b', '9878968666', 'Scott'),
-('1AM17CS117', 'cse', 5, 'b', '9088908787', 'Jasper'),
-('1AM17CS118', 'cse', 5, 'a', '9989789768', 'Zondra'),
-('1AM17CS119', 'cse', 5, 'b', '8895889692', 'Cris'),
-('1AM17CS120', 'cse', 5, 'b', '8846988709', 'Feodor'),
-('1AM17CS121', 'cse', 5, 'b', '9890998098', 'Nishank Swamy'),
-('1AM17CS122', 'cse', 5, 'a', '9770989869', 'Linnie'),
-('1AM17CS123', 'cse', 5, 'b', '8798988783', 'Tricia'),
-('1AM17CS124', 'cse', 5, 'b', '7879986965', 'Teresina'),
-('1AM17CS125', 'cse', 5, 'b', '9807687989', 'Wileen'),
-('1AM17CS126', 'cse', 5, 'b', '9878878997', 'Iona'),
-('1AM17CS127', 'cse', 5, 'b', '7899876677', 'Vamshi Prasad'),
-('1AM17CS128', 'cse', 5, 'b', '8632334434', 'Herminia'),
-('1AM17CS129', 'cse', 5, 'b', '9957837838', 'Gabrielle'),
-('1AM17CS130', 'cse', 5, 'b', '8998348783', 'Jacklyn'),
-('1AM17CS131', 'cse', 5, 'b', '9847848749', 'Elwood'),
-('1AM17CS132', 'cse', 5, 'b', '8939387837', 'Podaralla Candy'),
-('1AM17CS133', 'cse', 5, 'a', '9986634653', 'Marleah'),
-('1AM17CS134', 'cse', 5, 'b', '8660718302', 'Humphrey'),
-('1AM17CS135', 'cse', 5, 'b', '8639094896', 'Alvin'),
+('1AM17CS101', 'CSE', 5, 'B', '8971729383', 'Menahi Shayan'),
+('1AM17CS102', 'CSE', 5, 'A', '5285746350', 'Kayne'),
+('1AM17CS103', 'CSE', 5, 'B', '6325418596', 'Agnese'),
+('1AM17CS104', 'CSE', 5, 'B', '5489235489', 'Kylen'),
+('1AM17CS105', 'CSE', 5, 'B', '2041856329', 'Cordey'),
+('1AM17CS106', 'CSE', 5, 'B', '6587459856', 'Cassius'),
+('1AM17CS107', 'CSE', 5, 'B', '3254482635', 'Jodie'),
+('1AM17CS108', 'CSE', 5, 'A', '9885456565', 'Elliot'),
+('1AM17CS109', 'CSE', 5, 'B', '9875656755', 'Jazmin'),
+('1AM17CS110', 'CSE', 5, 'B', '8752542585', 'Sigfrid'),
+('1AM17CS111', 'CSE', 5, 'B', '7897986877', 'Desmund'),
+('1AM17CS112', 'CSE', 5, 'B', '8698899879', 'Muire'),
+('1AM17CS113', 'CSE', 5, 'B', '9787598800', 'Jesse'),
+('1AM17CS114', 'CSE', 5, 'B', '8688908988', 'Ulrike'),
+('1AM17CS115', 'CSE', 5, 'B', '9979886760', 'Tamma'),
+('1AM17CS116', 'CSE', 5, 'B', '9878968666', 'Scott'),
+('1AM17CS117', 'CSE', 5, 'B', '9088908787', 'Jasper'),
+('1AM17CS118', 'CSE', 5, 'A', '9989789768', 'Zondra'),
+('1AM17CS119', 'CSE', 5, 'B', '8895889692', 'Cris'),
+('1AM17CS120', 'CSE', 5, 'B', '8846988709', 'Feodor'),
+('1AM17CS121', 'CSE', 5, 'B', '9890998098', 'Nishank Swamy'),
+('1AM17CS122', 'CSE', 5, 'A', '9770989869', 'Linnie'),
+('1AM17CS123', 'CSE', 5, 'B', '8798988783', 'Tricia'),
+('1AM17CS124', 'CSE', 5, 'B', '7879986965', 'Teresina'),
+('1AM17CS125', 'CSE', 5, 'B', '9807687989', 'Wileen'),
+('1AM17CS126', 'CSE', 5, 'B', '9878878997', 'Iona'),
+('1AM17CS127', 'CSE', 5, 'B', '7899876677', 'Vamshi Prasad'),
+('1AM17CS128', 'CSE', 5, 'B', '8632334434', 'Herminia'),
+('1AM17CS129', 'CSE', 5, 'B', '9957837838', 'Gabrielle'),
+('1AM17CS130', 'CSE', 5, 'B', '8998348783', 'Jacklyn'),
+('1AM17CS131', 'CSE', 5, 'B', '9847848749', 'Elwood'),
+('1AM17CS132', 'CSE', 5, 'B', '8939387837', 'Podaralla Candy'),
+('1AM17CS133', 'CSE', 5, 'A', '9986634653', 'Marleah'),
+('1AM17CS134', 'CSE', 5, 'B', '8660718302', 'Humphrey'),
+('1AM17CS135', 'CSE', 5, 'B', '8639094896', 'Alvin'),
 ('1AM18CS100', 'CSE', 3, 'B', '723423489', 'BOB'),
 ('1AM18CS101', 'CSE', 3, 'B', '293842983', 'TOM'),
 ('1AM18CS102', 'CSE', 3, 'B', '453435342', 'JOB'),
-('1AM18CS113', 'cse', 5, 'b', '9890998098', 'Nishank Swamy'),
+('1AM18CS113', 'CSE', 5, 'B', '9890998098', 'Nishank Swamy'),
 ('1AM18CS114', 'CSE', 3, 'A', '342342342', 'CAP'),
 ('1AM18CS119', 'CSE', 3, 'B', '934583945', 'ROB');
 
@@ -540,7 +560,8 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (69, 100, 'CASH', 'PAID'),
 (70, 0, 'CASH', 'PAID'),
 (71, 200, NULL, 'PENDING'),
-(73, 200, 'CASH', 'PAID');
+(73, 200, 'CASH', 'PAID'),
+(78, 400, 'CASH', 'PAID');
 
 --
 -- Indexes for dumped tables
@@ -606,7 +627,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- Constraints for dumped tables

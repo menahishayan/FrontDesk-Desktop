@@ -1,13 +1,13 @@
 
 const showError = (msg) => {
 	const dialog = require('electron').remote.dialog
-	
+
 	dialog.showMessageBox(null, {
 		type: 'error',
 		buttons: ['OK'],
 		defaultId: 2,
-		title: 'Error',
-		message: 'Query Error',
+		title: '',
+		message: 'Database Error',
 		detail: msg.toString()
 	}, (res) => console.log(res))
 }
