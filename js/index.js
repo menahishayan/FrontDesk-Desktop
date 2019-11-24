@@ -7,11 +7,11 @@ const { ipcRenderer } = require('electron')
 const db = require('./js/db')
 const showError = require('./js/showError')
 
-const debug = false
+const debug = true
 
 document.getElementById('login').addEventListener('click', !debug ? (e) => {
     e.preventDefault();
-    let usn = document.getElementById('username').value;
+    let usn = document.getElementById('username').value.toUpperCase();
     db.query(`SELECT AES_DECRYPT(PASSWORD,'nish') AS PASSWORD FROM auth WHERE USN=\'${usn}\'`, (err, result, fields) => {
         if(result.length>0) {
             if (result[0]['PASSWORD'] == document.getElementById('pass').value)

@@ -16,7 +16,7 @@ String.prototype.capitalizeEachWord = function() {
 	return str.join(" ");
 }
 
-let detailsContent, registerContent, eventData, userData, registerStatus = false, rulesList = '', DeskUSN;
+let detailsContent, registerContent, eventData, userData, registerStatus = false, rulesList = '', DeskUSN, payment;
 
 const collapseLeft = function() {
 	document.querySelector('.container-left').style.width = '450px';
@@ -87,8 +87,8 @@ const checkUSN = (usn) => {
 }
 
 const register = (e_id, user) => {
-	db.query(`CALL REGISTER(${e_id}, \'${user.USN}\', \'${user.name}\', \'${user.phone}\', ${user.sem}, \'${user.sec}\', \'${document.getElementById('payment').value}\', \'${DeskUSN}\', \'${user.dept}\')`, (err, result, fields) => {
-		if(err) showError(err)
+	db.query(`CALL REGISTER(${e_id}, \'${user.USN}\', \'${user.name}\', \'${user.phone}\', ${user.sem}, \'${user.sec}\', \'${payment}\', \'${DeskUSN}\', \'${user.dept}\')`, (err, result, fields) => {
+		if(err) showError(err.toString().includes('registration_ibfk_4') ? "Please disable debug mode and log in using the correct credentials." : err)
 		else {
 			registerStatus = true;
 			document.getElementById('body').className = 'hidden15';
@@ -99,6 +99,7 @@ const register = (e_id, user) => {
 			document.getElementById('body').innerHTML = ""
 			document.getElementById('body').className = 'visible15';
 			document.getElementById('body').innerHTML = "<img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\">"
+			document.getElementById('qr').style.visibility = 'visible';
 
 			setTimeout(function() {
 				setInterval(function() {
@@ -132,10 +133,11 @@ const getRules = (e_id) => {
 			document.getElementById('rlist').innerHTML = rulesList.length>0 ? rulesList : "No rules available";
 		} else console.log(err);
 	})
-
 }
 
-
+const setPayment = (mode) => {
+	payment = mode;
+}
 
 ipcRenderer.on('view-event', (e, obj, loginUSN) => {
 	eventData = obj[0];
@@ -153,7 +155,7 @@ ipcRenderer.on('view-event', (e, obj, loginUSN) => {
 	//Event desription
 	registerContent = `<form class="login100-form validate-form p-b-33 p-t-5">
         <div class="wrap-input100 validate-input" data-validate="Enter USN">
-            <input class="input100" type="text" id="USN" placeholder="USN">
+            <input class="input100" type="text" id="USN" placeholder="USN" style="text-transform: uppercase;">
             <span class="focus-input100" data-placeholder="&#xe803;"></span>
         </div>
 
@@ -164,29 +166,29 @@ ipcRenderer.on('view-event', (e, obj, loginUSN) => {
 
         <div class="wrap-input100 validate-input fetchable" data-validate="Enter Phone">
             <input class="input100" type="text" id="phone" placeholder="Phone">
-            <span class="focus-input100" data-placeholder="&#xe830;""></span>
+            <span class="focus-input100" data-placeholder="&#xe830;"></span>
         </div>
-
-        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Sem" width="45%">
+		<div width="100%" style="display: flex; flex-direction: row; flex-wrap: wrap; width:100%;">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Sem" style="width:32%; margin-right: 2%;">
             <input class="input100" type="number" id="sem" placeholder="Sem">
-            <span class="focus-input100" data-placeholder="&#xe852;""></span>
+            <span class="focus-input100" data-placeholder="&#xe828;"></span>
         </div>
-        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Section" width="45%">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Section" style="width:34%; margin-right: 2%;text-transform: uppercase;">
             <input class="input100" type="text" id="section" placeholder="Section">
-            <span class="focus-input100" data-placeholder="&#xe852;""></span>
+            <span class="focus-input100" data-placeholder="&#xe842;"></span>
         </div>
 
-        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Dept" width="45%">
+        <div class="wrap-input100 validate-input fetchable" data-validate="Enter Dept"  style="width:30%;text-transform: uppercase;">
             <input class="input100" type="text" id="dept" placeholder="Dept">
-            <span class="focus-input100" data-placeholder="&#xe852;""></span>
+            <span class="focus-input100" data-placeholder="&#xe801;"></span>
+        </div>
+		</div>
+        <div class="btn-group fetchable" data-validate="Enter Payment Mode" style="width:80%; align-vertical: center; margin: 10%; margin-top:5%;">
+			<button type="button" class="btn btn-primary group-button radius-left" onclick="setPayment('CASH')">CASH</button>
+			<button type="button" class="btn btn-primary group-button radius-right" onclick="setPayment('UPI')">UPI</button>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate="Enter Payment Mode" width="45%">
-            <input class="input100" type="text" id="payment" placeholder="Payment Mode">
-            <span class="focus-input100" data-placeholder="&#xe82f;""></span>
-        </div>
-
-        <div class="container-login100-form-btn m-t-32">
+        <div class="container-login100-form-btn" style="margin-top:10%;">
             <button id="register" class="login100-form-btn gradient-${obj[0]['COLOR'].toUpperCase()}-left">
                 REGISTER
             </button>

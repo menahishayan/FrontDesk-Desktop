@@ -2,6 +2,8 @@
 	font-size: 28px;
 	margin: 10px;
 	margin-bottom: 50px;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .container-left {
@@ -15,6 +17,8 @@
 	z-index: 2;
 	background: white;
 	transition: 0.5s;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .ticket-container {
@@ -35,6 +39,8 @@
 	color: white;
 	z-index: 1;
 	text-align: center;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .ticket-content-head {
@@ -42,12 +48,16 @@
 
 	font-size: 28px;
 	font-weight: bold;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .ticket-content-sub {
 	color: white;
 	font-size: 16px;
 	font-weight: normal;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .visible35 {
@@ -95,10 +105,46 @@
 .qr {
 	margin-left: -3px;
 	margin-top: -3px;
+	visibility: hidden;
 }
 
 .tick {
 	margin-top: 150px;
+}
+
+.group-button {
+	outline-style: none;
+	border: 1px solid #e6e6e6;
+	border-radius: 12px;
+	font-family: Corbel, sans-serif;
+    font-size: 16px;
+    color: #555555;
+	background: white;
+	padding: 10px;
+	padding-left: 30px;
+	padding-right: 30px;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+.btn-primary:hover {
+	background: #555555;
+	border: 1px solid #555555;
+}
+
+.btn-primary:active {
+	background: -webkit-linear-gradient(left, #e0d513, #e6672f, #df3616);
+	border: 0px;
+	outline-style: none;
+
+}
+
+.btn-primary:focus {
+	background: -webkit-linear-gradient(left, #e0d513, #e6672f, #df3616);
+	border: 0px;
+	outline-style: none;
+	box-shadow: none;
+	color: white;
 }
 
 #backText {
@@ -109,4 +155,6 @@
 	position: absolute;
 	left: 160px;
 	top: 290px;
+	user-select: none;
+	-webkit-user-select: none;
 }

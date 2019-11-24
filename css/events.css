@@ -7,6 +7,8 @@
 	width: 230px;
 	padding: 15px;
 	cursor: pointer;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .item-container:hover {
@@ -60,12 +62,16 @@ padding-top: 15px;
 padding-bottom: 15px;
 margin-bottom: -30px;
 margin-right: -38px;
+user-select: none;
+-webkit-user-select: none;
 }
 
 .event-item {
 	display:inline-block;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	user-select: none;
+	-webkit-user-select: none;
 }
 
 .no-select {
@@ -76,4 +82,6 @@ margin-right: -38px;
 #eventList {
 	margin-left: -20px;
 	width: '100%';
+	user-select: none;
+	-webkit-user-select: none;
 }
