@@ -88,7 +88,7 @@ const checkUSN = (usn) => {
 
 const register = (e_id, user) => {
 	db.query(`CALL REGISTER(${e_id}, \'${user.USN}\', \'${user.name}\', \'${user.phone}\', ${user.sem}, \'${user.sec}\', \'${payment}\', \'${DeskUSN}\', \'${user.dept}\')`, (err, result, fields) => {
-		if(err) showError(err.toString().includes('registration_ibfk_4') ? "Please disable debug mode and log in using the correct credentials." : err)
+		if(err) showError(err)
 		else {
 			registerStatus = true;
 			document.getElementById('body').className = 'hidden15';

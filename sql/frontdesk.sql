@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2019 at 09:09 AM
+-- Generation Time: Nov 24, 2019 at 10:16 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -26,6 +26,16 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `_USN` VARCHAR(11), IN `PASS` VARCHAR(30))  READS SQL DATA
+BEGIN
+
+IF ((SELECT AES_ENCRYPT(PASS, 'nish') AS `PASSWORD`) = (SELECT `PASSWORD` FROM `auth` WHERE `USN`=_USN)) THEN
+SELECT true AS RESPONSE;
+ELSE
+SELECT false AS RESPONSE;
+END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `REGISTER` (IN `_E_ID` INT(11), IN `_USN` VARCHAR(20), IN `_NAME` VARCHAR(20), IN `_PHONE` VARCHAR(20), IN `_SEM` INT(11), IN `_SECTION` VARCHAR(20), IN `_PAY` VARCHAR(20), IN `_DESKUSN` VARCHAR(20), IN `_DEPT` VARCHAR(20))  MODIFIES SQL DATA
 BEGIN
 DECLARE _COUNT INT(11);
