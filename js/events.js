@@ -1,6 +1,6 @@
 'use strict'
 
-const { ipcRenderer } = require('electron')
+const { ipcRenderer, remote } = require('electron')
 
 String.prototype.capitalizeEachWord = function() {
     this.toLowerCase();
@@ -35,4 +35,7 @@ ipcRenderer.on('events', (event, events) => {
   eventList.querySelectorAll('.event-item').forEach(item => {
     item.addEventListener('click', () => {ipcRenderer.send('view-event-window', item.id)})
   })
+
+  document.getElementById('logout').addEventListener('click', () => remote.getCurrentWindow().close())
+  document.getElementById('viewUser').addEventListener('click', () => ipcRenderer.send('user-window'))
 })

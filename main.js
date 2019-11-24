@@ -11,7 +11,7 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let loginWin, eventWin, viewEventWin, loginUSN
+let loginWin, eventWin, viewEventWin, userWin, loginUSN
 const Window = require('./js/Window')
 
 const db = require('./js/db')
@@ -77,6 +77,29 @@ createWindow = () => {
 			})
 		}
 	})
+
+	ipcMain.on('user-window', () => {
+  		if (!userWin) {
+  			userWin = new Window({
+  				file: 'user.html',
+  				width: 300,
+  				height: 350,
+  				parent: eventWin
+  			})
+
+  			userWin.once('show', () => {
+  				db.query(`SELECT  * FROM auth a,coordinators c,students s WHERE a.USN=\'${loginUSN}\' and a.USN=c.USN and a.USN=s.USN`, function(err, result, fields) {
+  					if (err) showError(err)
+  					else userWin.webContents.send('view-user', result[0])
+  				});
+  			})
+
+  			// cleanup
+  			userWin.on('closed', () => {
+  				userWin = null
+  			})
+  		}
+  	})
 
 	loginWin.on('closed', () => {
 		loginWin = null

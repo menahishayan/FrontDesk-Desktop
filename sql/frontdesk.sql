@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 24, 2019 at 10:16 AM
+-- Generation Time: Nov 24, 2019 at 02:29 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -26,6 +26,16 @@ DELIMITER $$
 --
 -- Procedures
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CHANGEPASS` (IN `_USN` VARCHAR(11), IN `OLDPASS` VARCHAR(30), IN `NEWPASS` VARCHAR(30))  MODIFIES SQL DATA
+BEGIN
+
+IF ((SELECT AES_ENCRYPT(OLDPASS,'nish') AS `PASSWORD`) = (SELECT `PASSWORD` FROM auth WHERE USN=_USN)) THEN
+	UPDATE auth SET `PASSWORD`= AES_ENCRYPT(NEWPASS,'nish') WHERE USN=_USN;
+ELSE
+	SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Incorrect Password. Please check the old password you have entered.';
+END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `LOGIN` (IN `_USN` VARCHAR(11), IN `PASS` VARCHAR(30))  READS SQL DATA
 BEGIN
 
@@ -154,10 +164,6 @@ INSERT INTO `auth` (`USN`, `PASSWORD`) VALUES
 --
 DELIMITER $$
 CREATE TRIGGER `ENCRYPT_INSERT` BEFORE INSERT ON `auth` FOR EACH ROW SET new.PASSWORD = AES_ENCRYPT(new.PASSWORD, 'nish')
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `ENCRYPT_UPDATE` BEFORE UPDATE ON `auth` FOR EACH ROW SET new.PASSWORD = AES_ENCRYPT(new.PASSWORD, 'nish')
 $$
 DELIMITER ;
 
@@ -294,7 +300,6 @@ INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (11, 24, '1AM17CS121', '1AM17CS132'),
 (12, 11, '1AM17CS110', '1AM17CS132'),
 (13, 26, '1AM17CS102', '1AM17CS132'),
-(19, 24, '1AM17CS101', '1AM17CS132'),
 (26, 11, '1AM18CS102', '1AM17CS132'),
 (27, 10, '1AM17CS121', '1AM17CS132'),
 (28, 11, '1AM17CS101', '1AM17CS132'),
@@ -342,7 +347,8 @@ INSERT INTO `registration` (`R_ID`, `E_ID`, `USN`, `DESK_USN`) VALUES
 (70, 21, '1AM17CS101', '1AM17CS132'),
 (71, 24, '1am17cs121', '1AM17CS132'),
 (73, 24, '1AM17CS105', '1AM17CS121'),
-(78, 3, '1am18cs100', '1AM17CS101');
+(78, 3, '1am18cs100', '1AM17CS101'),
+(88, 4, '1AM17CS101', '1AM17CS101');
 
 --
 -- Triggers `registration`
@@ -523,7 +529,6 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (11, 0, 'cash', 'PAID'),
 (12, 0, NULL, 'PENDING'),
 (13, 0, NULL, 'PENDING'),
-(19, 200, NULL, 'PENDING'),
 (26, 200, 'CASH', 'PAID'),
 (27, 100, 'UPI', 'PAID'),
 (28, 200, 'CASH', 'PAID'),
@@ -571,7 +576,8 @@ INSERT INTO `transactions` (`R_ID`, `AMOUNT`, `MODE`, `STATUS`) VALUES
 (70, 0, 'CASH', 'PAID'),
 (71, 200, NULL, 'PENDING'),
 (73, 200, 'CASH', 'PAID'),
-(78, 400, 'CASH', 'PAID');
+(78, 400, 'CASH', 'PAID'),
+(88, 500, 'CASH', 'PAID');
 
 --
 -- Indexes for dumped tables
@@ -637,7 +643,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `R_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- Constraints for dumped tables

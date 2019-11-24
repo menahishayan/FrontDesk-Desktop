@@ -7,7 +7,7 @@ const showError = (msg) => {
 		buttons: ['OK'],
 		defaultId: 2,
 		title: '',
-		message: 'Database Error',
+		message: 'Error',
 		detail: msg.toString()
 	}, (res) => console.log(res))
 }

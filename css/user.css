@@ -86,7 +86,10 @@ user-select: none;
     content: attr(data-placeholder);
     display: block;
 	margin: 20px;
-	cursor: pointer;
+}
+
+.side-button.sb-xl::after {
+	font-size: 40px;
 }
 
 #sideButtonContainer {
