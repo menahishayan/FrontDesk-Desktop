@@ -11,7 +11,7 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let loginWin, eventWin, viewEventWin, userWin, loginUSN
+let loginWin, eventWin, viewEventWin, userWin, loginUSN , isAdmin =false
 const Window = require('./js/Window')
 
 const db = require('./js/db')
@@ -42,6 +42,20 @@ createWindow = () => {
 	  loginUSN = usn
 
 	  eventWin.once('show', () => {
+			db.query(`SELECT ROLE as ROLE FROM coordinators where USN = \'${loginUSN}\' `, function(err, result, fields) {
+				if (err) showError(err)
+				else //eventWin.webContents.send('events', result)
+					console.log(result);
+				if(result[0]['ROLE'] != "Coordinator"){
+					console.log('Yaay');
+					isAdmin = true;
+					
+					
+				}
+				else
+					console.log('Nooooooo');
+
+			});
 			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
 				if (err) showError(err)
 				else eventWin.webContents.send('events', result)
