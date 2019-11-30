@@ -10,6 +10,13 @@ FrontDesk - Cross-platform desktop app for event registrations, ticketing and tr
 
  ## Running
  - `npm start`
+ 
+ 
+ ## Disclaimer
+ - This project was created by [Menahi Shayan](https://github.com/menahishayan), [P Vamshi Prasad](https://github.com/BullsEye34), [Nishank Swamy D N](), and Podaralla Revathi, as an Open Source , Cross Platform app. It is also used as our DBMS Project for our Education in AMC Engineering College, which is affiliated to VTU. It is a project as described by the syllabus of VTU, as our DBMS Mini Project.
+ 
+ ## Project Report
+ - [Click here for the Project Report](https://github.com/menahishayan/FrontDesk-Desktop/blob/master/documentation/DBMS%20Project%20Report.pdf)
 
 ## Screenshots
 <h3>Login Page</h3>
