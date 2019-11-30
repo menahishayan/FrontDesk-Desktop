@@ -11,7 +11,7 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let loginWin, eventWin, viewEventWin, userWin, loginUSN , isAdmin =false
+let loginWin, eventWin, viewEventWin, userWin, loginUSN , isAdmin = false
 const Window = require('./js/Window')
 
 const db = require('./js/db')
@@ -44,17 +44,7 @@ createWindow = () => {
 	  eventWin.once('show', () => {
 			db.query(`SELECT ROLE as ROLE FROM coordinators where USN = \'${loginUSN}\' `, function(err, result, fields) {
 				if (err) showError(err)
-				else //eventWin.webContents.send('events', result)
-					console.log(result);
-				if(result[0]['ROLE'] != "Coordinator"){
-					console.log('Yaay');
-					isAdmin = true;
-
-					
-				}
-				else
-					console.log('Nooooooo');
-
+				else isAdmin = (result[0]['ROLE'] != "Coordinator") ? true : false;
 			});
 			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
 				if (err) showError(err)
@@ -91,6 +81,29 @@ createWindow = () => {
 			})
 		}
 	})
+
+	ipcMain.on('edit-event-window', (e, id) => {
+  		if (!viewEventWin) {
+  			viewEventWin = new Window({
+  				file: 'edit_event.html',
+  				width: 600,
+  				height: 520,
+  				parent: eventWin
+  			})
+
+  			viewEventWin.once('show', () => {
+  				(id != 'add') ? db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
+  					if (err) showError(err)
+  					else viewEventWin.webContents.send('edit-event', result[0])
+  				}) : viewEventWin.webContents.send('edit-event')
+  			})
+
+  			// cleanup
+  			viewEventWin.on('closed', () => {
+  				viewEventWin = null
+  			})
+  		}
+  	})
 
 	ipcMain.on('user-window', () => {
   		if (!userWin) {

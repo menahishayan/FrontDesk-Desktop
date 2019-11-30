@@ -89,6 +89,32 @@ user-select: none;
 	cursor: pointer;
 }
 
+.fa-icon-container {
+	color: white;
+	font-size: 42px;
+	align-items:center;
+	justify-content: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+.fa-icon-container::after {
+	font-family: FontAwesome;
+    content: attr(data-placeholder);
+}
+
+.event-button {
+
+}
+
+.add-event {
+	position: relative;
+	top:-63px;
+	margin-bottom: -63px;
+	padding-left: 95px;
+	padding-top: 38px;
+}
+
 #sideButtonContainer {
 	position: absolute;
 	right: 40px;

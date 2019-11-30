@@ -157,3 +157,15 @@
 .gradient-GREEN:active {
 	background: #116900;
 }
+
+.gradient-RAINBOW {
+	background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+}
+
+.gradient-RAINBOW:hover {
+	background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}
+
+.gradient-RAINBOW:active {
+	background: linear-gradient(270deg, #00d2ff 0%, #3a47d5 100%);
+}
