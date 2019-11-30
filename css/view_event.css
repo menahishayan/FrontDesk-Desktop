@@ -147,6 +147,11 @@
 	color: white;
 }
 
+.tableContent {
+	font-size: 16px;
+	color: #555555;
+}
+
 #backText {
 	color: #BBB;
 	font-size: 14px;

@@ -16,7 +16,7 @@ String.prototype.capitalizeEachWord = function() {
 	return str.join(" ");
 }
 
-let detailsContent, registerContent, eventData, userData, registerStatus = false, rulesList = '', DeskUSN, payment;
+let detailsContent, registerContent, eventData, userData, registerStatus = false, rulesList = '', DeskUSN, payment, regList = '';
 
 const collapseLeft = function() {
 	document.querySelector('.container-left').style.width = '450px';
@@ -123,6 +123,35 @@ const register = (e_id, user) => {
 
 }
 
+const getRegistrations = (e_id) => {
+	db.query(`SELECT * FROM registration r, students s WHERE E_ID=\'${e_id}\' and r.USN = s.USN`, (err, result, fields) => {
+		if(!err) {
+			let r;
+			result.forEach((r) => {
+				regList += `<tr>
+						      <th scope="row">${r['R_ID']}</th>
+						      <td>${r['USN']}</td>
+						      <td>${r['NAME']}</td>
+						      <td>${r['PHONE']}</td>
+						    </tr>`
+			})
+
+			let logContent = `<div style="height:200px; overflow-y: scroll;"><table class="table tableContent">
+						  <thead>
+						    <tr class="${eventData['COLOR'].toUpperCase()}">
+						      <th scope="col">R_ID</th>
+						      <th scope="col">USN</th>
+						      <th scope="col">Name</th>
+						      <th scope="col">Phone</th>
+						    </tr>
+						  </thead>
+						  <tbody>` + regList + `</tbody></table></div>`
+
+			document.getElementById('body').innerHTML += regList.length>0 ? logContent : "<br><br><center><b>No registrations available</b></center>";
+		} else console.log(err);
+	})
+}
+
 const getRules = (e_id) => {
 	db.query(`SELECT * FROM rules WHERE E_ID=\'${e_id}\' ORDER BY RULE_NO`, (err, result, fields) => {
 		if(!err) {
@@ -133,6 +162,7 @@ const getRules = (e_id) => {
 			document.getElementById('rlist').innerHTML = rulesList.length>0 ? rulesList : "No rules available";
 		} else console.log(err);
 	})
+	getRegistrations(e_id);
 }
 
 const setPayment = (mode) => {
@@ -206,10 +236,11 @@ ipcRenderer.on('view-event', (e, obj, loginUSN) => {
                     <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf0c0;"></span>
                       ${eventData['TEAM_COUNT']} in a team&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					  <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf0d6;"></span>
-					  ${eventData['PRICE'] ? "Rs. " + eventData['PRICE'] : "Free"}<br><br>
+					  ${eventData['PRICE'] ? "Rs. " + eventData['PRICE'] : "Free"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <span class="fa-icon body-items ${eventData['COLOR'].toUpperCase()}" data-placeholder="&#xf2bb;"></span>
-                    ${eventData['a']}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					+91 ${eventData['b']}<br><br>`
+                    ${eventData['a']} (+91 ${eventData['b']})<br><br>`
+
+
 
 	document.getElementById('body').innerHTML = detailsContent;
 	// Ticket
