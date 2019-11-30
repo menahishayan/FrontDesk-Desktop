@@ -49,7 +49,7 @@ createWindow = () => {
 				if(result[0]['ROLE'] != "Coordinator"){
 					console.log('Yaay');
 					isAdmin = true;
-					
+
 					
 				}
 				else
@@ -58,7 +58,7 @@ createWindow = () => {
 			});
 			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
 				if (err) showError(err)
-				else eventWin.webContents.send('events', result)
+				else eventWin.webContents.send('events', result , isAdmin)
 			});
 	});
 
