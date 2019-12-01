@@ -14,6 +14,10 @@ const setValue = (field, value) => {
 
 let color = ''
 
+const setColor = () => {
+
+}
+
 ipcRenderer.on('edit-event', (e, eventData) => {
 
     if(!eventData) document.getElementById('header').innerHTML = 'Add Event'
