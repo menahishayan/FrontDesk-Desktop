@@ -86,7 +86,7 @@ createWindow = () => {
   		if (!viewEventWin) {
   			viewEventWin = new Window({
   				file: 'edit_event.html',
-  				width: 600,
+  				width: 620,
   				height: 520,
   				parent: eventWin
   			})

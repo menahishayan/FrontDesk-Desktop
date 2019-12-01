@@ -11,6 +11,8 @@ const setValue = (field, value) => {
     document.getElementById(field).value = value;
 }
 
+let color = ''
+
 ipcRenderer.on('edit-event', (e, eventData) => {
 
     if(!eventData) document.getElementById('header').innerHTML = 'Add Event'
@@ -21,7 +23,7 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         setValue('price',eventData['PRICE'])
         setValue('count',eventData['COUNT'])
         setValue('coordinator',eventData['COORDINATOR'])
-        setValue('color',eventData['COLOR'])
+        color = eventData['COLOR']
     }
 
     document.getElementById('change2').addEventListener('click', (e) => {
