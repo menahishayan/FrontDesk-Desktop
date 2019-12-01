@@ -12,9 +12,10 @@ const setText = (field, value) => {
     document.getElementById(field).innerHTML = value;
 }
 
-let userList = '', selectedUSN = ''
+let userList = '', selectedUSN = '' , oldPass = ''
 
 const viewEditUser = (user) => {
+    selectedUSN = user['USN']
     document.getElementById('userInfo').innerHTML = '<b>Edit Coordinator<br>USN: </b>' + user['USN']
     document.getElementById('AllUsers').style.display = 'none'
     document.getElementById('changeForm').style.display = 'block'
@@ -25,6 +26,7 @@ const viewEditUser = (user) => {
     setValue('sem', user['SEM'])
     setValue('section', user['SECTION'])
     setValue('role', user['ROLE'])
+    oldPass = user['PASSWORD']
 }
 
 ipcRenderer.on('edit-user', (e, userData) => {
@@ -58,8 +60,26 @@ ipcRenderer.on('edit-user', (e, userData) => {
             }
         });
 
+        // TODO: Fix this shit
     document.getElementById('editButton').addEventListener('click', (e) => {
         e.preventDefault();
         // Edit User 
+         db.query(`update coordinators c, auth a, student s set c.ROLE = \'${document.getElementById("role").value}\', s.DEPT=\'${document.getElementById("dept").value}\', s.SEM=\'${document.getElementById("sem").value}\', s.SECTION=\'${document.getElementById("section").value}\', s.PHONE=${document.getElementById("phone").value},s.NAME=\'${document.getElementById("name").value}\' WHERE c.USN =\'${selectedUSN}\' and s.USN = ${selectedUSN} and a.USN = ${selectedUSN}; `, function(err, result, fields) {
+            if (err) showError(err)
+            else{
+                db.query(`CHANGEPASS(${selectedUSN}, AES_DECRYPT(oldPass, \'nish\'), \'${document.getElementById("confirm").value}\')`, function(err, result, fields) {
+                    document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\" style=\"margin-top:60px;\"></center>"
+
+    			setTimeout(function() {
+    				setInterval(function() {
+    					$('#tick').attr('src', $('#tick').attr('src'))
+    				}, 1)
+    				document.getElementById('body').className = 'hidden35';
+                    remote.getCurrentWindow().close()
+    			}, 1800)
+                })
+                
+            }
+        }); 
     })
 })
