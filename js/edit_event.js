@@ -14,7 +14,15 @@ const setValue = (field, value) => {
 let color = ''
 
 const setColor = () => {
-
+    document.getElementById('body').querySelectorAll('.item-container').forEach(i => {
+        i.style.width = '60px'
+        i.style.height = '40px'
+        i.style.border = '0px'
+    })
+    let selectedItem = document.getElementById(color);
+    selectedItem.style.border = '5px solid #E6672F'
+    selectedItem.style.width = '63px'
+    selectedItem.style.height = '43px'
 }
 
 ipcRenderer.on('edit-event', (e, eventData) => {
@@ -27,8 +35,16 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         setValue('price',eventData['PRICE'])
         setValue('count',eventData['COUNT'])
         setValue('coordinator',eventData['COORDINATOR'])
-        color = eventData['COLOR']
+        color = eventData['COLOR'] || 'RED'
+        setColor();
     }
+
+    document.getElementById('body').querySelectorAll('.item-container').forEach(i => {
+        i.addEventListener('click', (e) => {
+            color = i.id;
+            setColor();
+        })
+    })
 
     document.getElementById('change2').addEventListener('click', (e) => {
         e.preventDefault();
