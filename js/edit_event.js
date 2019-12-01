@@ -56,6 +56,7 @@ ipcRenderer.on('edit-event', (e, eventData) => {
             else{
                 showError("Yo Yo Yo !!\nY'all See dis shet!! The Values has been updated , \nYoooo!")
                 console.log("All Clear")
+                remote.getCurrentWindow().close()
             }
         }); 
     })
