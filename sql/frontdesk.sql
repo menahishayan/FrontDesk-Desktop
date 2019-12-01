@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2019 at 09:54 PM
+-- Generation Time: Dec 01, 2019 at 10:35 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -662,7 +662,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `E_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `E_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `registration`
@@ -705,6 +705,12 @@ ALTER TABLE `registration`
 --
 ALTER TABLE `rules`
   ADD CONSTRAINT `rules_fk1` FOREIGN KEY (`E_ID`) REFERENCES `events` (`E_ID`);
+
+--
+-- Constraints for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `trans_ibfk_1` FOREIGN KEY (`R_ID`) REFERENCES `registration` (`R_ID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
