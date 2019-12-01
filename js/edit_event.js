@@ -66,7 +66,7 @@ ipcRenderer.on('edit-event', (e, eventData) => {
     document.getElementById('change2').addEventListener('click', (e) => {
         e.preventDefault();
 
-         db.query(`UPDATE events SET NAME = \'${document.getElementById("name").value}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}`, function(err, result, fields) {
+         db.query(`UPDATE events SET NAME = \'${document.getElementById("name").value}\', COLOR=\'${color}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}`, function(err, result, fields) {
             if (err) showError(err)
             else{
                 showError("Yo Yo Yo !!\nY'all See dis shet!! The Values has been updated , \nYoooo!")
