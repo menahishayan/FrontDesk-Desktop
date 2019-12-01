@@ -39,17 +39,24 @@
 		</div>
 		<hr />
 		<div id="body">
-			<div id="user">
+			<div id="user" class="d-flex" style="width:100%;justify-content:center;">
 				<span id="userIcon" class="side-button sb-xl" data-placeholder="&#xe82a;"></span>
-				<div id="USN"></div>
-				<div id="name"></div>
-				<div id="phone"></div>
-				<div class="d-flex" style="width:100%;justify-content:center;">
-					<div id="sem"></div>
-					<div id="section" style="margin-right:10px;margin-left:10px;"></div>
-					<div id="dept"></div>
-				</div>
-				<div id="role"></div>
+				<div id="userInfo"></div>
+			</div>
+			<div id="AllUsers" style="height:420px; overflow-y: scroll;">
+				<table class="table tableContent">
+					<thead>
+						<tr>
+							<th scope="col">USN</th>
+							<th scope="col">Name</th>
+							<th scope="col">Phone</th>
+							<th scope="col">Class</th>
+							<th scope="col">Role</th>
+						</tr>
+					</thead>
+					<tbody id="tableBody">
+					</tbody>
+				</table>
 			</div>
 			<form id="changeForm" class="login100-form validate-form p-b-33 p-t-5" style="margin-top:5%;">
 				<div width="100%" style="display: flex; flex-direction: row; flex-wrap: wrap; width:100%;">
