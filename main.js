@@ -20,7 +20,7 @@ const showError = require('./js/showError')
 
 createWindow = () => {
 	const {screen} = require('electron')
-	var dimensions = screen.getPrimaryDisplay().size, zFactor = 900/dimensions.height;
+	var dimensions = screen.getPrimaryDisplay().size, zFactor = 1440/dimensions.width;
 
 	loginWin = new Window({
 		file: 'index.html',
