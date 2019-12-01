@@ -36,10 +36,11 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         setValue('price',eventData['PRICE'])
         setValue('count',eventData['TEAM_COUNT'])
         setValue('coordinator',eventData['COORDINATOR'])
-        color = eventData['COLOR']
         setValue('time', moment(eventData['TIME'], "HH:mm:ss", true).format("HH:mm:ss"))
         setValue('date', moment(eventData['DATE']).format("YYYY-MM-DD"))
         setValue('duration', eventData['DURATION'])
+        color = eventData['COLOR'] || 'RED'
+        setColor()
     }
         console.log(eventData["E_ID"])
         console.log(document.getElementById("name").value );
@@ -64,7 +65,6 @@ ipcRenderer.on('edit-event', (e, eventData) => {
 
     document.getElementById('change2').addEventListener('click', (e) => {
         e.preventDefault();
-
 
          db.query(`UPDATE events SET NAME = \'${document.getElementById("name").value}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}`, function(err, result, fields) {
             if (err) showError(err)
