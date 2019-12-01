@@ -40,7 +40,7 @@ ipcRenderer.on('events', (event, events, admin) => {
 
   // add click handlers to delete the clicked event
   eventList.querySelectorAll('.event-item').forEach(item => {
-     item.addEventListener('click', () => {ipcRenderer.send('edit-event-window', item.id)})
+     item.addEventListener('click', () => {ipcRenderer.send((admin ? 'edit' : 'view') + '-event-window', item.id)})
   })
 
   document.getElementById('logout').addEventListener('click', () => remote.getCurrentWindow().close())

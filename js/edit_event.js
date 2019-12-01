@@ -42,20 +42,6 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         color = eventData['COLOR'] || 'RED'
         setColor()
     }
-        console.log(eventData["E_ID"])
-        console.log(document.getElementById("name").value );
-        console.log(document.getElementById("date").value)
-        console.log(document.getElementById("time").value)
-        //console.log(eventData["TIME"])
-        //console.log(moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A"));
-        console.log(document.getElementById("duration").value)
-        console.log(document.getElementById("venue").value)
-        console.log(document.getElementById("price").value)
-        console.log(document.getElementById("coordinator").value)
-        console.log(document.getElementById("count").value)
-        //console.log(document.getElementById("color").value)
-        console.log(document.getElementById("category").value)
-
     document.getElementById('body').querySelectorAll('.item-container').forEach(i => {
         i.addEventListener('click', (e) => {
             color = i.id;
@@ -69,9 +55,17 @@ ipcRenderer.on('edit-event', (e, eventData) => {
          db.query(`UPDATE events SET NAME = \'${document.getElementById("name").value}\', COLOR=\'${color}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}`, function(err, result, fields) {
             if (err) showError(err)
             else{
-                showError("Yo Yo Yo !!\nY'all See dis shet!! The Values has been updated , \nYoooo!")
-                console.log("All Clear")
-                remote.getCurrentWindow().close()
+                document.getElementById('body').className = 'hidden35';
+                document.getElementById('body').className = 'visible15';
+                document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\" style=\"margin-top:60px;\"></center>"
+
+    			setTimeout(function() {
+    				setInterval(function() {
+    					$('#tick').attr('src', $('#tick').attr('src'))
+    				}, 1)
+    				document.getElementById('body').className = 'hidden35';
+                    remote.getCurrentWindow().close()
+    			}, 1800)
             }
         });
     })

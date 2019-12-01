@@ -95,7 +95,7 @@ createWindow = () => {
   				file: 'edit_event.html',
 				zoom: zFactor,
   				width: 620,
-  				height: 520,
+  				height: 530,
   				parent: eventWin
   			})
 
