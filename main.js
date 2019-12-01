@@ -4,7 +4,7 @@ const {
 	app,
 	BrowserWindow,
 	dialog,
-	ipcMain
+	ipcMain,
 } = require('electron')
 
 require('electron-reload')(__dirname, {
@@ -17,11 +17,15 @@ const Window = require('./js/Window')
 const db = require('./js/db')
 const showError = require('./js/showError')
 
+
 createWindow = () => {
+	const {screen} = require('electron')
+	var dimensions = screen.getPrimaryDisplay().size, widthAdjustFactor = dimensions.width/1440, heightAdjustFactor = dimensions.height/900;
+	
 	loginWin = new Window({
 		file: 'index.html',
-		width: 700,
-		height: 500
+		width: 700*widthAdjustFactor,
+		height: 500*heightAdjustFactor
 	})
 
 	loginWin.once('show', () => {
@@ -32,8 +36,8 @@ createWindow = () => {
     if (!eventWin) {
       eventWin= new Window({
 		  file: 'events.html',
-		  width: 1079,
-  		height: 720,
+		  width: 1079*widthAdjustFactor,
+  		height: 720*heightAdjustFactor,
 		parent: loginWin
       })
 
@@ -63,8 +67,8 @@ createWindow = () => {
 		if (!viewEventWin) {
 			viewEventWin = new Window({
 				file: 'view_event.html',
-				width: 800,
-				height: 680,
+				width: 800*widthAdjustFactor,
+				height: 680*heightAdjustFactor,
 				parent: eventWin
 			})
 
@@ -86,8 +90,8 @@ createWindow = () => {
   		if (!viewEventWin) {
   			viewEventWin = new Window({
   				file: 'edit_event.html',
-  				width: 620,
-  				height: 520,
+  				width: 620*widthAdjustFactor,
+  				height: 520*heightAdjustFactor,
   				parent: eventWin
   			})
 
@@ -109,8 +113,8 @@ createWindow = () => {
   		if (!userWin) {
   			userWin = new Window({
   				file: 'user.html',
-  				width: 300,
-  				height: 350,
+  				width: 300*widthAdjustFactor,
+  				height: 350*heightAdjustFactor,
   				parent: eventWin
   			})
 
@@ -132,8 +136,8 @@ createWindow = () => {
   		if (!userWin) {
   			userWin = new Window({
   				file: 'edit_user.html',
-  				width: 740,
-  				height: 620,
+  				width: 740*widthAdjustFactor,
+  				height: 620*heightAdjustFactor,
   				parent: eventWin
   			})
 
