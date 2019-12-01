@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2019 at 03:43 PM
+-- Generation Time: Dec 01, 2019 at 04:31 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -203,21 +203,21 @@ INSERT INTO `coordinators` (`USN`, `ROLE`) VALUES
 ('1AM17CS118', 'Coordinator'),
 ('1AM17CS119', 'Coordinator'),
 ('1AM17CS120', 'Coordinator'),
-('1AM17CS121', 'Coordinator'),
+('1AM17CS121', 'Core Team'),
 ('1AM17CS122', 'Coordinator'),
 ('1AM17CS123', 'Coordinator'),
 ('1AM17CS124', 'Coordinator'),
 ('1AM17CS125', 'Coordinator'),
 ('1AM17CS126', 'Coordinator'),
-('1AM17CS127', 'Coordinator'),
+('1AM17CS127', 'Core Team'),
 ('1AM17CS128', 'Coordinator'),
 ('1AM17CS129', 'Coordinator'),
 ('1AM17CS130', 'Coordinator'),
 ('1AM17CS131', 'Coordinator'),
 ('1AM17CS132', 'Coordinator'),
-('1AM17CS133', 'Core team'),
-('1AM17CS134', 'Core team'),
-('1AM17CS135', 'Core team');
+('1AM17CS133', 'Coordinator'),
+('1AM17CS134', 'Coordinator'),
+('1AM17CS135', 'Coordinator');
 
 -- --------------------------------------------------------
 
