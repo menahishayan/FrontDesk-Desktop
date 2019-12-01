@@ -43,7 +43,6 @@ ipcRenderer.on('events', (event, events, admin) => {
      item.addEventListener('click', () => {ipcRenderer.send('edit-event-window', item.id)})
   })
 
-  document.getElementById('addEvent').style.display = admin ? 'inline' : 'none'
   document.getElementById('logout').addEventListener('click', () => remote.getCurrentWindow().close())
-  document.getElementById('viewUser').addEventListener('click', () => ipcRenderer.send('user-window'))
+  document.getElementById('viewUser').addEventListener('click', () => ipcRenderer.send((admin ? 'edit-' : '') + 'user-window'))
 })

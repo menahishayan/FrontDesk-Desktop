@@ -128,6 +128,29 @@ createWindow = () => {
   		}
   	})
 
+	ipcMain.on('edit-user-window', (e, id) => {
+  		if (!userWin) {
+  			userWin = new Window({
+  				file: 'edit_user.html',
+  				width: 740,
+  				height: 620,
+  				parent: eventWin
+  			})
+
+  			userWin.once('show', () => {
+				db.query(`SELECT  * FROM auth a,coordinators c,students s WHERE a.USN=\'${loginUSN}\' and a.USN=c.USN and a.USN=s.USN`, function(err, result, fields) {
+  					if (err) showError(err)
+  					else userWin.webContents.send('edit-user', result[0])
+  				});
+  			})
+
+  			// cleanup
+  			userWin.on('closed', () => {
+  				userWin = null
+  			})
+  		}
+  	})
+
 	loginWin.on('closed', () => {
 		loginWin = null
 	})
