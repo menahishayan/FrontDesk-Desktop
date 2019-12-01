@@ -50,8 +50,8 @@ ipcRenderer.on('edit-event', (e, eventData) => {
     document.getElementById('change2').addEventListener('click', (e) => {
         e.preventDefault();
 
-         db.query( eventData ? `UPDATE events SET NAME = \'${document.getElementById("name").value}\', COLOR=\'${color}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}` : 
-         `CALL ADDEVENT(\'${document.getElementById("name").value}\',\'${document.getElementById("date").value}\',\'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\',${document.getElementById("duration").value}, \'${document.getElementById("venue").value}\', \'${document.getElementById("price").value}\', \'${document.getElementById("coordinator").value}\', \'${document.getElementById("category").value}\', ${document.getElementById("count").value}, \'${color}\')`, function(err, result, fields) {
+          db.query( eventData ? `UPDATE events SET NAME = \'${document.getElementById("name").value}\', COLOR=\'${color}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}` : 
+         `CALL ADDEVENT(\'${document.getElementById("name").value}\',\'${document.getElementById("date").value}\',\'${moment(document.getElementById("time").value , "HH:mm", true).format("HH:mm:ss")}\',${document.getElementById("duration").value}, \'${document.getElementById("venue").value}\', \'${document.getElementById("price").value}\', \'${document.getElementById("coordinator").value}\', \'${document.getElementById("category").value}\', ${document.getElementById("count").value}, \'${color}\')`, function(err, result, fields) {
             if (err) showError(err)
             else{
                 document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\" style=\"margin-top:60px;\"></center>"
@@ -64,7 +64,7 @@ ipcRenderer.on('edit-event', (e, eventData) => {
                     remote.getCurrentWindow().close()
     			}, 1800)
             }
-        });
+        }); 
     })
 
 
