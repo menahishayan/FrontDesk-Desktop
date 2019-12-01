@@ -30,15 +30,16 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         setValue('coordinator',eventData['COORDINATOR'])
         color = eventData['COLOR']
         setValue('time', moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm:ss"))
+        setValue('date', moment(eventData['DATE']).format("YYYY-MM-DD"))
     }
 
     document.getElementById('change2').addEventListener('click', (e) => {
         e.preventDefault();
         console.log(document.getElementById("name").value );
-        console.log(moment(document.getElementById("time").value , "HH:mm", true).format("hh:mm:ss A"))
-        console.log(eventData["TIME"])
-        console.log(moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A"));
-        //console.log(document.getElementById("date").value )
+        console.log(document.getElementById("date").value)
+        console.log(document.getElementById("time").value)
+        //console.log(eventData["TIME"])
+        //console.log(moment(eventData['TIME'], "HH:mm:ss", true).format("hh:mm A"));
         //console.log(document.getElementById("duration").value)
         console.log(document.getElementById("venue").value)
         console.log(document.getElementById("price").value)
@@ -47,10 +48,10 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         //console.log(document.getElementById("color").value)
         console.log(document.getElementById("category").value)
         
-        /*db.query(`UPDATE events SET "NAME" = ${document.getElementById("name").value} and "TIME" = ${document.getElementById("time").value} and "DATE" = ${document.getElementById("date").value} and "DURATION" = ${document.getElementById("duration").value} and "VENUE" = ${document.getElementById("venue").value} and "PRICE" = ${document.getElementById("price").value} and "COORDINATOR" = ${document.getElementById("coordinator").value} and "TEAM_COUNT" = ${document.getElementById("count").value} and "COLOR" = ${document.getElementById("color").value} and "CATEGORY" = ${document.getElementById("category").value} WHERE "E_ID" = ${eventData["E_ID"]}`, function(err, result, fields) {
+        db.query(`UPDATE events SET "NAME" = ${document.getElementById("name").value} and "TIME" = ${document.getElementById("time").value} and "DATE" = ${document.getElementById("date").value} and "DURATION" = ${document.getElementById("duration").value} and "VENUE" = ${document.getElementById("venue").value} and "PRICE" = ${document.getElementById("price").value} and "COORDINATOR" = ${document.getElementById("coordinator").value} and "TEAM_COUNT" = ${document.getElementById("count").value} and "COLOR" = ${document.getElementById("color").value} and "CATEGORY" = ${document.getElementById("category").value} WHERE "E_ID" = ${eventData["E_ID"]}`, function(err, result, fields) {
             if (err) showError(err)
             else eventWin.webContents.send('events', result , isAdmin)
-        });*/
+        });
     })
 
     
