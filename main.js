@@ -100,7 +100,6 @@ createWindow = () => {
   			})
 
   			viewEventWin.once('show', () => {
-				console.log(viewEventWin.width + 'x' + viewEventWin.height);
   				(id != 'add') ? db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.COORDINATOR = c.usn and s.usn = e.COORDINATOR`, function(err, result, fields) {
   					if (err) showError(err)
   					else viewEventWin.webContents.send('edit-event', result[0])
