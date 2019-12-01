@@ -166,7 +166,7 @@ createWindow = () => {
   			aboutWin = new Window({
   				file: 'about.html',
 				zoom: zFactor,
-  				width: 300,
+  				width: 450,
   				height: 350,
   				parent: loginWin
   			})

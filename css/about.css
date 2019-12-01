@@ -1,0 +1,24 @@
+a {
+	color: #e6672f;
+}
+
+a:hover {
+	color: grey;
+}
+
+a:active {
+	color: black;
+}
+
+a:visited {
+	color: #e6672f;
+}
+
+h2 {
+	margin-top: 10px;
+}
+
+p {
+	margin-bottom: 10px;
+	text-align: justify;
+}
