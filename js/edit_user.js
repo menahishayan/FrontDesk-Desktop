@@ -14,6 +14,19 @@ const setText = (field, value) => {
 
 let userList = '', selectedUSN = ''
 
+const viewEditUser = (user) => {
+    document.getElementById('userInfo').innerHTML = '<b>Edit Coordinator<br>USN: </b>' + user['USN']
+    document.getElementById('AllUsers').style.display = 'none'
+    document.getElementById('changeForm').style.display = 'block'
+
+    setValue('name', user['NAME'])
+    setValue('phone', user['PHONE'])
+    setValue('dept', user['DEPT'])
+    setValue('sem', user['SEM'])
+    setValue('section', user['SECTION'])
+    setValue('role', user['ROLE'])
+}
+
 ipcRenderer.on('edit-user', (e, userData) => {
     document.getElementById('changeForm').style.display = 'none'
 
@@ -28,8 +41,8 @@ ipcRenderer.on('edit-user', (e, userData) => {
         db.query(`SELECT  * FROM auth a,coordinators c,students s WHERE a.USN=c.USN and a.USN=s.USN`, function(err, result, fields) {
             if (err) showError(err)
             else {
-                result.forEach((r) => {
-                    userList += `<tr id="${r['USN']}" class="tableItem">
+                result.forEach((r, index) => {
+                    userList += `<tr id="${index}" class="tableItem">
                                   <td>${r['USN']}</td>
                                   <td>${r['NAME']}</td>
                                   <td>${r['PHONE']}</td>
@@ -40,19 +53,13 @@ ipcRenderer.on('edit-user', (e, userData) => {
                 document.getElementById('tableBody').innerHTML = userList
 
                 document.getElementById('body').querySelectorAll('.tableItem').forEach(i => {
-                    i.addEventListener('click', (e) => {
-                        document.getElementById('userInfo').style.display = 'none'
-                        document.getElementById('userIcon').style.display = 'none'
-                        document.getElementById('AllUsers').style.display = 'none'
-                        document.getElementById('changeForm').style.display = 'block'
-                    })
+                    i.addEventListener('click', () => {viewEditUser(result[i.id])})
                 })
             }
         });
 
-
-
-    document.getElementById('change2').addEventListener('click', (e) => {
+    document.getElementById('editButton').addEventListener('click', (e) => {
         e.preventDefault();
+        // Edit User 
     })
 })

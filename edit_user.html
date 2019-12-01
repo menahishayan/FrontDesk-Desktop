@@ -41,7 +41,7 @@
 		<div id="body">
 			<div id="user" class="d-flex" style="width:100%;justify-content:center;">
 				<span id="userIcon" class="side-button sb-xl" data-placeholder="&#xe82a;"></span>
-				<div id="userInfo"></div>
+				<div id="userInfo" style="margin-top:15px;"></div>
 			</div>
 			<div id="AllUsers" style="height:420px; overflow-y: scroll;">
 				<table class="table tableContent">
@@ -58,56 +58,54 @@
 					</tbody>
 				</table>
 			</div>
-			<form id="changeForm" class="login100-form validate-form p-b-33 p-t-5" style="margin-top:5%;">
+			<form id="changeForm" class="login100-form validate-form p-b-33 p-t-5">
 				<div width="100%" style="display: flex; flex-direction: row; flex-wrap: wrap; width:100%;">
 
+					<div class="wrap-input100 validate-input" style="width:30%; margin-right: 4%;">
+						<input class="input100" type="text" id="name" placeholder="Name">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" style="width:30%; margin-right: 4%;">
+						<input class="input100" type="text" id="phone" placeholder="Phone">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" style="width:30%;">
+						<input class="input100" type="text" id="role" placeholder="Role">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" style="width:30%; margin-right: 4%;">
+						<input class="input100" type="text" id="dept" placeholder="Dept">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" style="width:30%; margin-right: 4%;">
+						<input class="input100" type="number" id="sem" placeholder="Sem">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" style="width:30%;">
+						<input class="input100" type="text" id="section" placeholder="Section">
+						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
+					</div>
+
 					<div class="wrap-input100 validate-input" style="width:48%; margin-right: 4%;">
-						<input class="input100" type="text" id="name" placeholder="Event Name">
+						<input class="input100" type="password" id="pass" placeholder="New Password">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" style="width:48%;">
-						<input class="input100" type="text" id="category" placeholder="Category">
+						<input class="input100" type="password" id="confirm" placeholder="Confirm Password">
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" style="width:48%; margin-right: 4%;">
-						<input class="input100" type="date" id="date" placeholder="Date">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" style="width:48%;">
-						<input class="input100" type="time" id="time" placeholder="Time">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" style="width:48%; margin-right: 4%;">
-						<input class="input100" type="text" id="venue" placeholder="Venue">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
-					<div class="wrap-input100 validate-input" style="width:48%;">
-						<input class="input100" type="number" id="price" placeholder="Price">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
-					<div class="wrap-input100 validate-input" style="width:48%; margin-right: 4%;">
-						<input class="input100" type="number" id="count" placeholder="Team Count">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" style="width:48%;">
-						<input class="input100" type="text" id="coordinator" placeholder="Coordinator">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" id="color" placeholder="Color">
-						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
-					</div>
 				</div>
 				<br>
 				<div class="container-login100-form-btn">
-					<button id="change2" class="login100-form-btn">
-						CHANGE
+					<button id="editButton" class="login100-form-btn">
+						EDIT
 					</button>
 				</div>
 			</form>
