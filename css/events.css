@@ -138,9 +138,3 @@ user-select: none;
 	user-select: none;
 	-webkit-user-select: none;
 }
-
-#body {
-	visibility: visible;
-	opacity: 1;
-	transition: opacity 0.35s linear;
-}

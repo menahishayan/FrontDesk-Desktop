@@ -11,7 +11,7 @@ require('electron-reload')(__dirname, {
     electron: require(`${__dirname}/node_modules/electron`)
 });
 
-let loginWin, eventWin, viewEventWin, userWin, loginUSN , isAdmin = false
+let loginWin, eventWin, viewEventWin, userWin, loginUSN, aboutWin, isAdmin = false
 const Window = require('./js/Window')
 
 const db = require('./js/db')
@@ -157,6 +157,23 @@ createWindow = () => {
   			// cleanup
   			userWin.on('closed', () => {
   				userWin = null
+  			})
+  		}
+  	})
+
+	ipcMain.on('about-window', () => {
+  		if (!aboutWin) {
+  			aboutWin = new Window({
+  				file: 'about.html',
+				zoom: zFactor,
+  				width: 300,
+  				height: 350,
+  				parent: loginWin
+  			})
+
+  			// cleanup
+  			aboutWin.on('closed', () => {
+  				aboutWin = null
   			})
   		}
   	})

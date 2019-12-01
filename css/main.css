@@ -448,6 +448,16 @@ iframe {
   opacity: 1;
 }
 
+.sb-min-w::after {
+	font-family: Linearicons-Free;
+	font-size: 22px;
+    color: white;
+    content: attr(data-placeholder);
+    display: block;
+	margin: 20px;
+	cursor: pointer;
+}
+
 .fa-icon::after {
 	font-family: FontAwesome;
     content: attr(data-placeholder);

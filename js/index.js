@@ -15,4 +15,8 @@ document.getElementById('login').addEventListener('click', !debug ? (e) => {
     db.query(`CALL LOGIN(\'${usn}\', \'${pass}\')`, (err, result, fields) =>
         result[0][0]['RESPONSE'] ? ipcRenderer.send('event-window', usn) : showError("Invalid Username or Password")
     )
-} : () => ipcRenderer.send('event-window', "1AM17CS101"))
+} : () => ipcRenderer.send('event-window', "1AM17CS101"));
+
+document.getElementById('aboutButton').addEventListener('click', () => {
+    ipcRenderer.send('about-window')
+});
