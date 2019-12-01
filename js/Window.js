@@ -9,14 +9,16 @@ const defaultProps = {
   show: false,
 
   // update for electron V5+
-
+  webPreferences: {
+      nodeIntegration: true
+  },
   titleBarStyle: 'hidden'
 }
 
 class Window extends BrowserWindow {
   constructor ({ file, zoom, ...windowSettings }) {
     // calls new BrowserWindow with these props
-    super({ ...defaultProps, webPreferences: {nodeIntegration: true, zoomFactor: zoom?zoom:1.0}, ...windowSettings })
+    super({ ...defaultProps, ...windowSettings })
 
     // load the html and open devtools
     this.loadFile(file)
@@ -24,6 +26,7 @@ class Window extends BrowserWindow {
 
     // gracefully show when ready to prevent flickering
     this.once('ready-to-show', () => {
+        this.webContents.setZoomFactor(zoom ? zoom : 1.0)
       this.show()
     })
   }
