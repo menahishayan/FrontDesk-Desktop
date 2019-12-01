@@ -26,7 +26,7 @@ class Window extends BrowserWindow {
 
     // gracefully show when ready to prevent flickering
     this.once('ready-to-show', () => {
-        this.webContents.setZoomFactor(zoom ? zoom : 1.0)
+        this.webContents.setZoomFactor(zoom ? zoom : 0.75)
       this.show()
     })
   }
