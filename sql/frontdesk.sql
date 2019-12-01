@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 30, 2019 at 05:24 PM
+-- Generation Time: Dec 01, 2019 at 03:43 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.1.23
 
@@ -175,50 +175,49 @@ DELIMITER ;
 
 CREATE TABLE `coordinators` (
   `USN` varchar(20) NOT NULL,
-  `ROLE` varchar(20) NOT NULL,
-  `EVENT` varchar(20) NOT NULL
+  `ROLE` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `coordinators`
 --
 
-INSERT INTO `coordinators` (`USN`, `ROLE`, `EVENT`) VALUES
-('1AM17CS101', 'Core Team', 'Core'),
-('1AM17CS102', 'Coordinator', '1'),
-('1AM17CS103', 'Coordinator', '2'),
-('1AM17CS104', 'Coordinator', '3'),
-('1AM17CS105', 'Coordinator', '4'),
-('1AM17CS106', 'Coordinator', '5'),
-('1AM17CS107', 'Coordinator', '6'),
-('1AM17CS108', 'Coordinator', '7'),
-('1AM17CS109', 'Coordinator', '8'),
-('1AM17CS110', 'Coordinator', '9'),
-('1AM17CS111', 'Coordinator', '10'),
-('1AM17CS112', 'Coordinator', '11'),
-('1AM17CS113', 'Coordinator', '12'),
-('1AM17CS114', 'Coordinator', '13'),
-('1AM17CS115', 'Coordinator', '14'),
-('1AM17CS116', 'Coordinator', '15'),
-('1AM17CS117', 'Coordinator', '16'),
-('1AM17CS118', 'Coordinator', '17'),
-('1AM17CS119', 'Coordinator', '18'),
-('1AM17CS120', 'Coordinator', '19'),
-('1AM17CS121', 'Coordinator', '20'),
-('1AM17CS122', 'Coordinator', '21'),
-('1AM17CS123', 'Coordinator', '22'),
-('1AM17CS124', 'Coordinator', '23'),
-('1AM17CS125', 'Coordinator', '24'),
-('1AM17CS126', 'Coordinator', '25'),
-('1AM17CS127', 'Coordinator', '26'),
-('1AM17CS128', 'Coordinator', '27'),
-('1AM17CS129', 'Coordinator', '28'),
-('1AM17CS130', 'Coordinator', '29'),
-('1AM17CS131', 'Coordinator', '30'),
-('1AM17CS132', 'Coordinator', '31'),
-('1AM17CS133', 'Core team', 'Core'),
-('1AM17CS134', 'Core team', 'Core'),
-('1AM17CS135', 'Core team', 'Core');
+INSERT INTO `coordinators` (`USN`, `ROLE`) VALUES
+('1AM17CS101', 'Core Team'),
+('1AM17CS102', 'Coordinator'),
+('1AM17CS103', 'Coordinator'),
+('1AM17CS104', 'Coordinator'),
+('1AM17CS105', 'Coordinator'),
+('1AM17CS106', 'Coordinator'),
+('1AM17CS107', 'Coordinator'),
+('1AM17CS108', 'Coordinator'),
+('1AM17CS109', 'Coordinator'),
+('1AM17CS110', 'Coordinator'),
+('1AM17CS111', 'Coordinator'),
+('1AM17CS112', 'Coordinator'),
+('1AM17CS113', 'Coordinator'),
+('1AM17CS114', 'Coordinator'),
+('1AM17CS115', 'Coordinator'),
+('1AM17CS116', 'Coordinator'),
+('1AM17CS117', 'Coordinator'),
+('1AM17CS118', 'Coordinator'),
+('1AM17CS119', 'Coordinator'),
+('1AM17CS120', 'Coordinator'),
+('1AM17CS121', 'Coordinator'),
+('1AM17CS122', 'Coordinator'),
+('1AM17CS123', 'Coordinator'),
+('1AM17CS124', 'Coordinator'),
+('1AM17CS125', 'Coordinator'),
+('1AM17CS126', 'Coordinator'),
+('1AM17CS127', 'Coordinator'),
+('1AM17CS128', 'Coordinator'),
+('1AM17CS129', 'Coordinator'),
+('1AM17CS130', 'Coordinator'),
+('1AM17CS131', 'Coordinator'),
+('1AM17CS132', 'Coordinator'),
+('1AM17CS133', 'Core team'),
+('1AM17CS134', 'Core team'),
+('1AM17CS135', 'Core team');
 
 -- --------------------------------------------------------
 
@@ -234,7 +233,7 @@ CREATE TABLE `events` (
   `DURATION` int(11) NOT NULL,
   `VENUE` varchar(20) NOT NULL,
   `PRICE` int(11) NOT NULL,
-  `COORDINATORS` varchar(20) NOT NULL,
+  `COORDINATOR` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `CATEGORY` varchar(20) NOT NULL,
   `TEAM_COUNT` int(11) NOT NULL,
   `COLOR` varchar(20) NOT NULL
@@ -244,7 +243,7 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRICE`, `COORDINATORS`, `CATEGORY`, `TEAM_COUNT`, `COLOR`) VALUES
+INSERT INTO `events` (`E_ID`, `NAME`, `DATE`, `TIME`, `DURATION`, `VENUE`, `PRICE`, `COORDINATOR`, `CATEGORY`, `TEAM_COUNT`, `COLOR`) VALUES
 (1, 'Codeit', '2019-11-15', '10:00:00', 60, ' LH-201', 80, '1AM17CS102', 'TECHNICAL', 2, 'YELLOW'),
 (2, 'Fasion show', '2019-11-15', '17:00:00', 15, 'MAIN STAGE', 800, '1AM17CS103', 'MAIN STAGE', 8, 'RED'),
 (3, 'Group singing', '2019-11-15', '10:00:00', 7, 'MAIN STAGE', 400, '1AM17CS104', 'MAIN STAGE', 5, 'RED'),
@@ -599,7 +598,8 @@ ALTER TABLE `coordinators`
 -- Indexes for table `events`
 --
 ALTER TABLE `events`
-  ADD PRIMARY KEY (`E_ID`);
+  ADD PRIMARY KEY (`E_ID`),
+  ADD KEY `events_ibfk_1` (`COORDINATOR`);
 
 --
 -- Indexes for table `registration`
@@ -650,11 +650,22 @@ ALTER TABLE `registration`
 --
 
 --
+-- Constraints for table `auth`
+--
+ALTER TABLE `auth`
+  ADD CONSTRAINT `auth_ibfk_1` FOREIGN KEY (`USN`) REFERENCES `coordinators` (`USN`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `coordinators`
 --
 ALTER TABLE `coordinators`
-  ADD CONSTRAINT `coordinators_ibfk_1` FOREIGN KEY (`USN`) REFERENCES `students` (`USN`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `coordinators_ibfk_2` FOREIGN KEY (`USN`) REFERENCES `auth` (`USN`);
+  ADD CONSTRAINT `coordinators_ibfk_1` FOREIGN KEY (`USN`) REFERENCES `students` (`USN`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`COORDINATOR`) REFERENCES `coordinators` (`USN`);
 
 --
 -- Constraints for table `registration`

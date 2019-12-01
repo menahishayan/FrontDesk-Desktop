@@ -20,7 +20,7 @@ ipcRenderer.on('edit-event', (e, eventData) => {
         setValue('venue',eventData['VENUE'])
         setValue('price',eventData['PRICE'])
         setValue('count',eventData['COUNT'])
-        setValue('coordinator',eventData['COORDINATORS'])
+        setValue('coordinator',eventData['COORDINATOR'])
         setValue('color',eventData['COLOR'])
     }
 

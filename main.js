@@ -69,7 +69,7 @@ createWindow = () => {
 			})
 
 			viewEventWin.once('show', () => {
-				db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
+				db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.COORDINATOR = c.usn and s.usn = e.COORDINATOR`, function(err, result, fields) {
 					if (err) showError(err)
 					else viewEventWin.webContents.send('view-event', result, loginUSN)
 				});
@@ -92,7 +92,7 @@ createWindow = () => {
   			})
 
   			viewEventWin.once('show', () => {
-  				(id != 'add') ? db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.coordinators = c.usn and s.usn = e.coordinators`, function(err, result, fields) {
+  				(id != 'add') ? db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.COORDINATOR = c.usn and s.usn = e.COORDINATOR`, function(err, result, fields) {
   					if (err) showError(err)
   					else viewEventWin.webContents.send('edit-event', result[0])
   				}) : viewEventWin.webContents.send('edit-event')
