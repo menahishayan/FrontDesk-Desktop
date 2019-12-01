@@ -9,16 +9,14 @@ const defaultProps = {
   show: false,
 
   // update for electron V5+
-  webPreferences: {
-    nodeIntegration: true
-},
+
   titleBarStyle: 'hidden'
 }
 
 class Window extends BrowserWindow {
-  constructor ({ file, ...windowSettings }) {
+  constructor ({ file, zoom, ...windowSettings }) {
     // calls new BrowserWindow with these props
-    super({ ...defaultProps, ...windowSettings })
+    super({ ...defaultProps, webPreferences: {nodeIntegration: true, zoomFactor: zoom?zoom:1.0}, ...windowSettings })
 
     // load the html and open devtools
     this.loadFile(file)

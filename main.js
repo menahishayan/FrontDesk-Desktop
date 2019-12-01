@@ -20,12 +20,13 @@ const showError = require('./js/showError')
 
 createWindow = () => {
 	const {screen} = require('electron')
-	var dimensions = screen.getPrimaryDisplay().size, widthAdjustFactor = dimensions.width/1440, heightAdjustFactor = dimensions.height/900;
-	
+	var dimensions = screen.getPrimaryDisplay().size, zFactor = 900/dimensions.height;
+
 	loginWin = new Window({
 		file: 'index.html',
-		width: 700*widthAdjustFactor,
-		height: 500*heightAdjustFactor
+		zoom: zFactor,
+		width: 700,
+		height: 500,
 	})
 
 	loginWin.once('show', () => {
@@ -36,9 +37,10 @@ createWindow = () => {
     if (!eventWin) {
       eventWin= new Window({
 		  file: 'events.html',
-		  width: 1079*widthAdjustFactor,
-  		height: 720*heightAdjustFactor,
-		parent: loginWin
+		  zoom: zFactor,
+		  width: 1079,
+  		height: 720,
+		parent: loginWin,
       })
 
 	  // commented out during testing
@@ -67,9 +69,10 @@ createWindow = () => {
 		if (!viewEventWin) {
 			viewEventWin = new Window({
 				file: 'view_event.html',
-				width: 800*widthAdjustFactor,
-				height: 680*heightAdjustFactor,
-				parent: eventWin
+				zoom: zFactor,
+				width: 800,
+				height: 680,
+				parent: eventWin,
 			})
 
 			viewEventWin.once('show', () => {
@@ -90,12 +93,14 @@ createWindow = () => {
   		if (!viewEventWin) {
   			viewEventWin = new Window({
   				file: 'edit_event.html',
-  				width: 620*widthAdjustFactor,
-  				height: 520*heightAdjustFactor,
+				zoom: zFactor,
+  				width: 620,
+  				height: 520,
   				parent: eventWin
   			})
 
   			viewEventWin.once('show', () => {
+				console.log(viewEventWin.width + 'x' + viewEventWin.height);
   				(id != 'add') ? db.query(`SELECT e.* , s.name  as a, s.phone as b FROM events e, coordinators c, students s WHERE E_ID=\'${id}\' and e.COORDINATOR = c.usn and s.usn = e.COORDINATOR`, function(err, result, fields) {
   					if (err) showError(err)
   					else viewEventWin.webContents.send('edit-event', result[0])
@@ -113,8 +118,9 @@ createWindow = () => {
   		if (!userWin) {
   			userWin = new Window({
   				file: 'user.html',
-  				width: 300*widthAdjustFactor,
-  				height: 350*heightAdjustFactor,
+				zoom: zFactor,
+  				width: 300,
+  				height: 350,
   				parent: eventWin
   			})
 
@@ -136,8 +142,9 @@ createWindow = () => {
   		if (!userWin) {
   			userWin = new Window({
   				file: 'edit_user.html',
-  				width: 740*widthAdjustFactor,
-  				height: 620*heightAdjustFactor,
+				zoom: zFactor,
+  				width: 740,
+  				height: 620,
   				parent: eventWin
   			})
 
