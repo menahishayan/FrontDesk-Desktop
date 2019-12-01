@@ -1,6 +1,3 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
 'use strict'
 
 const { ipcRenderer, remote } = require('electron')
@@ -55,8 +52,6 @@ ipcRenderer.on('edit-event', (e, eventData) => {
          db.query(`UPDATE events SET NAME = \'${document.getElementById("name").value}\', COLOR=\'${color}\', TIME = \'${moment(document.getElementById("time").value , "HH:mm:ss", true).format("HH:mm:ss")}\', DURATION = ${document.getElementById("duration").value}, DATE = \'${document.getElementById("date").value}\', VENUE = \'${document.getElementById("venue").value}\', PRICE = \'${document.getElementById("price").value}\', COORDINATOR = \'${document.getElementById("coordinator").value}\', TEAM_COUNT = ${document.getElementById("count").value}, CATEGORY = \'${document.getElementById("category").value}\' WHERE E_ID = ${eventData["E_ID"]}`, function(err, result, fields) {
             if (err) showError(err)
             else{
-                document.getElementById('body').className = 'hidden35';
-                document.getElementById('body').className = 'visible15';
                 document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\" style=\"margin-top:60px;\"></center>"
 
     			setTimeout(function() {
