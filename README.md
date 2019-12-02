@@ -30,3 +30,9 @@ FrontDesk - Cross-platform desktop app for event registrations, ticketing and tr
  <h3>Confirmation page with ticket</h3>
      <image src ="screenshots/ss4.png">
  <image src ="screenshots/ss5.png">
+   <image src ="screenshots/ss6.png">
+     <image src ="screenshots/ss7.png">
+       <image src ="screenshots/ss8.png">
+         <image src ="screenshots/ss9.png">
+         <image src ="screenshots/ss10.png">
+         <image src ="screenshots/ss11.png">
