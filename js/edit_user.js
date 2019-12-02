@@ -29,6 +29,39 @@ const viewEditUser = (user) => {
     oldPass = user['PASSWORD']
 }
 
+const updateCoord = (name, phone, dept, sem, section, role) => {
+	db.query(`update students set
+             DEPT=\'${dept}\',
+             SEM=${sem},
+             SECTION=\'${section}\',
+             PHONE=${phone},
+             NAME=\'${name}\'
+             WHERE USN=\'${selectedUSN}\'`,
+		function(err, result, fields) {
+			if (err) showError(err)
+			else db.query(`update coordinators set
+                    ROLE = \'${role}\'
+                    WHERE USN=\'${selectedUSN}\'`,
+				function(err2, result, fields) {
+					if (err2) showError(err2)
+					else {
+                        document.getElementById('changeForm').style.display = 'none';
+                        document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"260px\" style=\"margin-top:130px;\"></center>"
+                        document.getElementById('body').style.display = 'block';
+                        document.getElementById('tick').className = 'visible15';
+
+                        setTimeout(function() {
+                            setInterval(function() {
+                                $('#tick').attr('src', $('#tick').attr('src'))
+                            }, 1)
+                            document.getElementById('tick').className = 'hidden35';
+                            remote.getCurrentWindow().close()
+                        }, 1800)
+                    }
+				})
+		});
+}
+
 ipcRenderer.on('edit-user', (e, userData) => {
     document.getElementById('changeForm').style.display = 'none'
 
@@ -40,7 +73,8 @@ ipcRenderer.on('edit-user', (e, userData) => {
         <b>Phone:</b> +91 ${userData['PHONE']} &nbsp; &nbsp; &nbsp; &nbsp;
         <b>Role:</b> ${userData['ROLE']}`
 
-        db.query(`SELECT  * FROM auth a,coordinators c,students s WHERE a.USN=c.USN and a.USN=s.USN`, function(err, result, fields) {
+
+        db.query(`SELECT  s.*, c.*, AES_DECRYPT(a.PASSWORD, 'nish') as PASSWORD FROM auth a,coordinators c,students s WHERE a.USN=c.USN and a.USN=s.USN`, function(err, result, fields) {
             if (err) showError(err)
             else {
                 result.forEach((r, index) => {
@@ -62,56 +96,24 @@ ipcRenderer.on('edit-user', (e, userData) => {
 
     document.getElementById('editButton').addEventListener('click', (e) => {
         e.preventDefault();
-        // Rewrite the whole function
 
-        let newpass = document.getElementById("pass").value
-        let newpass2 = document.getElementById("confirm").value
+        let name = document.getElementById("name").value,
+            phone = document.getElementById("phone").value,
+            dept = document.getElementById("dept").value,
+            sem = document.getElementById("sem").value,
+            section = document.getElementById("section").value,
+            role = document.getElementById("role").value,
+            newpass = document.getElementById("pass").value,
+            newpass2 = document.getElementById("confirm").value
 
-        if (newpass.length>0 && newpass2.length>0) {
+        if (newpass.length>0 || newpass2.length>0) {
             if(newpass==newpass2) {
-                db.query(`CALL CHANGEPASS(\'${selectedUSN}\',AES_DECRYPT(\'${oldPass}\', \'nish\'),\'${newpass}\')`, (err, result, fields) => {
+                db.query(`CALL CHANGEPASS(\'${selectedUSN}\',\'${oldPass}\',\'${newpass}\')`, (err, result, fields) => {
                     if(err) showError(err)
-                    else {
-                        document.getElementById('changeForm').style.display = 'none';
-                        document.getElementById('user').innerHTML = "<img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"260px\">"
-                        document.getElementById('user').style.display = 'block';
-                        document.getElementById('tick').className = 'visible15';
-
-                        setTimeout(function() {
-            				setInterval(function() {
-            					$('#tick').attr('src', $('#tick').attr('src'))
-            				}, 1)
-            				document.getElementById('tick').className = 'hidden35';
-                            remote.getCurrentWindow().close()
-            			}, 1800)
-                    }
+                    else updateCoord(name, phone, dept, sem, section, role)
                 })
             } else showError("Passwords do not match.")
-        }
-
-         db.query(`update students set
-             DEPT=\'${document.getElementById("dept").value}\',
-             SEM=${document.getElementById("sem").value},
-             SECTION=\'${document.getElementById("section").value}\',
-             PHONE=${document.getElementById("phone").value},
-             NAME=\'${document.getElementById("name").value}\'
-             WHERE USN =\'${selectedUSN}\';
-             update coordinators set
-             ROLE = \'${document.getElementById("role").value}\',
-             WHERE USN =\'${selectedUSN}\';`,
-             function(err, result, fields) {
-                if (err) showError(err)
-                else{
-                    document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\" style=\"margin-top:60px;\"></center>"
-
-                setTimeout(function() {
-                    setInterval(function() {
-                        $('#tick').attr('src', $('#tick').attr('src'))
-                    }, 1)
-                    document.getElementById('body').className = 'hidden35';
-                    remote.getCurrentWindow().close()
-                }, 1800)
-                }
-        });
+        } else updateCoord(name, phone, dept, sem, section, role)
     })
+
 })

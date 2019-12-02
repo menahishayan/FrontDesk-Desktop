@@ -4,7 +4,7 @@ const { ipcRenderer } = require('electron')
 const db = require('./js/db')
 const showError = require('./js/showError')
 
-const debug = true
+const debug = !true
 
 document.getElementById('login').addEventListener('click', !debug ? (e) => {
     e.preventDefault();

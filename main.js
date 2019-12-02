@@ -40,11 +40,9 @@ createWindow = () => {
 		  zoom: zFactor,
 		  width: 1079,
   		height: 720,
-		parent: loginWin,
+		parent: loginWin
       })
 
-	  // commented out during testing
-	  // loginWin.close();
 	  loginUSN = usn
 
 	  eventWin.once('show', () => {
@@ -108,7 +106,15 @@ createWindow = () => {
 
   			// cleanup
   			viewEventWin.on('closed', () => {
-  				viewEventWin = null
+				 viewEventWin = null
+				 db.query(`SELECT ROLE as ROLE FROM coordinators where USN = \'${loginUSN}\' `, function(err, result, fields) {
+	 				if (err) showError(err)
+	 				else isAdmin = (result[0]['ROLE'] != "Coordinator") ? true : false;
+	 			});
+	 			db.query("SELECT E_ID,NAME,CATEGORY,COLOR FROM events order by case when category = 'MAIN STAGE' then 0 else 1 end, category ", function(err, result, fields) {
+	 				if (err) showError(err)
+	 				else eventWin.webContents.send('events', result , isAdmin)
+	 			});
   			})
   		}
   	})
