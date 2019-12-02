@@ -60,26 +60,58 @@ ipcRenderer.on('edit-user', (e, userData) => {
             }
         });
 
-        // TODO: Fix this shit
     document.getElementById('editButton').addEventListener('click', (e) => {
         e.preventDefault();
-        // Edit User 
-         db.query(`update coordinators c, auth a, student s set c.ROLE = \'${document.getElementById("role").value}\', s.DEPT=\'${document.getElementById("dept").value}\', s.SEM=\'${document.getElementById("sem").value}\', s.SECTION=\'${document.getElementById("section").value}\', s.PHONE=${document.getElementById("phone").value},s.NAME=\'${document.getElementById("name").value}\' WHERE c.USN =\'${selectedUSN}\' and s.USN = ${selectedUSN} and a.USN = ${selectedUSN}; `, function(err, result, fields) {
-            if (err) showError(err)
-            else{
-                db.query(`CHANGEPASS(${selectedUSN}, AES_DECRYPT(oldPass, \'nish\'), \'${document.getElementById("confirm").value}\')`, function(err, result, fields) {
+        // Rewrite the whole function
+
+        let newpass = document.getElementById("pass").value
+        let newpass2 = document.getElementById("confirm").value
+
+        if (newpass.length>0 && newpass2.length>0) {
+            if(newpass==newpass2) {
+                db.query(`CALL CHANGEPASS(\'${selectedUSN}\',AES_DECRYPT(\'${oldPass}\', \'nish\'),\'${newpass}\')`, (err, result, fields) => {
+                    if(err) showError(err)
+                    else {
+                        document.getElementById('changeForm').style.display = 'none';
+                        document.getElementById('user').innerHTML = "<img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"260px\">"
+                        document.getElementById('user').style.display = 'block';
+                        document.getElementById('tick').className = 'visible15';
+
+                        setTimeout(function() {
+            				setInterval(function() {
+            					$('#tick').attr('src', $('#tick').attr('src'))
+            				}, 1)
+            				document.getElementById('tick').className = 'hidden35';
+                            remote.getCurrentWindow().close()
+            			}, 1800)
+                    }
+                })
+            } else showError("Passwords do not match.")
+        }
+
+         db.query(`update students set
+             DEPT=\'${document.getElementById("dept").value}\',
+             SEM=${document.getElementById("sem").value},
+             SECTION=\'${document.getElementById("section").value}\',
+             PHONE=${document.getElementById("phone").value},
+             NAME=\'${document.getElementById("name").value}\'
+             WHERE USN =\'${selectedUSN}\';
+             update coordinators set
+             ROLE = \'${document.getElementById("role").value}\',
+             WHERE USN =\'${selectedUSN}\';`,
+             function(err, result, fields) {
+                if (err) showError(err)
+                else{
                     document.getElementById('body').innerHTML = "<center><img src=\"images/tick.gif\" alt=\"tick\" class=\"tick\" id=\"tick\" width=\"380px\" style=\"margin-top:60px;\"></center>"
 
-    			setTimeout(function() {
-    				setInterval(function() {
-    					$('#tick').attr('src', $('#tick').attr('src'))
-    				}, 1)
-    				document.getElementById('body').className = 'hidden35';
+                setTimeout(function() {
+                    setInterval(function() {
+                        $('#tick').attr('src', $('#tick').attr('src'))
+                    }, 1)
+                    document.getElementById('body').className = 'hidden35';
                     remote.getCurrentWindow().close()
-    			}, 1800)
-                })
-                
-            }
-        }); 
+                }, 1800)
+                }
+        });
     })
 })
